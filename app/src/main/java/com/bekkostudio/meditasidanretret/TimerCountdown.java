@@ -1,15 +1,26 @@
 package com.bekkostudio.meditasidanretret;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class TimerCountdown extends AppCompatActivity {
     PowerManager.WakeLock wakeLock;
+
     TextView remainingTimeWidget;
+    TextView messageWidget;
+    Button finishWidget;
+
+    MediaPlayer bellSound;
+    MediaPlayer backgroundSound;
+
+    int resultTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,13 +28,28 @@ public class TimerCountdown extends AppCompatActivity {
 
         //get parameter
         Intent intent = getIntent();
-        int meditationDuration = intent.getIntExtra("meditationDuration",60);
+        final int meditationDuration = intent.getIntExtra("meditationDuration",60);
         int warmupDuration = intent.getIntExtra("warmupDuration",60);
-        int ambientMusic = intent.getIntExtra("ambientMusic",60);
+        final int ambientMusic = intent.getIntExtra("ambientMusic",60);
 
-        //set duration
+        //initialize sound
+        bellSound = MediaPlayer.create(this,R.raw.bell);
+
+        if (ambientMusic != 0){
+            backgroundSound = MediaPlayer.create(this,ambientMusic);
+            backgroundSound.start();
+            backgroundSound.isLooping();
+        }
+
+
+        //get widget
+        messageWidget = findViewById(R.id.message);
         remainingTimeWidget = findViewById(R.id.remainingTime);
-        remainingTimeWidget.setText(formatMilliSecondsToTime(meditationDuration*1000));
+        finishWidget = findViewById(R.id.finish);
+
+        //set message
+        messageWidget.setText("Pemanasan: "+ ambientMusic);
+        remainingTimeWidget.setText(formatMilliSecondsToTime(warmupDuration*1000));
 
         //start wakelock to keep countdown awake
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -31,21 +57,62 @@ public class TimerCountdown extends AppCompatActivity {
                 "MyWakelockTag");
         wakeLock.acquire();
 
-        new CountDownTimer(meditationDuration*1000, 1000) {
+        //start Warmup Timer
+        bellSound.start();
+        resultTime = 0;
+        new CountDownTimer(warmupDuration*1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 remainingTimeWidget.setText(formatMilliSecondsToTime(millisUntilFinished));
             }
 
             public void onFinish() {
-                remainingTimeWidget.setText("done!");
+                bellSound.start();
+                messageWidget.setText("Meditasi");
+
+                //start Meditation Timer
+                new CountDownTimer(meditationDuration*1000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        remainingTimeWidget.setText(formatMilliSecondsToTime(millisUntilFinished));
+                        resultTime = (int) ((meditationDuration*1000) - millisUntilFinished);
+                    }
+
+                    public void onFinish() {
+                        bellSound.start();
+                        if (ambientMusic != 0){
+                            backgroundSound.stop();
+                        }
+
+                        endMeditation();
+                    }
+                }.start();
             }
         }.start();
+
+
+        //finish early on click
+        finishWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                endMeditation();
+            }
+        });
     }
 
     @Override
     protected void onDestroy() {
         wakeLock.release();
+        if (backgroundSound!=null){
+            backgroundSound.stop();
+            backgroundSound.release();
+            backgroundSound = null;
+        }
+        if (bellSound!=null){
+            bellSound.stop();
+            bellSound.release();
+            bellSound = null;
+        }
         super.onDestroy();
     }
 
@@ -74,5 +141,12 @@ public class TimerCountdown extends AppCompatActivity {
         }
 
         return String.valueOf(number);
+    }
+
+    private void endMeditation(){
+        Intent intent = new Intent(this, MeditationResult.class);
+        intent.putExtra("remainingTime", formatMilliSecondsToTime(resultTime));
+        this.startActivity(intent);
+        finish();
     }
 }

@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         //loading the default fragment
         loadFragment(new TimerFragment());
 
+        //get recent meditation database
+        Global.getRecentMeditation(this);
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }

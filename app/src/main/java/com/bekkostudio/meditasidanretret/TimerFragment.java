@@ -2,7 +2,6 @@ package com.bekkostudio.meditasidanretret;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +36,7 @@ public class TimerFragment extends Fragment {
         minutesDurationWidget = view.findViewById(R.id.minutesDuration);
         minutesDurationWidget.setMinValue(0);
         minutesDurationWidget.setMaxValue(59);
-        minutesDurationWidget.setValue(30);
+        minutesDurationWidget.setValue(1);
 
         secondsDurationWidget = view.findViewById(R.id.secondsDuration);
         secondsDurationWidget.setMinValue(0);
@@ -63,6 +62,8 @@ public class TimerFragment extends Fragment {
                     case 2:
                         ambientMusic = R.raw.weaving;
                         break;
+                    default:
+                        ambientMusic = 0;
                 }
 
                 //start timer
