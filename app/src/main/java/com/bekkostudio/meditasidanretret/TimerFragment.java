@@ -9,9 +9,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 
 public class TimerFragment extends Fragment {
+
     //reference widget in xml
+    TextView recentMeditationWidget0;
+    TextView recentMeditationWidget1;
+    TextView recentMeditationWidget2;
+
     NumberPicker hoursDurationWidget;
     NumberPicker minutesDurationWidget;
     NumberPicker secondsDurationWidget;
@@ -28,6 +34,13 @@ public class TimerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_timer_fragment, container, false);
+        //for trigger reloading recent Meditation from another class
+        Global.lastTimerFragmentObject = this;
+
+        recentMeditationWidget0 = view.findViewById(R.id.recentMeditation0);
+        recentMeditationWidget1 = view.findViewById(R.id.recentMeditation1);
+        recentMeditationWidget2 = view.findViewById(R.id.recentMeditation2);
+        loadRecentMeditation();
 
         hoursDurationWidget = view.findViewById(R.id.hoursDuration);
         hoursDurationWidget.setMinValue(0);
@@ -67,10 +80,17 @@ public class TimerFragment extends Fragment {
                 }
 
                 //start timer
-                Global.StartTimer(getActivity(),meditationDuration,warmupDuration,ambientMusic);
+                Global.StartTimer(getActivity().getApplicationContext(),meditationDuration,warmupDuration,ambientMusic);
             }
         });
 
         return view;
+    }
+
+
+    public void loadRecentMeditation(){
+        recentMeditationWidget0.setText(Global.recentMeditation.get(0));
+        recentMeditationWidget1.setText(Global.recentMeditation.get(1));
+        recentMeditationWidget2.setText(Global.recentMeditation.get(2));
     }
 }

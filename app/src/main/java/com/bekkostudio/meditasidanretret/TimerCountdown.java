@@ -20,6 +20,9 @@ public class TimerCountdown extends AppCompatActivity {
     MediaPlayer bellSound;
     MediaPlayer backgroundSound;
 
+    CountDownTimer warmupTimer;
+    CountDownTimer meditationTimer;
+
     int resultTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class TimerCountdown extends AppCompatActivity {
         //start Warmup Timer
         bellSound.start();
         resultTime = 0;
-        new CountDownTimer(warmupDuration*1000, 1000) {
+        warmupTimer = new CountDownTimer(warmupDuration*1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 remainingTimeWidget.setText(formatMilliSecondsToTime(millisUntilFinished));
@@ -71,7 +74,7 @@ public class TimerCountdown extends AppCompatActivity {
                 messageWidget.setText("Meditasi");
 
                 //start Meditation Timer
-                new CountDownTimer(meditationDuration*1000, 1000) {
+                meditationTimer = new CountDownTimer(meditationDuration*1000, 1000) {
 
                     public void onTick(long millisUntilFinished) {
                         remainingTimeWidget.setText(formatMilliSecondsToTime(millisUntilFinished));
@@ -144,6 +147,8 @@ public class TimerCountdown extends AppCompatActivity {
     }
 
     private void endMeditation(){
+        warmupTimer.cancel();
+        meditationTimer.cancel();
         Intent intent = new Intent(this, MeditationResult.class);
         intent.putExtra("remainingTime", formatMilliSecondsToTime(resultTime));
         this.startActivity(intent);

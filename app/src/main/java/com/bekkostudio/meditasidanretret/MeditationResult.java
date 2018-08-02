@@ -19,17 +19,21 @@ public class MeditationResult extends AppCompatActivity {
 
         //get parameter
         Intent intent = getIntent();
-        String remainingTime = intent.getStringExtra("remainingTime");
+        final String remainingTime = intent.getStringExtra("remainingTime");
 
         //get widget
         resultTimeWidget = findViewById(R.id.resultTime);
         doneWidget = findViewById(R.id.done);
 
         resultTimeWidget.setText(remainingTime);
+
+        //Click Done
         doneWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Global.setRecentMeditation(getApplicationContext(),remainingTime);
+                Global.lastTimerFragmentObject.loadRecentMeditation();
+                finish();
             }
         });
     }

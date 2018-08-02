@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(new TimerFragment());
 
         //get recent meditation database
-        Global.getRecentMeditation(this);
+        Global.getRecentMeditation(getApplicationContext());
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

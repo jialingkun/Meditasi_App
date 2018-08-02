@@ -6,10 +6,14 @@ import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Global {
+
+    public static TimerFragment lastTimerFragmentObject;
     public static ArrayList<String> recentMeditation;
 
 
@@ -33,10 +37,26 @@ public class Global {
             recentMeditation.add(0,"Kosong");
             recentMeditation.add(0,"Kosong");
             recentMeditation.add(0,"Kosong");
-            Log.d("ANU","FILENOTFOUND: "+ recentMeditation.size());
+            Log.d("ANU","FILENOTFOUND: "+ recentMeditation.size() + ", Index 2: "+ recentMeditation.get(2));
 
         }catch (Exception e){
+            Log.d("getRecentMeditation", "Exception: " + e);
+        }
 
+    }
+
+    public static void setRecentMeditation (Context context, String timeToSave){
+        recentMeditation.remove(2);
+        recentMeditation.add(0, timeToSave);
+
+        try {
+            FileOutputStream outputStream = context.openFileOutput("recentMeditation.txt", Context.MODE_PRIVATE);
+            //Log.d("Context Directory", "Path: "+context.getFilesDir());
+            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+            output.writeObject(recentMeditation);
+            output.close();
+        }catch (Exception e){
+            Log.d("SetRecentMeditation", "Exception: " + e);
         }
 
     }
