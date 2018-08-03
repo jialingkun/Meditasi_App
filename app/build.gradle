@@ -29,4 +29,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //implementation 'com.github.metes:android-slider:1.0.4'
+    implementation 'com.wefika:horizontal-picker:1.1.1'
 }

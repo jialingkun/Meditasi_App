@@ -5,4 +5,14 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_blank_fragment">BlankFragment</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="warmup_value">
+        <item>5s</item>
+        <item>10s</item>
+        <item>30s</item>
+        <item>45s</item>
+        <item>1m</item>
+        <item>5m</item>
+        <item>10m</item>
+    </string-array>
 </resources>

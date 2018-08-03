@@ -3,6 +3,7 @@ package com.bekkostudio.meditasidanretret;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-public class TimerFragment extends Fragment {
+import com.wefika.horizontalpicker.HorizontalPicker;
+
+public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSelected{
 
     //reference widget in xml
     TextView recentMeditationWidget0;
@@ -21,7 +24,11 @@ public class TimerFragment extends Fragment {
     NumberPicker hoursDurationWidget;
     NumberPicker minutesDurationWidget;
     NumberPicker secondsDurationWidget;
-    EditText warmupDurationWidget;
+
+    HorizontalPicker warmupDurationPickerWidget;
+    String[] warmupItem;
+
+
     EditText ambientMusicWidget;
     Button startTimerWidget;
 
@@ -56,15 +63,20 @@ public class TimerFragment extends Fragment {
         secondsDurationWidget.setMaxValue(59);
 
         ambientMusicWidget = view.findViewById(R.id.ambientmusic);
-        warmupDurationWidget = view.findViewById(R.id.warmupDuration);
 
+        //Horizontal picker library
+        warmupDurationPickerWidget = view.findViewById(R.id.warmupduration);
+        warmupDuration = 5; //default 5 seconds
+        warmupItem = getResources().getStringArray(R.array.warmup_value);
+        warmupDurationPickerWidget.setOnItemSelectedListener(this);
+
+        //Click start
         startTimerWidget = view.findViewById(R.id.startTimer);
         startTimerWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //get parameter before start Timer
                 meditationDuration = (hoursDurationWidget.getValue()*3600)+(minutesDurationWidget.getValue()*60)+(secondsDurationWidget.getValue());
-                warmupDuration = Integer.parseInt(warmupDurationWidget.getText().toString());
                 switch (Integer.parseInt(ambientMusicWidget.getText().toString())) {
                     case 0:
                         ambientMusic = R.raw.butterfly_space;
@@ -85,6 +97,28 @@ public class TimerFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onItemSelected(int index){
+
+        String timeUnit = warmupItem[index].substring(warmupItem[index].length()-1);
+        int timeValue = Integer.parseInt(warmupItem[index].substring(0,warmupItem[index].length()-1));
+        //Log.d("TIME UNIT", "onItemSelected: "+ timeUnit);
+        //Log.d("TIME VALUE", "onItemSelected: "+ timeValue);
+        switch (timeUnit){
+            case "s":
+                warmupDuration = timeValue;
+                break;
+            case "m":
+                warmupDuration = timeValue*60;
+                break;
+            case "h":
+                warmupDuration = timeValue*3600;
+                break;
+            default:
+                warmupDuration = timeValue;
+        }
     }
 
 

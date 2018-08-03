@@ -51,7 +51,7 @@ public class TimerCountdown extends AppCompatActivity {
         finishWidget = findViewById(R.id.finish);
 
         //set message
-        messageWidget.setText("Pemanasan: "+ ambientMusic);
+        messageWidget.setText("Pemanasan");
         remainingTimeWidget.setText(formatMilliSecondsToTime(warmupDuration*1000));
 
         //start wakelock to keep countdown awake
@@ -148,7 +148,7 @@ public class TimerCountdown extends AppCompatActivity {
 
     private void endMeditation(){
         warmupTimer.cancel();
-        meditationTimer.cancel();
+        if (meditationTimer!=null){meditationTimer.cancel();}
         Intent intent = new Intent(this, MeditationResult.class);
         intent.putExtra("remainingTime", formatMilliSecondsToTime(resultTime));
         this.startActivity(intent);
