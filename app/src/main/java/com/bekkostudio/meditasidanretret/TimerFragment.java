@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -25,11 +27,13 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
     NumberPicker minutesDurationWidget;
     NumberPicker secondsDurationWidget;
 
+    //warmup horizontal picker
     HorizontalPicker warmupDurationPickerWidget;
     String[] warmupItem;
 
+    //BGM image picker
+    LinearLayout ambientMusicPickerWidget;
 
-    EditText ambientMusicWidget;
     Button startTimerWidget;
 
     //parameter to be used in countdown timer
@@ -62,13 +66,19 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
         secondsDurationWidget.setMinValue(0);
         secondsDurationWidget.setMaxValue(59);
 
-        ambientMusicWidget = view.findViewById(R.id.ambientmusic);
-
         //Horizontal picker library
         warmupDurationPickerWidget = view.findViewById(R.id.warmupduration);
         warmupDuration = 5; //default 5 seconds
         warmupItem = getResources().getStringArray(R.array.warmup_value);
         warmupDurationPickerWidget.setOnItemSelectedListener(this);
+
+        //BGM picker
+        ambientMusicPickerWidget = view.findViewById(R.id.ambientmusic);
+        for(int i=0; i<Global.ambientImageItem.length; i++){
+            ImageView image=new ImageView(getContext());
+            image.setImageResource(Global.ambientImageItem[i]);
+            ambientMusicPickerWidget.addView(image);
+        }
 
         //Click start
         startTimerWidget = view.findViewById(R.id.startTimer);
@@ -77,19 +87,19 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
             public void onClick(View v) {
                 //get parameter before start Timer
                 meditationDuration = (hoursDurationWidget.getValue()*3600)+(minutesDurationWidget.getValue()*60)+(secondsDurationWidget.getValue());
-                switch (Integer.parseInt(ambientMusicWidget.getText().toString())) {
-                    case 0:
-                        ambientMusic = R.raw.butterfly_space;
-                        break;
-                    case 1:
-                        ambientMusic = R.raw.mt_airy;
-                        break;
-                    case 2:
-                        ambientMusic = R.raw.weaving;
-                        break;
-                    default:
-                        ambientMusic = 0;
-                }
+//                switch (Integer.parseInt(ambientMusicWidget.getText().toString())) {
+//                    case 0:
+//                        ambientMusic = R.raw.butterfly_space;
+//                        break;
+//                    case 1:
+//                        ambientMusic = R.raw.mt_airy;
+//                        break;
+//                    case 2:
+//                        ambientMusic = R.raw.weaving;
+//                        break;
+//                    default:
+//                        ambientMusic = 0;
+//                }
 
                 //start timer
                 Global.StartTimer(getActivity().getApplicationContext(),meditationDuration,warmupDuration,ambientMusic);

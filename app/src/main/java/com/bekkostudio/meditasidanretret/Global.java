@@ -16,6 +16,9 @@ public class Global {
     public static TimerFragment lastTimerFragmentObject;
     public static ArrayList<String> recentMeditation;
 
+    public static final int[] ambientImageItem = {R.drawable.ambient0,R.drawable.ambient1,R.drawable.ambient2,R.drawable.ambient3};
+    public static final int[] ambientMusicItem = {R.raw.butterfly_space,R.raw.mt_airy,R.raw.weaving,R.raw.butterfly_space};
+
 
     public static void StartTimer(Context context, int meditationDuration, int warmupDuration, int ambientMusic){
         Intent intent = new Intent(context, TimerCountdown.class);
