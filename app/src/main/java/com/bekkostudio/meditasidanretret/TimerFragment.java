@@ -1,9 +1,11 @@
 package com.bekkostudio.meditasidanretret;
 
+import android.graphics.Point;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wefika.horizontalpicker.HorizontalPicker;
@@ -76,11 +79,43 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
         //BGM picker
         ambientMusicScrollWidget = view.findViewById(R.id.centerHorizontalScrollView);
         ambientMusicPickerWidget = view.findViewById(R.id.ambientmusic);
-        for(int i=0; i<Global.ambientImageItem.length; i++){
-            ImageView image=new ImageView(getContext());
+
+        ImageView image;
+        LinearLayout.LayoutParams params;
+
+        //Set the width here
+        int imageWidth = 120;
+        int imageMargin = 20;
+
+        Point size = new Point();
+        getActivity().getWindowManager().getDefaultDisplay().getSize(size);
+        int screenWidth = size.x;
+
+        //First thumbnail
+        image=new ImageView(getContext());
+        image.setImageResource(Global.ambientImageItem[0]);
+        params = new LinearLayout.LayoutParams(Global.dpToPx(getContext(), imageWidth), Global.dpToPx(getContext(),imageWidth));
+        params.setMargins((screenWidth/2)-Global.dpToPx(getContext(),(imageWidth/2)),0,Global.dpToPx(getContext(),imageMargin),0);
+        image.setLayoutParams(params);
+        ambientMusicPickerWidget.addView(image);
+
+        // center thumbnail
+        for(int i=1; i<Global.ambientImageItem.length-1; i++){
+            image=new ImageView(getContext());
             image.setImageResource(Global.ambientImageItem[i]);
+            params = new LinearLayout.LayoutParams(Global.dpToPx(getContext(), imageWidth), Global.dpToPx(getContext(),imageWidth));
+            params.setMargins(Global.dpToPx(getContext(),imageMargin),0,Global.dpToPx(getContext(),imageMargin),0);
+            image.setLayoutParams(params);
             ambientMusicPickerWidget.addView(image);
         }
+
+        //Last Thumbnail
+        image=new ImageView(getContext());
+        image.setImageResource(Global.ambientImageItem[Global.ambientImageItem.length-1]);
+        params = new LinearLayout.LayoutParams(Global.dpToPx(getContext(), imageWidth), Global.dpToPx(getContext(),imageWidth));
+        params.setMargins(Global.dpToPx(getContext(),imageMargin),0,(screenWidth/2)-Global.dpToPx(getContext(),(imageWidth/2)),0);
+        image.setLayoutParams(params);
+        ambientMusicPickerWidget.addView(image);
 
         for(int i=Global.ambientImageItem.length-2; i>0; i--){
 
@@ -98,24 +133,11 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
             public void onClick(View v) {
                 //get parameter before start Timer
                 meditationDuration = (hoursDurationWidget.getValue()*3600)+(minutesDurationWidget.getValue()*60)+(secondsDurationWidget.getValue());
-                Log.d("Ambient index", "onClick: "+ambientMusicScrollWidget.getActiveItem());
-//                switch (Integer.parseInt(ambientMusicWidget.getText().toString())) {
-//                    case 0:
-//                        ambientMusic = R.raw.butterfly_space;
-//                        break;
-//                    case 1:
-//                        ambientMusic = R.raw.mt_airy;
-//                        break;
-//                    case 2:
-//                        ambientMusic = R.raw.weaving;
-//                        break;
-//                    default:
-//                        ambientMusic = 0;
-//                }
+//                Log.d("Ambient index", "onClick: "+ambientMusicScrollWidget.getActiveItem());
 
-
+                ambientMusic = Global.ambientMusicItem[ambientMusicScrollWidget.getActiveItem()];
                 //start timer
-                //Global.StartTimer(getActivity().getApplicationContext(),meditationDuration,warmupDuration,ambientMusic);
+                Global.StartTimer(getActivity().getApplicationContext(),meditationDuration,warmupDuration,ambientMusic);
             }
         });
 
