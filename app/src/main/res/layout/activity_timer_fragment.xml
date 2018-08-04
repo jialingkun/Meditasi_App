@@ -116,10 +116,9 @@
         app:values="@array/warmup_value" />
 
     <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
-        android:id="@+id/HSVImage"
+        android:id="@+id/centerHorizontalScrollView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/minutesDuration">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/ambientmusic"

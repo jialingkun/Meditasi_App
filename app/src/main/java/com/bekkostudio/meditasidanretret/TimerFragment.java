@@ -32,6 +32,7 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
     String[] warmupItem;
 
     //BGM image picker
+    CenteringHorizontalScrollView ambientMusicScrollWidget;
     LinearLayout ambientMusicPickerWidget;
 
     Button startTimerWidget;
@@ -73,12 +74,22 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
         warmupDurationPickerWidget.setOnItemSelectedListener(this);
 
         //BGM picker
+        ambientMusicScrollWidget = view.findViewById(R.id.centerHorizontalScrollView);
         ambientMusicPickerWidget = view.findViewById(R.id.ambientmusic);
         for(int i=0; i<Global.ambientImageItem.length; i++){
             ImageView image=new ImageView(getContext());
             image.setImageResource(Global.ambientImageItem[i]);
             ambientMusicPickerWidget.addView(image);
         }
+
+        for(int i=Global.ambientImageItem.length-2; i>0; i--){
+
+            ambientMusicScrollWidget.setCurrentItemAndCenter(i);
+        }
+
+        ambientMusicScrollWidget.setCurrentItemAndCenter(0);
+
+
 
         //Click start
         startTimerWidget = view.findViewById(R.id.startTimer);
@@ -87,6 +98,7 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
             public void onClick(View v) {
                 //get parameter before start Timer
                 meditationDuration = (hoursDurationWidget.getValue()*3600)+(minutesDurationWidget.getValue()*60)+(secondsDurationWidget.getValue());
+                Log.d("Ambient index", "onClick: "+ambientMusicScrollWidget.getActiveItem());
 //                switch (Integer.parseInt(ambientMusicWidget.getText().toString())) {
 //                    case 0:
 //                        ambientMusic = R.raw.butterfly_space;
@@ -101,8 +113,9 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
 //                        ambientMusic = 0;
 //                }
 
+
                 //start timer
-                Global.StartTimer(getActivity().getApplicationContext(),meditationDuration,warmupDuration,ambientMusic);
+                //Global.StartTimer(getActivity().getApplicationContext(),meditationDuration,warmupDuration,ambientMusic);
             }
         });
 

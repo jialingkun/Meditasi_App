@@ -29,7 +29,7 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
         super(context, attrs);
 
         mContext=context;
-        mItemWidth = 100; // or whatever your item width is.
+        mItemWidth = dpToPx(100); // or whatever your item width is.
         setOnTouchListener(this);
     }
 
@@ -119,7 +119,7 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
         View targetView = getLinearLayout().getChildAt(targetItem);
 
         ImageView centerImage = (ImageView)targetView;
-        int height=300;//set size of centered image
+        int height=dpToPx(200);//set size of centered image
         LinearLayout.LayoutParams flparams = new LinearLayout.LayoutParams(height, height);
         centerImage.setLayoutParams(flparams);
 
@@ -127,7 +127,7 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
         if((targetItem-1)>=0){
             targetLeft = getLinearLayout().getChildAt(targetItem-1);
             leftImage = (ImageView)targetLeft;
-            int width=250;//set the size of left image
+            int width=dpToPx(150);//set the size of left image
             LinearLayout.LayoutParams leftParams = new LinearLayout.LayoutParams(width,width);
             leftParams.setMargins(0, 30, 0, 0);
             leftImage.setLayoutParams(leftParams);
@@ -137,7 +137,7 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
         if((targetItem+1)<maxItemCount){
             targetRight = getLinearLayout().getChildAt(targetItem+1);
             rightImage = (ImageView)targetRight;
-            int width=250;//set the size of right image
+            int width=dpToPx(150);//set the size of right image
             LinearLayout.LayoutParams rightParams = new LinearLayout.LayoutParams(width,width);
             rightParams.setMargins(0, 30, 0, 0);
             rightImage.setLayoutParams(rightParams);
@@ -150,6 +150,7 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
         int targetScroll = targetLeft - ((width - childWidth) / 2);
 
         super.smoothScrollTo(targetScroll, 0);
+
     }
 
     /**
@@ -159,6 +160,18 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
     public void setCurrentItemAndCenter(int currentItem) {
         mActiveItem = currentItem;
         scrollToActiveItem();
+    }
+
+
+    public int getActiveItem(){
+        return mActiveItem;
+    }
+
+    public int dpToPx(int dp) {
+        float density = mContext.getResources()
+                .getDisplayMetrics()
+                .density;
+        return Math.round((float) dp * density);
     }
 
 }
