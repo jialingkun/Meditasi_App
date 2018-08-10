@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TimerFragment">
+    tools:context=".Timer.TimerFragment">
 
     <TextView
         android:id="@+id/recentMeditationLabel"
@@ -54,7 +54,7 @@
         android:layout_marginTop="20dp"
         android:text="Musik Latar" />
 
-    <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
+    <com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView
         android:id="@+id/centerHorizontalScrollView"
         android:layout_below="@+id/ambientMusicLabel"
         android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
             android:orientation="horizontal">
         </LinearLayout>
 
-    </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
+    </com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView>
 
     <TextView
         android:id="@+id/warmuplabel"

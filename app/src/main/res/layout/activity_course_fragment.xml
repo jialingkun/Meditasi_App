@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Course.CourseFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/retret"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="RETRET"
+            android:layout_weight="1"
+            android:background="@drawable/fullborder_course"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/tutorial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="TUTORIAL"
+                android:layout_weight="1"
+                android:background="@drawable/fullborder_course"/>
+
+            <Button
+                android:id="@+id/shop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="SHOP"
+                android:layout_weight="1"
+                android:background="@drawable/fullborder_course"/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

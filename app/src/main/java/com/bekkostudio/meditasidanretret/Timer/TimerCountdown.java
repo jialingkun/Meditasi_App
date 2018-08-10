@@ -1,4 +1,4 @@
-package com.bekkostudio.meditasidanretret;
+package com.bekkostudio.meditasidanretret.Timer;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.bekkostudio.meditasidanretret.R;
 
 public class TimerCountdown extends AppCompatActivity {
     PowerManager.WakeLock wakeLock;

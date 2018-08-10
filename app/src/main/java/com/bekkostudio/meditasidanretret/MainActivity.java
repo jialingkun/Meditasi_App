@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.bekkostudio.meditasidanretret.Course.CourseFragment;
+import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -26,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ArticleFragment();
                     break;
                 case R.id.navigation_course:
-                    fragment = new TimerFragment();
+                    fragment = new CourseFragment();
                     break;
                 case R.id.navigation_about:
-                    fragment = new TimerFragment();
+                    fragment = new AboutFragment();
                     break;
             }
             return loadFragment(fragment);

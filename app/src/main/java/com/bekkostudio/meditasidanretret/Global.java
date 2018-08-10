@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.webkit.WebView;
 
+import com.bekkostudio.meditasidanretret.Timer.TimerCountdown;
+import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

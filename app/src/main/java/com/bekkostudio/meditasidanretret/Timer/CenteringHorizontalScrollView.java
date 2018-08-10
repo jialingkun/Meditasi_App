@@ -1,4 +1,4 @@
-package com.bekkostudio.meditasidanretret;
+package com.bekkostudio.meditasidanretret.Timer;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.bekkostudio.meditasidanretret.Global;
 
 public class CenteringHorizontalScrollView extends HorizontalScrollView implements View.OnTouchListener {
 

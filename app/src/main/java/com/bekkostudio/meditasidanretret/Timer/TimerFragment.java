@@ -1,4 +1,4 @@
-package com.bekkostudio.meditasidanretret;
+package com.bekkostudio.meditasidanretret.Timer;
 
 import android.graphics.Point;
 import android.support.annotation.Nullable;
@@ -13,6 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.bekkostudio.meditasidanretret.Global;
+import com.bekkostudio.meditasidanretret.R;
+import com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView;
 import com.wefika.horizontalpicker.HorizontalPicker;
 
 public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSelected{
