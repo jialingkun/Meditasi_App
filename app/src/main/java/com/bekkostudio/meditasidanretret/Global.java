@@ -3,6 +3,7 @@ package com.bekkostudio.meditasidanretret;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.webkit.WebView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,6 +19,10 @@ public class Global {
 
     public static final int[] ambientImageItem = {R.drawable.ambient0,R.drawable.ambient1,R.drawable.ambient2,R.drawable.ambient3};
     public static final int[] ambientMusicItem = {0,R.raw.mt_airy,R.raw.weaving,R.raw.butterfly_space};
+
+
+    //Article
+    public static WebView currentWebview;
 
 
     public static void StartTimer(Context context, int meditationDuration, int warmupDuration, int ambientMusic){

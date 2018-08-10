@@ -4,17 +4,13 @@ import android.graphics.Point;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wefika.horizontalpicker.HorizontalPicker;
@@ -87,6 +83,7 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
         int imageWidth = 120;
         int imageMargin = 20;
 
+        //get screen Width
         Point size = new Point();
         getActivity().getWindowManager().getDefaultDisplay().getSize(size);
         int screenWidth = size.x;
