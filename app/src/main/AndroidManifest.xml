@@ -27,7 +27,10 @@
         <activity android:name=".Timer.MeditationResult" />
         <activity android:name=".Course.RetretActivity" />
         <activity android:name=".Course.TutorialActivity" />
-        <activity android:name=".Course.ShopActivity"></activity>
+        <activity android:name=".Course.ShopActivity" />
+        <activity android:name=".Course.TutorialContentActivity" />
+        <activity android:name=".Course.TutorialPlayerActivity"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

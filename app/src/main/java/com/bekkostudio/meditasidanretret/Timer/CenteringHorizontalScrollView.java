@@ -120,32 +120,6 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
         // Scroll so that the target child is centered
         View targetView = getLinearLayout().getChildAt(targetItem);
 
-//        ImageView centerImage = (ImageView)targetView;
-//        int height=Global.dpToPx(mContext,150);//set size of centered image
-//        LinearLayout.LayoutParams flparams = new LinearLayout.LayoutParams(height, height);
-//        flparams.setMargins(Global.dpToPx(getContext(),45),0,Global.dpToPx(getContext(),45),0);
-//        centerImage.setLayoutParams(flparams);
-//
-//        //get the image to left of the centered image
-//        if((targetItem-1)>=0){
-//            targetLeft = getLinearLayout().getChildAt(targetItem-1);
-//            leftImage = (ImageView)targetLeft;
-//            int width=Global.dpToPx(mContext,70);//set the size of left image
-//            LinearLayout.LayoutParams leftParams = new LinearLayout.LayoutParams(width,width);
-//            leftParams.setMargins(Global.dpToPx(getContext(),30), 30, 0, 0);
-//            leftImage.setLayoutParams(leftParams);
-//        }
-//
-//        //get the image to right of the centered image
-//        if((targetItem+1)<maxItemCount){
-//            targetRight = getLinearLayout().getChildAt(targetItem+1);
-//            rightImage = (ImageView)targetRight;
-//            int width=Global.dpToPx(mContext,70);//set the size of right image
-//            LinearLayout.LayoutParams rightParams = new LinearLayout.LayoutParams(width,width);
-//            rightParams.setMargins(0, 30, Global.dpToPx(getContext(),30), 0);
-//            rightImage.setLayoutParams(rightParams);
-//        }
-
         int targetLeft = targetView.getLeft();
         int childWidth = targetView.getRight() - targetLeft;
         int width = getWidth() - getPaddingLeft() - getPaddingRight();
