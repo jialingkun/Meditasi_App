@@ -1,9 +1,11 @@
 package com.bekkostudio.meditasidanretret.Course;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +43,15 @@ public class TutorialContentActivity extends AppCompatActivity {
         //set description
         TextView videoDescriptionWidget = findViewById(R.id.videoDescription);
         videoDescriptionWidget.setText(Global.videoDescription[contentIndex]);
+
+        Button videoEbookWidget = findViewById(R.id.videoEbook);
+        videoEbookWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Global.videoEbookUrl[contentIndex]));
+                startActivity(browserIntent);
+            }
+        });
 
     }
 }

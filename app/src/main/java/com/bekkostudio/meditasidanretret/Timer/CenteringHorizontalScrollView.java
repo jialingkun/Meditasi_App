@@ -1,6 +1,8 @@
 package com.bekkostudio.meditasidanretret.Timer;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -17,7 +19,7 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
 
     private static final int SWIPE_PAGE_ON_FACTOR = 10;
 
-    private int mActiveItem;
+    private int mActiveItem=0;
 
     private float mPrevScrollX;
 
@@ -25,14 +27,11 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
 
     private int mItemWidth;
 
-    View targetLeft, targetRight;
-    ImageView leftImage, rightImage;
-
     public CenteringHorizontalScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         mContext=context;
-        mItemWidth = Global.dpToPx(getContext(),250); // or whatever your item width is.
+        mItemWidth = Global.dpToPx(getContext(),120); // or whatever your item width is.
         setOnTouchListener(this);
     }
 
@@ -136,6 +135,17 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
     public void setCurrentItemAndCenter(int currentItem) {
         mActiveItem = currentItem;
         scrollToActiveItem();
+    }
+
+
+    public void setLeftRightGap(Context context, int contentWidth){
+        //get screen Width
+        Point size = new Point();
+        ((Activity)context).getWindowManager().getDefaultDisplay().getSize(size);
+        int screenWidth = size.x;
+
+        getLinearLayout().setPadding((screenWidth/2)-Global.dpToPx(getContext(),(contentWidth/2)),0,(screenWidth/2)-Global.dpToPx(getContext(),(contentWidth/2)),0);
+
     }
 
 

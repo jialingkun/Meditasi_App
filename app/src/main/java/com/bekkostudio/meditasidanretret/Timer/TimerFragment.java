@@ -1,6 +1,6 @@
 package com.bekkostudio.meditasidanretret.Timer;
 
-import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -36,6 +36,8 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
     //BGM image picker
     CenteringHorizontalScrollView ambientMusicScrollWidget;
     LinearLayout ambientMusicPickerWidget;
+    //Sound on click BGM image
+    MediaPlayer backgroundSound;
 
     Button startTimerWidget;
 
@@ -84,46 +86,53 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
 
         //Set the width here
         int imageWidth = 120;
+        int imageHeight = 120;
         int imageMargin = 20;
 
-        //get screen Width
-        Point size = new Point();
-        getActivity().getWindowManager().getDefaultDisplay().getSize(size);
-        int screenWidth = size.x;
-
-        //First thumbnail
-        image=new ImageView(getContext());
-        image.setImageResource(Global.ambientImageItem[0]);
-        params = new LinearLayout.LayoutParams(Global.dpToPx(getContext(), imageWidth), Global.dpToPx(getContext(),imageWidth));
-        params.setMargins((screenWidth/2)-Global.dpToPx(getContext(),(imageWidth/2)),0,Global.dpToPx(getContext(),imageMargin),0);
-        image.setLayoutParams(params);
-        ambientMusicPickerWidget.addView(image);
+        //set gap to center first item and last item
+        ambientMusicScrollWidget.setLeftRightGap(getActivity(),imageWidth);
 
         // center thumbnail
-        for(int i=1; i<Global.ambientImageItem.length-1; i++){
+        for(int i=0; i<Global.ambientImageItem.length; i++){
             image=new ImageView(getContext());
+            //set image
             image.setImageResource(Global.ambientImageItem[i]);
-            params = new LinearLayout.LayoutParams(Global.dpToPx(getContext(), imageWidth), Global.dpToPx(getContext(),imageWidth));
-            params.setMargins(Global.dpToPx(getContext(),imageMargin),0,Global.dpToPx(getContext(),imageMargin),0);
+            //set height width
+            params = new LinearLayout.LayoutParams(Global.dpToPx(getContext(), imageWidth), Global.dpToPx(getContext(),imageHeight));
+            if (i==0){
+                //If first item
+                params.setMargins(0,0,Global.dpToPx(getContext(),imageMargin),0);
+            }else if (i==Global.ambientImageItem.length-1){
+                //if last item
+                params.setMargins(Global.dpToPx(getContext(),imageMargin),0,0,0);
+            }else{
+                params.setMargins(Global.dpToPx(getContext(),imageMargin),0,Global.dpToPx(getContext(),imageMargin),0);
+            }
             image.setLayoutParams(params);
+            //add to Linearlayout
             ambientMusicPickerWidget.addView(image);
+
+            //On image click
+            final int musicId = Global.ambientMusicItem[i]; //final to force this variable to go inside onclicklistener
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (backgroundSound!=null){
+                        backgroundSound.stop();
+                        backgroundSound.release();
+                        backgroundSound = null;
+                    }
+                    if (musicId!=0){
+                        backgroundSound = MediaPlayer.create(getActivity(),musicId);
+                        backgroundSound.start();
+                    }
+
+                }
+            });
         }
 
-        //Last Thumbnail
-        image=new ImageView(getContext());
-        image.setImageResource(Global.ambientImageItem[Global.ambientImageItem.length-1]);
-        params = new LinearLayout.LayoutParams(Global.dpToPx(getContext(), imageWidth), Global.dpToPx(getContext(),imageWidth));
-        params.setMargins(Global.dpToPx(getContext(),imageMargin),0,(screenWidth/2)-Global.dpToPx(getContext(),(imageWidth/2)),0);
-        image.setLayoutParams(params);
-        ambientMusicPickerWidget.addView(image);
-
-        for(int i=Global.ambientImageItem.length-2; i>0; i--){
-
-            ambientMusicScrollWidget.setCurrentItemAndCenter(i);
-        }
-
+        //default first item
         ambientMusicScrollWidget.setCurrentItemAndCenter(0);
-
 
 
         //Click start
@@ -142,6 +151,16 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
         });
 
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        if (backgroundSound!=null){
+            backgroundSound.stop();
+            backgroundSound.release();
+            backgroundSound = null;
+        }
+        super.onPause();
     }
 
     @Override
