@@ -30,7 +30,7 @@ public class TutorialContentActivity extends AppCompatActivity {
         videoThumbnailWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TutorialContentActivity.this, TutorialPlayerActivity.class);
+                Intent intent = new Intent(TutorialContentActivity.this, ExoPlayerActivity.class);
                 intent.putExtra("videoUrl", Global.videoUrl[contentIndex]);
                 startActivity(intent);
             }

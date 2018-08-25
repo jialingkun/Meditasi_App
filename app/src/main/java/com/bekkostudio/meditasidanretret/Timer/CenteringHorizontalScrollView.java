@@ -17,9 +17,9 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
 
     private Context mContext;
 
-    private static final int SWIPE_PAGE_ON_FACTOR = 10;
+    private static final int SWIPE_PAGE_ON_FACTOR = 8;
 
-    private int mActiveItem=0;
+    private int mActiveItem;
 
     private float mPrevScrollX;
 
@@ -32,6 +32,8 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
 
         mContext=context;
         mItemWidth = Global.dpToPx(getContext(),120); // or whatever your item width is.
+        mStart = true;
+        mActiveItem = 0;
         setOnTouchListener(this);
     }
 

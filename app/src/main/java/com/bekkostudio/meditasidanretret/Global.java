@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.webkit.WebView;
 
+import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
+import com.bekkostudio.meditasidanretret.Course.Retret.RetretDays;
+import com.bekkostudio.meditasidanretret.Course.Retret.RetretDetail;
 import com.bekkostudio.meditasidanretret.Timer.TimerCountdown;
 import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
 import com.danikula.videocache.HttpProxyCacheServer;
@@ -14,12 +17,56 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class Global {
     //timer
     public static TimerFragment lastTimerFragmentObject;
+
+    //recent meditation
     public static ArrayList<String> recentMeditation;
+
+    public static void getRecentMeditation(Context context){
+        try {
+            FileInputStream inputStream = context.openFileInput("recentMeditation.txt");
+            ObjectInputStream input = new ObjectInputStream(inputStream);
+            recentMeditation = (ArrayList<String>) input.readObject();
+            input.close();
+        } catch (FileNotFoundException e){
+            recentMeditation = new ArrayList<>();
+            recentMeditation.add(0,"Kosong");
+            recentMeditation.add(0,"Kosong");
+            recentMeditation.add(0,"Kosong");
+            Log.d("getRecentMeditation", "Exception: " + e);
+
+        }catch (Exception e){
+            Log.d("getRecentMeditation", "Exception: " + e);
+        }
+
+    }
+
+    public static void setRecentMeditation (Context context, String timeToSave){
+        recentMeditation.remove(2);
+        recentMeditation.add(0, timeToSave);
+
+        try {
+            FileOutputStream outputStream = context.openFileOutput("recentMeditation.txt", Context.MODE_PRIVATE);
+            //Log.d("Context Directory", "Path: "+context.getFilesDir());
+            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+            output.writeObject(recentMeditation);
+            output.close();
+        }catch (Exception e){
+            Log.d("SetRecentMeditation", "Exception: " + e);
+        }
+
+    }
 
     public static final int[] ambientImageItem = {R.drawable.ambient0,R.drawable.ambient1,R.drawable.ambient2,R.drawable.ambient3};
     public static final int[] ambientMusicItem = {0,R.raw.mt_airy,R.raw.weaving,R.raw.butterfly_space};
@@ -68,6 +115,122 @@ public class Global {
     }
 
 
+    //retret
+    public static Map<String,RetretDetail> courseRetret = new HashMap<>();
+    static {
+        initializeRetretDetail();
+    }
+    public static  void initializeRetretDetail(){
+        String tempId = BillingParameter.courseSKUList.get(0);
+        RetretDetail tempRetretDetail = new RetretDetail();
+        tempRetretDetail.title = "Belajar Meditasi untuk Pemula";
+        tempRetretDetail.thumbnailImage = R.drawable.ambient0;
+        tempRetretDetail.retretDays = new RetretDays[1];
+        tempRetretDetail.retretDays[0] = new RetretDays();
+        tempRetretDetail.retretDays[0].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
+        tempRetretDetail.retretDays[0].videoFileName = "/"+tempId+".mp4"; //can looped
+        tempRetretDetail.retretDays[0].morningDuration = 60;
+        tempRetretDetail.retretDays[0].morningBGM = R.raw.butterfly_space;
+        tempRetretDetail.retretDays[0].nightDuration = 120;
+        tempRetretDetail.retretDays[0].nightBGM = R.raw.butterfly_space;
+        tempRetretDetail.retretDays[0].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+        courseRetret.put(tempId,tempRetretDetail);
+    }
+
+    //active retret save data
+    public static String activeRetretId;
+    public static String activeRetretEndDate;
+
+    //universal pattern for date
+    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+
+    public static void getActiveRetret(Context context){
+        try {
+            //get id
+            FileInputStream inputStream = context.openFileInput("activeRetretId.txt");
+            ObjectInputStream input = new ObjectInputStream(inputStream);
+            activeRetretId = (String) input.readObject();
+            input.close();
+            //get end date
+            inputStream = context.openFileInput("activeRetretEndDate.txt");
+            input = new ObjectInputStream(inputStream);
+            activeRetretEndDate = (String) input.readObject();
+            input.close();
+
+        } catch (FileNotFoundException e){
+            activeRetretId = "";
+            activeRetretEndDate = "";
+            Log.d("getActiveRetret", "Exception: " + e);
+        }catch (Exception e){
+            Log.d("getActiveRetret", "Exception: " + e);
+        }
+
+    }
+
+
+    public static void setActiveRetret (Context context, String idToSave, String endDateToSave){
+        activeRetretId = idToSave;
+        activeRetretEndDate = endDateToSave;
+        try {
+            //save id
+            FileOutputStream outputStream = context.openFileOutput("activeRetretId.txt", Context.MODE_PRIVATE);
+            //Log.d("Context Directory", "Path: "+context.getFilesDir());
+            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+            output.writeObject(activeRetretId);
+            output.close();
+
+            //save end date
+            outputStream = context.openFileOutput("activeRetretEndDate.txt", Context.MODE_PRIVATE);
+            output = new ObjectOutputStream(outputStream);
+            output.writeObject(activeRetretEndDate);
+            output.close();
+        }catch (Exception e){
+            Log.d("setActiveRetret", "Exception: " + e);
+        }
+    }
+
+    public static String calculateEndDate(String ID){
+        int numberofDays = courseRetret.get(ID).retretDays.length;
+        Date endDate = new Date(new Date().getTime() + TimeUnit.DAYS.toMillis( numberofDays ));
+        return simpleDateFormat.format(endDate);
+    }
+
+    public static int checkEndDateDifference(){
+        if (activeRetretId == ""){
+            return -1;
+        }else if (activeRetretEndDate==""){
+            return 0; //Counted as active course, but not being actived yet
+        }else{
+            try {
+                Date endDate = simpleDateFormat.parse(activeRetretEndDate);
+                Date currentDate = new Date();
+                int dayDiff = (int) getDateDiff(currentDate,endDate,TimeUnit.DAYS);
+                return dayDiff;
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return -1;
+            }
+
+        }
+    }
+
+    public static boolean checkActiveRetretStatus(){
+        if (checkEndDateDifference()>=0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
+    }
+
+
+
+
 
     public static void StartTimer(Context context, int meditationDuration, int warmupDuration, int ambientMusic){
         Intent intent = new Intent(context, TimerCountdown.class);
@@ -75,42 +238,6 @@ public class Global {
         intent.putExtra("warmupDuration", warmupDuration);
         intent.putExtra("ambientMusic", ambientMusic);
         context.startActivity(intent);
-    }
-
-    public static void getRecentMeditation(Context context){
-
-        try {
-            FileInputStream inputStream = context.openFileInput("recentMeditation.txt");
-            ObjectInputStream input = new ObjectInputStream(inputStream);
-            recentMeditation = (ArrayList<String>) input.readObject();
-            input.close();
-        } catch (FileNotFoundException e){
-            recentMeditation = new ArrayList<>();
-            recentMeditation.add(0,"Kosong");
-            recentMeditation.add(0,"Kosong");
-            recentMeditation.add(0,"Kosong");
-            Log.d("ANU","FILENOTFOUND: "+ recentMeditation.size() + ", Index 2: "+ recentMeditation.get(2));
-
-        }catch (Exception e){
-            Log.d("getRecentMeditation", "Exception: " + e);
-        }
-
-    }
-
-    public static void setRecentMeditation (Context context, String timeToSave){
-        recentMeditation.remove(2);
-        recentMeditation.add(0, timeToSave);
-
-        try {
-            FileOutputStream outputStream = context.openFileOutput("recentMeditation.txt", Context.MODE_PRIVATE);
-            //Log.d("Context Directory", "Path: "+context.getFilesDir());
-            ObjectOutputStream output = new ObjectOutputStream(outputStream);
-            output.writeObject(recentMeditation);
-            output.close();
-        }catch (Exception e){
-            Log.d("SetRecentMeditation", "Exception: " + e);
-        }
-
     }
 
     public static int dpToPx(Context context, int dp) {
