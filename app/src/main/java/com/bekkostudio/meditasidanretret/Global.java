@@ -125,7 +125,8 @@ public class Global {
         RetretDetail tempRetretDetail = new RetretDetail();
         tempRetretDetail.title = "Belajar Meditasi untuk Pemula";
         tempRetretDetail.thumbnailImage = R.drawable.ambient0;
-        tempRetretDetail.retretDays = new RetretDays[1];
+        tempRetretDetail.retretDays = new RetretDays[5];
+        //day 1
         tempRetretDetail.retretDays[0] = new RetretDays();
         tempRetretDetail.retretDays[0].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
         tempRetretDetail.retretDays[0].videoFileName = "/"+tempId+".mp4"; //can looped
@@ -134,6 +135,46 @@ public class Global {
         tempRetretDetail.retretDays[0].nightDuration = 120;
         tempRetretDetail.retretDays[0].nightBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[0].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+        //day 2
+        tempRetretDetail.retretDays[1] = new RetretDays();
+        tempRetretDetail.retretDays[1].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
+        tempRetretDetail.retretDays[1].videoFileName = "/"+tempId+".mp4"; //can looped
+        tempRetretDetail.retretDays[1].morningDuration = 100;
+        tempRetretDetail.retretDays[1].morningBGM = R.raw.butterfly_space;
+        tempRetretDetail.retretDays[1].nightDuration = 5;
+        tempRetretDetail.retretDays[1].nightBGM = R.raw.butterfly_space;
+        tempRetretDetail.retretDays[1].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+
+        //day 3
+        tempRetretDetail.retretDays[2] = new RetretDays();
+        tempRetretDetail.retretDays[2].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
+        tempRetretDetail.retretDays[2].videoFileName = "/"+tempId+".mp4"; //can looped
+        tempRetretDetail.retretDays[2].morningDuration = 3;
+        tempRetretDetail.retretDays[2].morningBGM = R.raw.butterfly_space;
+        tempRetretDetail.retretDays[2].nightDuration = 10;
+        tempRetretDetail.retretDays[2].nightBGM = R.raw.butterfly_space;
+        tempRetretDetail.retretDays[2].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+
+        //day 4
+        tempRetretDetail.retretDays[3] = new RetretDays();
+        tempRetretDetail.retretDays[3].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
+        tempRetretDetail.retretDays[3].videoFileName = "/"+tempId+".mp4"; //can looped
+        tempRetretDetail.retretDays[3].morningDuration = 1;
+        tempRetretDetail.retretDays[3].morningBGM = R.raw.butterfly_space;
+        tempRetretDetail.retretDays[3].nightDuration = 4;
+        tempRetretDetail.retretDays[3].nightBGM = R.raw.butterfly_space;
+        tempRetretDetail.retretDays[3].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+
+        //day 5
+        tempRetretDetail.retretDays[4] = new RetretDays();
+        tempRetretDetail.retretDays[4].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
+        tempRetretDetail.retretDays[4].videoFileName = "/"+tempId+".mp4"; //can looped
+        tempRetretDetail.retretDays[4].morningDuration = 1;
+        tempRetretDetail.retretDays[4].morningBGM = R.raw.butterfly_space;
+        tempRetretDetail.retretDays[4].nightDuration = 2;
+        tempRetretDetail.retretDays[4].nightBGM = R.raw.butterfly_space;
+        tempRetretDetail.retretDays[4].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+
         courseRetret.put(tempId,tempRetretDetail);
     }
 
@@ -142,7 +183,7 @@ public class Global {
     public static String activeRetretEndDate;
 
     //universal pattern for date
-    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE,dd-MM-yyyy");
 
 
     public static void getActiveRetret(Context context){
@@ -190,21 +231,35 @@ public class Global {
         }
     }
 
-    public static String calculateEndDate(String ID){
-        int numberofDays = courseRetret.get(ID).retretDays.length;
+    public static String calculateEndDate(){
+        int numberofDays = courseRetret.get(activeRetretId).retretDays.length;
         Date endDate = new Date(new Date().getTime() + TimeUnit.DAYS.toMillis( numberofDays ));
         return simpleDateFormat.format(endDate);
+    }
+
+    public static String calculateRetretDaysDate(int currentIndex){
+        int numberofDays = courseRetret.get(activeRetretId).retretDays.length;
+        try {
+            Date date = new Date(simpleDateFormat.parse(activeRetretEndDate).getTime() - TimeUnit.DAYS.toMillis( numberofDays-currentIndex-1 ));
+            return simpleDateFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "Error: "+e;
+        }
     }
 
     public static int checkEndDateDifference(){
         if (activeRetretId == ""){
             return -1;
         }else if (activeRetretEndDate==""){
-            return 0; //Counted as active course, but not being actived yet
+            return 0; //Counted as active course, but not being activated yet
         }else{
             try {
                 Date endDate = simpleDateFormat.parse(activeRetretEndDate);
-                Date currentDate = new Date();
+
+                //To neutralize the clock, we have to parse from String format
+                Date currentDate = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
+
                 int dayDiff = (int) getDateDiff(currentDate,endDate,TimeUnit.DAYS);
                 return dayDiff;
             } catch (ParseException e) {
@@ -245,6 +300,22 @@ public class Global {
                 .getDisplayMetrics()
                 .density;
         return Math.round((float) dp * density);
+    }
+
+
+    public static String formatMinutesToHoursMinutes(int rawMinutes){
+        int minutes =rawMinutes % 60;
+        int hours =(rawMinutes / 60) % 24;
+        String result ="";
+        if (hours>0){
+            result = hours + " jam ";
+        }
+
+        if (minutes>0){
+            result = result+minutes + " menit";
+        }
+
+        return result;
     }
 
 

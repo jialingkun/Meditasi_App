@@ -29,9 +29,11 @@
         <activity android:name=".Course.Retret.RetretActivity" />
         <activity android:name=".Course.TutorialActivity" />
         <activity android:name=".Course.ShopActivity" />
-        <activity android:name=".Course.TutorialContentActivity" />
-        <activity android:name=".Course.ExoPlayerActivity"
-            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".Course.ExoPlayerActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".Course.Retret.AttentionActivity" />
+        <activity android:name=".Course.Retret.TimelineActivity" />
     </application>
 
 </manifest>

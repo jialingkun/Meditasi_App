@@ -128,8 +128,22 @@ public class RetretActivity extends AppCompatActivity implements BillingProcesso
         activeRetretLabelWidget = findViewById(R.id.activeCourseLabel);
         activeRetretTitleWidget = findViewById(R.id.activeCourseTitle);
         activeRetretImageWidget = findViewById(R.id.activeCourseImage);
-
         setActiveRetretWidget();
+        activeRetretImageWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Global.activeRetretEndDate==""){
+                    //to Attention page before start activity
+                    Intent intent = new Intent(RetretActivity.this, AttentionActivity.class);
+                    startActivity(intent);
+                }else {
+                    //To course timeline
+                    Intent intent = new Intent(RetretActivity.this, TimelineActivity.class);
+                    startActivity(intent);
+
+                }
+            }
+        });
 
     }
 

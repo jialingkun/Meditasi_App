@@ -17,7 +17,7 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
 
     private Context mContext;
 
-    private static final int SWIPE_PAGE_ON_FACTOR = 8;
+    private static final int SWIPE_PAGE_ON_FACTOR = 10;
 
     private int mActiveItem;
 

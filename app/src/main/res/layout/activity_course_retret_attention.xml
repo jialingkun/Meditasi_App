@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Course.Retret.AttentionActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="PERINGATAN"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:text="1. Jika anda menekan tombol mulai di bawah, anda harus mematuhi jadwal yang ditetapkan.\n
+2. Jika kursus sudah dimulai, anda tidak bisa mengulang kursus yang sudah terlewatkan dari jadwal. \n
+3. Saat anda menekan tombol mulai, sesi pertama akan dimulai sejak besok pagi, antara jam 4:00 hingga jam 11:00 pagi. Pastikan anda mengakses aplikasi ini keesokan paginya untuk memulai kursus. \n
+4. Saat kursus ini sudah berakhir, kursus ini akan terhapus secara otomatis. Pastikan anda mengikuti seluruh sesi yang anda."/>
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="MULAI"/>
+
+
+</RelativeLayout>
