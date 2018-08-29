@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.bekkostudio.meditasidanretret.Course.TutorialActivity;
 import com.bekkostudio.meditasidanretret.Course.TutorialContentActivity;
@@ -29,6 +30,12 @@ public class TimelineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_retret_timeline);
+
+        //Title
+        TextView title = findViewById(R.id.title);
+        title.setText(Global.courseRetret.get(Global.activeRetretId).title);
+
+
 
         List<HashMap<String, String>> aList = new ArrayList<>();
         retretDays = Global.courseRetret.get(Global.activeRetretId).retretDays;
@@ -65,7 +72,7 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == activeIndex){
-                    Intent intent = new Intent(TimelineActivity.this, TutorialContentActivity.class);
+                    Intent intent = new Intent(TimelineActivity.this, TimelineContentActivity.class);
                     intent.putExtra("contentIndex", position);
                     startActivity(intent);
                 }

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Course.Retret.TimelineContentActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/videoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Hari ke-2"/>
+
+            <ImageView
+                android:id="@+id/videoThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/videoTitle"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ambient0"/>
+
+            <RelativeLayout
+                android:id="@+id/MorningLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/videoThumbnail">
+
+                <TextView
+                    android:id="@+id/MorningTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="04:00 - 11:00"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/MorningDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/MorningTitle"
+                    android:layout_below="@+id/MorningTitle"
+                    android:text="120 Menit"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/MorningStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="MULAI"
+                    android:textSize="23sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/NightLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/MorningLayout">
+
+                <TextView
+                    android:id="@+id/NightTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="16:00 - 23:00"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/NightDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/NightTitle"
+                    android:layout_below="@+id/NightTitle"
+                    android:text="120 Menit"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/NightStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="MULAI"
+                    android:textSize="23sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/DescriptionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/NightLayout"
+                android:text="Deskripsi"/>
+            <TextView
+                android:id="@+id/Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/DescriptionTitle"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>
