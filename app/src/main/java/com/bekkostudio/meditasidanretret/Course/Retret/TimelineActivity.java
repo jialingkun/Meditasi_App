@@ -44,8 +44,8 @@ public class TimelineActivity extends AppCompatActivity {
         int datediff = Global.checkEndDateDifference();
         if (datediff>=0){
             activeIndex = retretDays.length - datediff - 1;
-            Log.d("active index", "onCreate: "+activeIndex);
-            Log.d("date diff", "onCreate: "+datediff);
+//            Log.d("active index", "onCreate: "+activeIndex);
+//            Log.d("date diff", "onCreate: "+datediff);
         }
 
         for (int i = 0; i < retretDays.length; i++) {
@@ -82,7 +82,6 @@ public class TimelineActivity extends AppCompatActivity {
 
 
     public class CustomAdapter extends SimpleAdapter{
-
         public CustomAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to) {
             super(context, data, resource, from, to);
         }
@@ -92,6 +91,8 @@ public class TimelineActivity extends AppCompatActivity {
             View view = super.getView(position, convertView, parent);
             if (position == activeIndex){
                 view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }else{
+                view.setBackgroundColor(Color.parseColor("#D2D7D3"));
             }
             return view;
         }

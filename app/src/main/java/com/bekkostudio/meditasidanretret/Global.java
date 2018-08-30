@@ -129,7 +129,7 @@ public class Global {
         //day 1
         tempRetretDetail.retretDays[0] = new RetretDays();
         tempRetretDetail.retretDays[0].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[0].videoFileName = "/"+tempId+".mp4"; //can looped
+        tempRetretDetail.retretDays[0].videoThumbnail = R.drawable.ambient0;
         tempRetretDetail.retretDays[0].morningDuration = 60;
         tempRetretDetail.retretDays[0].morningBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[0].nightDuration = 120;
@@ -138,7 +138,7 @@ public class Global {
         //day 2
         tempRetretDetail.retretDays[1] = new RetretDays();
         tempRetretDetail.retretDays[1].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[1].videoFileName = "/"+tempId+".mp4"; //can looped
+        tempRetretDetail.retretDays[1].videoThumbnail = R.drawable.ambient0;
         tempRetretDetail.retretDays[1].morningDuration = 100;
         tempRetretDetail.retretDays[1].morningBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[1].nightDuration = 5;
@@ -148,7 +148,7 @@ public class Global {
         //day 3
         tempRetretDetail.retretDays[2] = new RetretDays();
         tempRetretDetail.retretDays[2].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[2].videoFileName = "/"+tempId+".mp4"; //can looped
+        tempRetretDetail.retretDays[2].videoThumbnail = R.drawable.ambient0;
         tempRetretDetail.retretDays[2].morningDuration = 3;
         tempRetretDetail.retretDays[2].morningBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[2].nightDuration = 10;
@@ -158,7 +158,7 @@ public class Global {
         //day 4
         tempRetretDetail.retretDays[3] = new RetretDays();
         tempRetretDetail.retretDays[3].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[3].videoFileName = "/"+tempId+".mp4"; //can looped
+        tempRetretDetail.retretDays[3].videoThumbnail = R.drawable.ambient0;
         tempRetretDetail.retretDays[3].morningDuration = 1;
         tempRetretDetail.retretDays[3].morningBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[3].nightDuration = 4;
@@ -168,7 +168,7 @@ public class Global {
         //day 5
         tempRetretDetail.retretDays[4] = new RetretDays();
         tempRetretDetail.retretDays[4].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[4].videoFileName = "/"+tempId+".mp4"; //can looped
+        tempRetretDetail.retretDays[4].videoThumbnail = R.drawable.ambient0;
         tempRetretDetail.retretDays[4].morningDuration = 1;
         tempRetretDetail.retretDays[4].morningBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[4].nightDuration = 2;
