@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -36,7 +37,15 @@ public class ExoPlayerActivity extends AppCompatActivity {
         //get video url
         Intent intent = getIntent();
         url = intent.getStringExtra("videoUrl");
-        String proxyUrl = Global.getProxy(this).getProxyUrl(url);
+        String proxyUrl;
+        if (url.startsWith("http")){
+            proxyUrl = Global.getProxy(this).getProxyUrl(url);
+        }else{
+            proxyUrl = url;
+        }
+
+
+        Log.d("PROXY URL", "onCreate: "+proxyUrl);
 
         // If the Android version is lower than Jellybean, use this call to hide
         // the status bar.
