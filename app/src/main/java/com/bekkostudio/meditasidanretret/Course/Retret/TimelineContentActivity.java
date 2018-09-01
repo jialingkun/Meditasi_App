@@ -1,5 +1,6 @@
 package com.bekkostudio.meditasidanretret.Course.Retret;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,11 +25,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TimelineContentActivity extends AppCompatActivity {
     int contentIndex;
     RetretDays retretDays;
     String filePath;
+    int warmupDuration = 30; //universal warmup duration, change this value
+    int meditationDuration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +47,6 @@ public class TimelineContentActivity extends AppCompatActivity {
 
         TextView videoTitle = findViewById(R.id.videoTitle);
         videoTitle.setText("Hari Ke "+(contentIndex+1));
-
 
         ImageView videoThumbnail = findViewById(R.id.videoThumbnail);
         videoThumbnail.setImageResource(retretDays.videoThumbnail);
@@ -74,9 +79,61 @@ public class TimelineContentActivity extends AppCompatActivity {
         });
 
 
+        //start meditation
+        Button morningStart = findViewById(R.id.MorningStart);
+        morningStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isCurrentTimeBetweenTwoHours(4,11)){
+                    meditationDuration = retretDays.morningDuration * 60; //minutes to seconds
+                    Global.startTimer(getApplicationContext(),meditationDuration,warmupDuration,retretDays.morningBGM);
+                }else{
+                    AlertDialog.Builder alert = new AlertDialog.Builder(TimelineContentActivity.this);
+                    alert.setTitle("Peringatan");
+                    alert.setMessage("Sesi pagi hanya bisa dimulai dari jam 4 sampai 11 pagi");
+                    alert.setPositiveButton("OK",null);
+                    alert.show();
+                }
+            }
+        });
+        Button nightStart = findViewById(R.id.NightStart);
+        nightStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isCurrentTimeBetweenTwoHours(16,23)){
+                    meditationDuration = retretDays.nightDuration * 60; //minutes to seconds
+                    Global.startTimer(getApplicationContext(),meditationDuration,warmupDuration,retretDays.morningBGM);
+                }else{
+                    AlertDialog.Builder alert = new AlertDialog.Builder(TimelineContentActivity.this);
+                    alert.setTitle("Peringatan");
+                    alert.setMessage("Sesi malam hanya bisa dimulai dari jam 4 sampai 11 malam");
+                    alert.setPositiveButton("OK",null);
+                    alert.show();
+                }
+
+            }
+        });
+    }
 
 
+    public boolean isCurrentTimeBetweenTwoHours(int fromHour, int toHour) {
+        //Current Time
+        Calendar now = Calendar.getInstance();
+        now.setTime(new Date());
+        //Start Time
+        Calendar from = Calendar.getInstance();
+        from.set(Calendar.HOUR_OF_DAY, fromHour);
+        from.set(Calendar.MINUTE, 0);
+        //Stop Time
+        Calendar to = Calendar.getInstance();
+        to.set(Calendar.HOUR_OF_DAY, toHour);
+        to.set(Calendar.MINUTE, 0);
 
+        if(to.before(from)) {
+            if (now.after(to)) to.add(Calendar.DATE, 1);
+            else from.add(Calendar.DATE, -1);
+        }
+        return now.after(from) && now.before(to);
     }
 
 

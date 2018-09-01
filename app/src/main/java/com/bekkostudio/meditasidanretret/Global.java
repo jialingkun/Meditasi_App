@@ -291,7 +291,7 @@ public class Global {
 
 
 
-    public static void StartTimer(Context context, int meditationDuration, int warmupDuration, int ambientMusic){
+    public static void startTimer(Context context, int meditationDuration, int warmupDuration, int ambientMusic){
         Intent intent = new Intent(context, TimerCountdown.class);
         intent.putExtra("meditationDuration", meditationDuration);
         intent.putExtra("warmupDuration", warmupDuration);

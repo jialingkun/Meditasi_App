@@ -146,7 +146,7 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
 
                 ambientMusic = Global.ambientMusicItem[ambientMusicScrollWidget.getActiveItem()];
                 //start timer
-                Global.StartTimer(getActivity().getApplicationContext(),meditationDuration,warmupDuration,ambientMusic);
+                Global.startTimer(getActivity().getApplicationContext(),meditationDuration,warmupDuration,ambientMusic);
             }
         });
 
