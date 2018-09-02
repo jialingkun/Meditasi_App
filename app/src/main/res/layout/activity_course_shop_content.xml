@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Course.ShopContentActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/shopTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:id="@+id/shopThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/shopTitle"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/shopDescriptionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shopThumbnail"
+                android:text="Deskripsi"/>
+            <TextView
+                android:id="@+id/shopDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shopDescriptionTitle"/>
+            <TextView
+                android:id="@+id/shopContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shopDescription"
+                android:text="Contact Person : 082331602198"
+                android:textSize="19sp"/>
+            <Button
+                android:id="@+id/shopSaveContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shopContact"
+                android:text="Hubungi"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

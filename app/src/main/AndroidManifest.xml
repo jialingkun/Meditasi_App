@@ -26,25 +26,35 @@
         </activity>
         <activity
             android:name=".Timer.TimerCountdown"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Timer.MeditationResult"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Course.Retret.RetretActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Course.TutorialActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Course.TutorialContentActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Course.ShopActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Course.ExoPlayerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Timer.MeditationResult"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Course.Retret.RetretActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Course.TutorialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Course.TutorialContentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Course.ShopActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Course.ExoPlayerActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".Course.Retret.AttentionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Course.Retret.TimelineActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Course.Retret.TimelineContentActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Course.Retret.AttentionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Course.Retret.TimelineActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Course.Retret.TimelineContentActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Course.ShopContentActivity"></activity>
     </application>
 
 </manifest>

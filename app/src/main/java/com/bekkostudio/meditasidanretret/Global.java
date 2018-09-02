@@ -80,13 +80,31 @@ public class Global {
 
 
     //course
+    //shop
+    // Array of strings for ListView
+    public static final String[] shopTitle ={
+            "Bantal Meditasi", "Guling meditasi", "Kasur meditasi",
+    };
+    public static final int[] shopThumbnail ={
+            R.drawable.bantal, R.drawable.bantal, R.drawable.bantal,
+    };
+    public static final String[] listviewShopPrice ={
+            "Rp 200.000", "Rp 250.000", "Rp 1.350.000",
+    };
+    public static final String[] shopDescription ={
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    };
+    public static final String shopContact = "082331602198";
+
     //tutorial
     // Array of strings for ListView
     public static final String[] videoTitle ={
             "How to Meditate for dummies", "How to Meditate for dummies 2", "How to Meditate for dummies 3",
     };
     public static final int[] videoThumbnail ={
-            R.drawable.ambient0, R.drawable.ambient0, R.drawable.ambient0,
+            R.drawable.thumbnail_dummy, R.drawable.thumbnail_dummy, R.drawable.thumbnail_dummy,
     };
     public static final String[] listviewShortDescription ={
             "00:13:30", "00:13:30", "00:13:30",
@@ -133,7 +151,7 @@ public class Global {
         //day 1
         tempRetretDetail.retretDays[0] = new RetretDays();
         tempRetretDetail.retretDays[0].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[0].videoThumbnail = R.drawable.ambient0;
+        tempRetretDetail.retretDays[0].videoThumbnail = R.drawable.thumbnail_dummy;
         tempRetretDetail.retretDays[0].morningDuration = 60;
         tempRetretDetail.retretDays[0].morningBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[0].nightDuration = 120;
@@ -142,7 +160,7 @@ public class Global {
         //day 2
         tempRetretDetail.retretDays[1] = new RetretDays();
         tempRetretDetail.retretDays[1].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[1].videoThumbnail = R.drawable.ambient0;
+        tempRetretDetail.retretDays[1].videoThumbnail = R.drawable.thumbnail_dummy;
         tempRetretDetail.retretDays[1].morningDuration = 100;
         tempRetretDetail.retretDays[1].morningBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[1].nightDuration = 5;
@@ -152,7 +170,7 @@ public class Global {
         //day 3
         tempRetretDetail.retretDays[2] = new RetretDays();
         tempRetretDetail.retretDays[2].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[2].videoThumbnail = R.drawable.ambient0;
+        tempRetretDetail.retretDays[2].videoThumbnail = R.drawable.thumbnail_dummy;
         tempRetretDetail.retretDays[2].morningDuration = 3;
         tempRetretDetail.retretDays[2].morningBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[2].nightDuration = 10;
@@ -162,7 +180,7 @@ public class Global {
         //day 4
         tempRetretDetail.retretDays[3] = new RetretDays();
         tempRetretDetail.retretDays[3].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[3].videoThumbnail = R.drawable.ambient0;
+        tempRetretDetail.retretDays[3].videoThumbnail = R.drawable.thumbnail_dummy;
         tempRetretDetail.retretDays[3].morningDuration = 1;
         tempRetretDetail.retretDays[3].morningBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[3].nightDuration = 4;
@@ -172,7 +190,7 @@ public class Global {
         //day 5
         tempRetretDetail.retretDays[4] = new RetretDays();
         tempRetretDetail.retretDays[4].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[4].videoThumbnail = R.drawable.ambient0;
+        tempRetretDetail.retretDays[4].videoThumbnail = R.drawable.thumbnail_dummy;
         tempRetretDetail.retretDays[4].morningDuration = 1;
         tempRetretDetail.retretDays[4].morningBGM = R.raw.butterfly_space;
         tempRetretDetail.retretDays[4].nightDuration = 2;
