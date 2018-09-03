@@ -48,7 +48,7 @@
                 android:layout_below="@+id/activeCourseImage"
                 android:text="Kursus Pemula" />
 
-            <com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView
+            <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
                 android:id="@+id/beginnerCourseCenterHorizontalScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                 </LinearLayout>
-            </com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView>
+            </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
 
             <TextView
                 android:id="@+id/intermediateCourseLabel"
@@ -69,7 +69,7 @@
                 android:layout_below="@+id/beginnerCourseCenterHorizontalScrollView"
                 android:text="Kursus Menengah" />
 
-            <com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView
+            <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
                 android:id="@+id/intermediateCourseCenterHorizontalScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                 </LinearLayout>
-            </com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView>
+            </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
 
             <TextView
                 android:id="@+id/advanceCourseLabel"
@@ -90,7 +90,7 @@
                 android:layout_below="@+id/intermediateCourseCenterHorizontalScrollView"
                 android:text="Kursus Lanjut" />
 
-            <com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView
+            <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
                 android:id="@+id/advanceCourseCenterHorizontalScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                 </LinearLayout>
-            </com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView>
+            </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
 
 
 

@@ -2,7 +2,6 @@ package com.bekkostudio.meditasidanretret.Course.Retret;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +15,7 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
-import com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView;
+import com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView;
 
 public class RetretActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
 
@@ -59,9 +58,9 @@ public class RetretActivity extends AppCompatActivity implements BillingProcesso
         LinearLayout.LayoutParams params;
 
         //Set the width here
-        int courseItemWidth = 120;
-        int courseItemHeight = 120;
-        int courseItemMargin = 20;
+        int courseItemWidth = 170;
+        int courseItemHeight = 170;
+        int courseItemMargin = 0;
 
 
         //set gap to center first item and last item

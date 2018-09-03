@@ -40,7 +40,7 @@ import static android.app.Activity.RESULT_OK;
 public class ArticleFragment extends Fragment {
 
     ProgressBar progressBar;
-    String homeURL = "http://hiduppemula.blogspot.com/";
+    String homeURL = "https://meditasi123.blogspot.com/";
 
 
     private static final String TAG = MainActivity.class.getSimpleName();

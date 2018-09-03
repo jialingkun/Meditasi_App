@@ -146,7 +146,7 @@ public class Global {
         String tempId = BillingParameter.courseSKUList.get(0);
         RetretDetail tempRetretDetail = new RetretDetail();
         tempRetretDetail.title = "Belajar Meditasi untuk Pemula";
-        tempRetretDetail.thumbnailImage = R.drawable.ambient0;
+        tempRetretDetail.thumbnailImage = R.drawable.course_thumbnail_dummy;
         tempRetretDetail.retretDays = new RetretDays[5];
         //day 1
         tempRetretDetail.retretDays[0] = new RetretDays();

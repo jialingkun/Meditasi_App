@@ -7,15 +7,16 @@
         android:id="@+id/itemImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@drawable/ambient0"
-        android:layout_weight="1"/>
+        android:src="@drawable/course_thumbnail_dummy"
+        android:layout_weight="0.7"/>
 
     <TextView
         android:id="@+id/itemText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="ANUANUANU"
-        android:layout_weight="1" />
+        android:text="Belajar Meditasi untuk Pemula"
+        android:textAlignment="center"
+        android:layout_weight="0.3" />
 
 
 

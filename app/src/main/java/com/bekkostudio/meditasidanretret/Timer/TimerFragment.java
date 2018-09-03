@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
-import com.bekkostudio.meditasidanretret.Timer.CenteringHorizontalScrollView;
+import com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView;
 import com.wefika.horizontalpicker.HorizontalPicker;
 
 public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSelected{
