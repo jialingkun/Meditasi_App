@@ -32,7 +32,7 @@ public class TimelineContentActivity extends AppCompatActivity {
     int contentIndex;
     RetretDays retretDays;
     String filePath;
-    int warmupDuration = 30; //universal warmup duration, change this value
+    int warmupDuration = 10; //universal warmup duration, change this value
     int meditationDuration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class TimelineContentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (isCurrentTimeBetweenTwoHours(4,11)){
                     meditationDuration = retretDays.morningDuration * 60; //minutes to seconds
-                    Global.startTimer(getApplicationContext(),meditationDuration,warmupDuration,retretDays.morningBGM);
+                    Global.startTimer(TimelineContentActivity.this,meditationDuration,warmupDuration,retretDays.morningBGM);
                 }else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(TimelineContentActivity.this);
                     alert.setTitle("Peringatan");
@@ -102,7 +102,7 @@ public class TimelineContentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (isCurrentTimeBetweenTwoHours(16,23)){
                     meditationDuration = retretDays.nightDuration * 60; //minutes to seconds
-                    Global.startTimer(getApplicationContext(),meditationDuration,warmupDuration,retretDays.morningBGM);
+                    Global.startTimer(TimelineContentActivity.this,meditationDuration,warmupDuration,retretDays.morningBGM);
                 }else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(TimelineContentActivity.this);
                     alert.setTitle("Peringatan");

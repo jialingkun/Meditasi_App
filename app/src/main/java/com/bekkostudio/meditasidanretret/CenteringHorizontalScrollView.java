@@ -136,6 +136,12 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
 
         super.smoothScrollTo(targetScroll, 0);
 
+        // fire listener here
+        if (listener != null){
+            listener.onItemSelected(mActiveItem);
+        }
+
+
     }
 
     /**
@@ -161,6 +167,18 @@ public class CenteringHorizontalScrollView extends HorizontalScrollView implemen
 
     public int getActiveItem(){
         return mActiveItem;
+    }
+
+
+    //Listener for on item selected
+    public interface CustomListener{
+        public void onItemSelected(int activeItem);
+    }
+
+    private CustomListener listener;
+    // Assign the listener implementing events interface that will receive the events
+    public void setCustomListener(CustomListener listener) {
+        this.listener = listener;
     }
 
 }

@@ -87,7 +87,7 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
         //Set the width here
         int imageWidth = 120;
         int imageHeight = 120;
-        int imageMargin = 20;
+        int imageMargin = 10;
 
         //set gap to center first item and last item
         ambientMusicScrollWidget.setLeftRightGap(getActivity(),imageWidth);
@@ -112,23 +112,23 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
             //add to Linearlayout
             ambientMusicPickerWidget.addView(image);
 
-            //On image click
-            final int musicId = Global.ambientMusicItem[i]; //final to force this variable to go inside onclicklistener
-            image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (backgroundSound!=null){
-                        backgroundSound.stop();
-                        backgroundSound.release();
-                        backgroundSound = null;
-                    }
-                    if (musicId!=0){
-                        backgroundSound = MediaPlayer.create(getActivity(),musicId);
-                        backgroundSound.start();
-                    }
-
-                }
-            });
+//            //On image click
+//            final int musicId = Global.ambientMusicItem[i]; //final to force this variable to go inside onclicklistener
+//            image.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    if (backgroundSound!=null){
+//                        backgroundSound.stop();
+//                        backgroundSound.release();
+//                        backgroundSound = null;
+//                    }
+//                    if (musicId!=0){
+//                        backgroundSound = MediaPlayer.create(getActivity(),musicId);
+//                        backgroundSound.start();
+//                    }
+//
+//                }
+//            });
         }
 
         //default first item
@@ -146,7 +146,25 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
 
                 ambientMusic = Global.ambientMusicItem[ambientMusicScrollWidget.getActiveItem()];
                 //start timer
-                Global.startTimer(getActivity().getApplicationContext(),meditationDuration,warmupDuration,ambientMusic);
+                Global.startTimer(getActivity(),meditationDuration,warmupDuration,ambientMusic);
+            }
+        });
+
+        //listener on scroll view item selected
+        ambientMusicScrollWidget.setCustomListener(new CenteringHorizontalScrollView.CustomListener() {
+            @Override
+            public void onItemSelected(int activeItem) {
+                //On image click
+                int musicId = Global.ambientMusicItem[activeItem];
+                if (backgroundSound!=null){
+                    backgroundSound.stop();
+                    backgroundSound.release();
+                    backgroundSound = null;
+                }
+                if (musicId!=0){
+                    backgroundSound = MediaPlayer.create(getActivity(),musicId);
+                    backgroundSound.start();
+                }
             }
         });
 

@@ -85,9 +85,9 @@ public class TimerCountdown extends AppCompatActivity {
 
                     public void onFinish() {
                         bellSound.start();
-                        if (ambientMusic != 0){
-                            backgroundSound.stop();
-                        }
+//                        if (ambientMusic != 0){
+//                            backgroundSound.stop();
+//                        }
 
                         endMeditation();
                     }
@@ -153,7 +153,12 @@ public class TimerCountdown extends AppCompatActivity {
         if (meditationTimer!=null){meditationTimer.cancel();}
         Intent intent = new Intent(this, MeditationResult.class);
         intent.putExtra("remainingTime", formatMilliSecondsToTime(resultTime));
-        this.startActivity(intent);
+        this.startActivityForResult(intent, 1);
+        //finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         finish();
     }
 }

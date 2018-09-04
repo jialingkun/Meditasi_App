@@ -35,6 +35,11 @@ public class TimelineActivity extends AppCompatActivity {
         TextView title = findViewById(R.id.title);
         title.setText(Global.courseRetret.get(Global.activeRetretId).title);
 
+        //Title
+        TextView description = findViewById(R.id.description);
+        description.setText(Global.courseRetret.get(Global.activeRetretId).description);
+
+
 
 
         List<HashMap<String, String>> aList = new ArrayList<>();

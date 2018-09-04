@@ -1,5 +1,6 @@
 package com.bekkostudio.meditasidanretret;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -11,6 +12,7 @@ import com.bekkostudio.meditasidanretret.Course.Retret.RetretDetail;
 import com.bekkostudio.meditasidanretret.Timer.TimerCountdown;
 import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
 import com.danikula.videocache.HttpProxyCacheServer;
+import com.google.android.exoplayer2.SimpleExoPlayer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -137,6 +139,10 @@ public class Global {
     }
 
 
+    //Global Exoplayer Instance
+    public static SimpleExoPlayer exoPlayer;
+
+
     //retret
     public static Map<String,RetretDetail> courseRetret = new HashMap<>();
     static {
@@ -147,6 +153,7 @@ public class Global {
         RetretDetail tempRetretDetail = new RetretDetail();
         tempRetretDetail.title = "Belajar Meditasi untuk Pemula";
         tempRetretDetail.thumbnailImage = R.drawable.course_thumbnail_dummy;
+        tempRetretDetail.description = "Panduan :\nAkan ada 5 hari retret yang akan dimulai sesuai tanggal yang tertera di bawah. Pastikan akan kembali ke halaman ini di pagi hari dan menekan menu sesi yang aktif sesuai tanggal. Akan ada 2 sesi di pagi hari dan malam hari. Anda bisa menonton video panduan dan memulai sesi meditasi sesuai timer yang disediakan.";
         tempRetretDetail.retretDays = new RetretDays[5];
         //day 1
         tempRetretDetail.retretDays[0] = new RetretDays();
@@ -254,7 +261,7 @@ public class Global {
     }
 
     public static String calculateEndDate(){
-        int numberofDays = courseRetret.get(activeRetretId).retretDays.length;
+        int numberofDays = courseRetret.get(activeRetretId).retretDays.length; //cheat -1
         Date endDate = new Date(new Date().getTime() + TimeUnit.DAYS.toMillis( numberofDays ));
         return simpleDateFormat.format(endDate);
     }
@@ -309,12 +316,13 @@ public class Global {
 
 
 
-    public static void startTimer(Context context, int meditationDuration, int warmupDuration, int ambientMusic){
-        Intent intent = new Intent(context, TimerCountdown.class);
+    public static void startTimer(Activity activity, int meditationDuration, int warmupDuration, int ambientMusic){
+        Intent intent = new Intent(activity, TimerCountdown.class);
         intent.putExtra("meditationDuration", meditationDuration);
         intent.putExtra("warmupDuration", warmupDuration);
         intent.putExtra("ambientMusic", ambientMusic);
-        context.startActivity(intent);
+
+        activity.startActivity(intent);
     }
 
     public static int dpToPx(Context context, int dp) {

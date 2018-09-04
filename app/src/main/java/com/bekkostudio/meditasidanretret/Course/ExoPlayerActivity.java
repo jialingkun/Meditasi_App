@@ -1,7 +1,7 @@
 package com.bekkostudio.meditasidanretret.Course;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,23 +11,9 @@ import android.view.WindowManager;
 
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.upstream.BandwidthMeter;
-import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 
 public class ExoPlayerActivity extends AppCompatActivity {
-    String url;
-    SimpleExoPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +21,14 @@ public class ExoPlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_course_exo_player);
 
         //get video url
-        Intent intent = getIntent();
-        url = intent.getStringExtra("videoUrl");
-        String proxyUrl;
-        if (url.startsWith("http")){
-            proxyUrl = Global.getProxy(this).getProxyUrl(url);
-        }else{
-            proxyUrl = url;
-        }
-
-
-        Log.d("PROXY URL", "onCreate: "+proxyUrl);
+//        Intent intent = getIntent();
+//        url = intent.getStringExtra("videoUrl");
+//        String proxyUrl;
+//        if (url.startsWith("http")){
+//            proxyUrl = Global.getProxy(this).getProxyUrl(url);
+//        }else{
+//            proxyUrl = url;
+//        }
 
         // If the Android version is lower than Jellybean, use this call to hide
         // the status bar.
@@ -59,47 +42,16 @@ public class ExoPlayerActivity extends AppCompatActivity {
             decorView.setSystemUiVisibility(uiOptions);
         }
 
-        //set Video
-        initializeExoPlayer(proxyUrl);
-    }
-
-    private void initializeExoPlayer(String url){
-        // 1. Create a default TrackSelector
-        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-        TrackSelection.Factory videoTrackSelectionFactory =
-                new AdaptiveTrackSelection.Factory(bandwidthMeter);
-        DefaultTrackSelector trackSelector =
-                new DefaultTrackSelector(videoTrackSelectionFactory);
-
-        // 2. Create the player
-        player = ExoPlayerFactory.newSimpleInstance(this, trackSelector);
-
-        // 3. Bind Player to the view
         PlayerView playerViewWidget = findViewById(R.id.videoPlayer);
-        playerViewWidget.setPlayer(player);
 
-        // 4. Preparing Player
-        // Measures bandwidth during playback. Can be null if not required.
-        DefaultBandwidthMeter defaultBandwidthMeter = new DefaultBandwidthMeter();
-        // Produces DataSource instances through which media data is loaded.
-        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this,
-                Util.getUserAgent(this, "MeditasiDanRetret"), defaultBandwidthMeter);
-        //create URI
-        Uri videoUri = Uri.parse(url);
-        // This is the MediaSource representing the media to be played.
-        MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(videoUri);
-        // Prepare the player with the source.
-        player.prepare(videoSource);
-
+        //Bind video to widget
+        playerViewWidget.setPlayer(Global.exoPlayer);
     }
+
 
     @Override
-    public void onPause() {
-        super.onPause();
-        if (player!=null) {
-            player.release();
-            player = null;
-        }
+    public void onBackPressed() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        super.onBackPressed();
     }
 }

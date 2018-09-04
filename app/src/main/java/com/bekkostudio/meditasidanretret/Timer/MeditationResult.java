@@ -14,6 +14,7 @@ public class MeditationResult extends AppCompatActivity {
 
     TextView resultTimeWidget;
     Button doneWidget;
+    String remainingTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class MeditationResult extends AppCompatActivity {
 
         //get parameter
         Intent intent = getIntent();
-        final String remainingTime = intent.getStringExtra("remainingTime");
+        String remainingTime = intent.getStringExtra("remainingTime");
 
         //get widget
         resultTimeWidget = findViewById(R.id.resultTime);
@@ -34,10 +35,23 @@ public class MeditationResult extends AppCompatActivity {
         doneWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.setRecentMeditation(getApplicationContext(),remainingTime);
-                Global.lastTimerFragmentObject.loadRecentMeditation();
-                finish();
+                endMeditation();
             }
         });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        endMeditation();
+        return;
+    }
+
+
+    public void endMeditation(){
+        Global.setRecentMeditation(getApplicationContext(),remainingTime);
+        Global.lastTimerFragmentObject.loadRecentMeditation();
+        finish();
+
     }
 }
