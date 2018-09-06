@@ -3,6 +3,7 @@ package com.bekkostudio.meditasidanretret.Course.Retret;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,18 @@ import com.bekkostudio.meditasidanretret.Course.ExoPlayerActivity;
 import com.bekkostudio.meditasidanretret.Course.TutorialContentActivity;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelection;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -31,7 +44,7 @@ import java.util.Date;
 public class TimelineContentActivity extends AppCompatActivity {
     int contentIndex;
     RetretDays retretDays;
-    String filePath;
+//    String filePath;
     int warmupDuration = 10; //universal warmup duration, change this value
     int meditationDuration;
     @Override
@@ -48,8 +61,28 @@ public class TimelineContentActivity extends AppCompatActivity {
         TextView videoTitle = findViewById(R.id.videoTitle);
         videoTitle.setText("Hari Ke "+(contentIndex+1));
 
-        ImageView videoThumbnail = findViewById(R.id.videoThumbnail);
-        videoThumbnail.setImageResource(retretDays.videoThumbnail);
+//        ImageView videoThumbnail = findViewById(R.id.videoThumbnail);
+//        videoThumbnail.setImageResource(retretDays.videoThumbnail);
+
+
+        //set exoplayer
+        String url = retretDays.videoUrl;
+        String proxyUrl = Global.getProxy(this).getProxyUrl(url);
+        PlayerView playerViewWidget = findViewById(R.id.exoplayer);
+        initializeExoPlayer(proxyUrl,playerViewWidget);
+
+
+        Button fullscreenWidget = findViewById(R.id.fullscreenPlayer);
+        fullscreenWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TimelineContentActivity.this, ExoPlayerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
         TextView morningDuration = findViewById(R.id.MorningDuration);
         morningDuration.setText(retretDays.morningDuration+" Menit");
@@ -61,22 +94,22 @@ public class TimelineContentActivity extends AppCompatActivity {
         description.setText(retretDays.description);
 
 
-        //Download and play video
-        filePath = getCacheDir()+"/"+Global.md5(retretDays.videoUrl);
-        videoThumbnail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File file = new File (filePath);
-                if (file.exists()){
-                    Intent intent = new Intent(TimelineContentActivity.this, ExoPlayerActivity.class);
-                    intent.putExtra("videoUrl", filePath);
-                    startActivity(intent);
-                }else{
-                    downloadVideo(retretDays.videoUrl);
-                }
-
-            }
-        });
+//        //Download and play video
+//        filePath = getCacheDir()+"/"+Global.md5(retretDays.videoUrl);
+//        videoThumbnail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                File file = new File (filePath);
+//                if (file.exists()){
+//                    Intent intent = new Intent(TimelineContentActivity.this, ExoPlayerActivity.class);
+//                    intent.putExtra("videoUrl", filePath);
+//                    startActivity(intent);
+//                }else{
+//                    downloadVideo(retretDays.videoUrl);
+//                }
+//
+//            }
+//        });
 
 
         //start meditation
@@ -116,6 +149,57 @@ public class TimelineContentActivity extends AppCompatActivity {
     }
 
 
+    private void initializeExoPlayer(String url, PlayerView playerView){
+        // 1. Create a default TrackSelector
+        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+        TrackSelection.Factory videoTrackSelectionFactory =
+                new AdaptiveTrackSelection.Factory(bandwidthMeter);
+        DefaultTrackSelector trackSelector =
+                new DefaultTrackSelector(videoTrackSelectionFactory);
+
+        // 2. Create the player
+        Global.exoPlayer = ExoPlayerFactory.newSimpleInstance(this, trackSelector);
+
+        // 3. Bind Player to the view
+        playerView.setPlayer(Global.exoPlayer);
+
+        // 4. Preparing Player
+        // Measures bandwidth during playback. Can be null if not required.
+        DefaultBandwidthMeter defaultBandwidthMeter = new DefaultBandwidthMeter();
+        // Produces DataSource instances through which media data is loaded.
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this,
+                Util.getUserAgent(this, "MeditasiDanRetret"), defaultBandwidthMeter);
+        //create URI
+        Uri videoUri = Uri.parse(url);
+        // This is the MediaSource representing the media to be played.
+        MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(videoUri);
+        // Prepare the player with the source.
+        Global.exoPlayer.prepare(videoSource);
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("DESTROYED", "onDestroy: ");
+        if (Global.exoPlayer!=null) {
+            Global.exoPlayer.release();
+            Global.exoPlayer = null;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Global.exoPlayer!=null){
+            PlayerView playerViewWidget = findViewById(R.id.exoplayer);
+            playerViewWidget.setPlayer(null);
+            playerViewWidget.setPlayer(Global.exoPlayer);
+        }
+    }
+
+
     public boolean isCurrentTimeBetweenTwoHours(int fromHour, int toHour) {
         //Current Time
         Calendar now = Calendar.getInstance();
@@ -137,10 +221,9 @@ public class TimelineContentActivity extends AppCompatActivity {
     }
 
 
-    public void downloadVideo(String url){
-        new DownloadFile().execute(url);
-    }
-
+//    public void downloadVideo(String url){
+//        new DownloadFile().execute(url);
+//    }
 
 
     /**

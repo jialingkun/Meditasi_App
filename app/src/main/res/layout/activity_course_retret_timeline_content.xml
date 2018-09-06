@@ -21,19 +21,26 @@
                 android:layout_centerHorizontal="true"
                 android:text="Hari ke-2"/>
 
-            <ImageView
-                android:id="@+id/videoThumbnail"
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/exoplayer"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:layout_below="@+id/videoTitle"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/ambient0"/>
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/fullscreenPlayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full Screen"
+                android:layout_below="@+id/exoplayer"
+                android:layout_centerHorizontal="true"/>
 
             <RelativeLayout
                 android:id="@+id/MorningLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/videoThumbnail">
+                android:layout_below="@id/fullscreenPlayer">
 
                 <TextView
                     android:id="@+id/MorningTitle"

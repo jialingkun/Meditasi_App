@@ -89,7 +89,6 @@ public class TutorialContentActivity extends AppCompatActivity {
 
 
 
-
     private void initializeExoPlayer(String url, PlayerView playerView){
         // 1. Create a default TrackSelector
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
@@ -117,7 +116,6 @@ public class TutorialContentActivity extends AppCompatActivity {
                 .createMediaSource(videoUri);
         // Prepare the player with the source.
         Global.exoPlayer.prepare(videoSource);
-
     }
 
     @Override
