@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 
 public class TimerCountdown extends AppCompatActivity {
@@ -30,6 +31,9 @@ public class TimerCountdown extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer_countdown);
+
+        //initialize iscompleted status
+        Global.tempIsCompleted = false;
 
         //get parameter
         Intent intent = getIntent();
@@ -89,6 +93,7 @@ public class TimerCountdown extends AppCompatActivity {
 //                            backgroundSound.stop();
 //                        }
 
+                        Global.tempIsCompleted = true;
                         endMeditation();
                     }
                 }.start();
@@ -100,6 +105,7 @@ public class TimerCountdown extends AppCompatActivity {
         finishWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Global.tempIsCompleted = false;
                 endMeditation();
             }
         });

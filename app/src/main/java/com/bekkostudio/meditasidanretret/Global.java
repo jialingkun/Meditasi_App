@@ -145,9 +145,9 @@ public class Global {
 
     //retret
     public static Map<String,RetretDetail> courseRetret = new HashMap<>();
-    static {
-        initializeRetretDetail();
-    }
+//    static {
+//        initializeRetretDetail();
+//    }
     public static  void initializeRetretDetail(){
         String tempId = BillingParameter.courseSKUList.get(0);
         RetretDetail tempRetretDetail = new RetretDetail();
@@ -207,9 +207,55 @@ public class Global {
         courseRetret.put(tempId,tempRetretDetail);
     }
 
+    //To refresh completed status back to false
+    public static  void refreshRetretDetail(String tempId, Context context){
+        RetretDetail tempRetretDetail = courseRetret.get(tempId);
+        for (int i = 0; i < tempRetretDetail.retretDays.length; i++) {
+            tempRetretDetail.retretDays[i].morningCompleted = false;
+            tempRetretDetail.retretDays[i].nightCompleted = false;
+        }
+
+        setActiveRetretDetail(context);
+    }
+
+    public static void getActiveRetretDetail(Context context){
+        try {
+            //get retret detail
+            FileInputStream inputStream = context.openFileInput("activeRetretDetail.txt");
+            ObjectInputStream input = new ObjectInputStream(inputStream);
+            courseRetret = (HashMap<String,RetretDetail>) input.readObject();
+            input.close();
+        } catch (FileNotFoundException e){
+            initializeRetretDetail();
+            Log.d("getActiveRetretDetail", "Exception: " + e);
+        }catch (Exception e){
+            Log.d("getActiveRetretDetail", "Exception: " + e);
+        }
+
+    }
+
+
+    public static void setActiveRetretDetail (Context context){
+        try {
+            //save retret detail
+            FileOutputStream outputStream = context.openFileOutput("activeRetretDetail.txt", Context.MODE_PRIVATE);
+            //Log.d("Context Directory", "Path: "+context.getFilesDir());
+            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+            output.writeObject(courseRetret);
+            output.close();
+        }catch (Exception e){
+            Log.d("setActiveRetretDetail", "Exception: " + e);
+        }
+    }
+
     //active retret save data
     public static String activeRetretId;
     public static String activeRetretEndDate;
+
+    //temp variable to check timer completed status
+    public static boolean tempIsCompleted;
+    //To mark if the last timer represent morning or night
+    public static boolean isMorningTimer;
 
     //universal pattern for date
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE,dd-MM-yyyy");
@@ -322,7 +368,7 @@ public class Global {
         intent.putExtra("warmupDuration", warmupDuration);
         intent.putExtra("ambientMusic", ambientMusic);
 
-        activity.startActivity(intent);
+        activity.startActivityForResult(intent,1);
     }
 
     public static int dpToPx(Context context, int dp) {

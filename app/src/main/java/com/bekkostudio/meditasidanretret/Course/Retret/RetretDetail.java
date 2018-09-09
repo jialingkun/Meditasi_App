@@ -1,6 +1,8 @@
 package com.bekkostudio.meditasidanretret.Course.Retret;
 
-public class RetretDetail {
+import java.io.Serializable;
+
+public class RetretDetail implements Serializable {
 
     public String title;
     public int thumbnailImage;

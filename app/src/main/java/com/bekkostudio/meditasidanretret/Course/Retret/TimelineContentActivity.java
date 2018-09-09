@@ -47,6 +47,12 @@ public class TimelineContentActivity extends AppCompatActivity {
 //    String filePath;
     int warmupDuration = 10; //universal warmup duration, change this value
     int meditationDuration;
+
+
+    //widget
+    Button morningStart;
+    Button nightStart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,12 +119,15 @@ public class TimelineContentActivity extends AppCompatActivity {
 
 
         //start meditation
-        Button morningStart = findViewById(R.id.MorningStart);
+        morningStart = findViewById(R.id.MorningStart);
         morningStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isCurrentTimeBetweenTwoHours(4,11)){
+                if(retretDays.morningCompleted){
+                    //do nothing
+                }else if (isCurrentTimeBetweenTwoHours(4,11)){
                     meditationDuration = retretDays.morningDuration * 60; //minutes to seconds
+                    Global.isMorningTimer = true;
                     Global.startTimer(TimelineContentActivity.this,meditationDuration,warmupDuration,retretDays.morningBGM);
                 }else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(TimelineContentActivity.this);
@@ -129,12 +138,15 @@ public class TimelineContentActivity extends AppCompatActivity {
                 }
             }
         });
-        Button nightStart = findViewById(R.id.NightStart);
+        nightStart = findViewById(R.id.NightStart);
         nightStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isCurrentTimeBetweenTwoHours(16,23)){
+                if(retretDays.nightCompleted){
+                    //do nothing
+                }else if (isCurrentTimeBetweenTwoHours(16,23)){
                     meditationDuration = retretDays.nightDuration * 60; //minutes to seconds
+                    Global.isMorningTimer = false;
                     Global.startTimer(TimelineContentActivity.this,meditationDuration,warmupDuration,retretDays.morningBGM);
                 }else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(TimelineContentActivity.this);
@@ -146,8 +158,35 @@ public class TimelineContentActivity extends AppCompatActivity {
 
             }
         });
+
+
+        disableCompletedButton();
     }
 
+    public void disableCompletedButton(){
+        if (retretDays.morningCompleted){
+            morningStart.setText("SELESAI");
+            morningStart.setBackground(null);
+        }
+        if (retretDays.nightCompleted){
+            nightStart.setText("SELESAI");
+            nightStart.setBackground(null);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (Global.isMorningTimer && Global.tempIsCompleted){
+            retretDays.morningCompleted = true;
+            Global.setActiveRetretDetail(getApplicationContext());
+        }else if(!Global.isMorningTimer && Global.tempIsCompleted){
+            retretDays.nightCompleted = true;
+            Global.setActiveRetretDetail(getApplicationContext());
+        }
+
+        disableCompletedButton();
+    }
 
     private void initializeExoPlayer(String url, PlayerView playerView){
         // 1. Create a default TrackSelector

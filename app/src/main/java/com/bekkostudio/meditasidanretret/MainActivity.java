@@ -58,6 +58,16 @@ public class MainActivity extends AppCompatActivity {
         //get active retret database
         Global.getActiveRetret(getApplicationContext());
 
+        //get active retret detail database
+        Global.getActiveRetretDetail(getApplicationContext());
+
+        //debug only, refresh database
+        //Global.initializeRetretDetail();
+        //Global.setActiveRetretDetail(getApplicationContext());
+
+        Log.d("Check title", "active title: "+Global.courseRetret.get(Global.activeRetretId).title);
+
+
         //debug refresh retret end date
         //Global.setActiveRetret(getApplicationContext(),Global.activeRetretId,"");
 

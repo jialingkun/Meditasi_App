@@ -26,6 +26,9 @@ public class AttentionActivity extends AppCompatActivity {
                 //set end date
                 Global.setActiveRetret(getApplicationContext(),Global.activeRetretId,Global.calculateEndDate());
 
+                //refresh completed status
+                Global.refreshRetretDetail(Global.activeRetretId,getApplicationContext());
+
                 //Log.d("END DATE:", "onClick: "+Global.activeRetretEndDate);
 
                 Intent intent = new Intent(AttentionActivity.this, TimelineActivity.class);

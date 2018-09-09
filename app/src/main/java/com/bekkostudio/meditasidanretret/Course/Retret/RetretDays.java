@@ -1,6 +1,8 @@
 package com.bekkostudio.meditasidanretret.Course.Retret;
 
-public class RetretDays {
+import java.io.Serializable;
+
+public class RetretDays implements Serializable {
     public String videoUrl;
     public int videoThumbnail;
     public int morningDuration;//in minutes
@@ -8,4 +10,6 @@ public class RetretDays {
     public int nightDuration;
     public int nightBGM;
     public String description;
+    public boolean morningCompleted = false;
+    public boolean nightCompleted = false;
 }
