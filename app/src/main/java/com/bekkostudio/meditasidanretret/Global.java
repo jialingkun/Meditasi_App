@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.webkit.WebView;
 
+import com.bekkostudio.meditasidanretret.Chart.Mood;
 import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
 import com.bekkostudio.meditasidanretret.Course.Retret.RetretDays;
 import com.bekkostudio.meditasidanretret.Course.Retret.RetretDetail;
@@ -208,7 +209,7 @@ public class Global {
     }
 
     //To refresh completed status back to false
-    public static  void refreshRetretDetail(String tempId, Context context){
+    public static void refreshRetretDetail(String tempId, Context context){
         RetretDetail tempRetretDetail = courseRetret.get(tempId);
         for (int i = 0; i < tempRetretDetail.retretDays.length; i++) {
             tempRetretDetail.retretDays[i].morningCompleted = false;
@@ -358,10 +359,6 @@ public class Global {
         return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 
-
-
-
-
     public static void startTimer(Activity activity, int meditationDuration, int warmupDuration, int ambientMusic){
         Intent intent = new Intent(activity, TimerCountdown.class);
         intent.putExtra("meditationDuration", meditationDuration);
@@ -371,12 +368,48 @@ public class Global {
         activity.startActivityForResult(intent,1);
     }
 
+    //Mood and medicine database
+    public static ArrayList<Mood> moods;
+
+
+    public static void getMood(Context context){
+        try {
+            FileInputStream inputStream = context.openFileInput("mood.txt");
+            ObjectInputStream input = new ObjectInputStream(inputStream);
+            moods = (ArrayList<Mood>) input.readObject();
+            input.close();
+        } catch (FileNotFoundException e){
+            moods = new ArrayList<>();
+            Log.d("getMood", "Exception: " + e);
+        }catch (Exception e){
+            Log.d("getMood", "Exception: " + e);
+        }
+
+    }
+
+
+    public static void setMood (Context context, Mood mood){
+        moods.add(mood);
+        try {
+            FileOutputStream outputStream = context.openFileOutput("mood.txt", Context.MODE_PRIVATE);
+            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+            output.writeObject(moods);
+            output.close();
+        }catch (Exception e){
+            Log.d("setMood", "Exception: " + e);
+        }
+    }
+
+
+
+
     public static int dpToPx(Context context, int dp) {
         float density = context.getResources()
                 .getDisplayMetrics()
                 .density;
         return Math.round((float) dp * density);
     }
+
 
 
     public static String formatMinutesToHoursMinutes(int rawMinutes){

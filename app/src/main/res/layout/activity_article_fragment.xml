@@ -7,14 +7,18 @@
     tools:context=".ArticleFragment">
 
     <WebView
+        android:id="@+id/msw_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/webview"></WebView>
-
+        android:layout_height="match_parent"/>
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/loading"/>
+        android:id="@+id/msw_progress"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="6dip"
+        android:progressDrawable="@drawable/progress_style"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:visibility="visible" />
 
 </RelativeLayout>
