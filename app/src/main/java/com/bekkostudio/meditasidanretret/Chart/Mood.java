@@ -18,4 +18,6 @@ public class Mood implements Serializable {
     public static final int KURANGI_DOSIS = 2;
     public static final int TIDAK_MINUM_OBAT = 1;
 
+    public static final int TIDAK_MENGISI = 0;
+
 }

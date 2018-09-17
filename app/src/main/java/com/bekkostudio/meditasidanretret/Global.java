@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.webkit.WebView;
 
+import com.bekkostudio.meditasidanretret.Chart.Duration;
 import com.bekkostudio.meditasidanretret.Chart.Mood;
 import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
 import com.bekkostudio.meditasidanretret.Course.Retret.RetretDays;
@@ -397,6 +398,39 @@ public class Global {
             output.close();
         }catch (Exception e){
             Log.d("setMood", "Exception: " + e);
+        }
+    }
+
+
+    //Meditation duration database
+    public static ArrayList<Duration> durations;
+
+
+    public static void getDuration(Context context){
+        try {
+            FileInputStream inputStream = context.openFileInput("duration.txt");
+            ObjectInputStream input = new ObjectInputStream(inputStream);
+            durations = (ArrayList<Duration>) input.readObject();
+            input.close();
+        } catch (FileNotFoundException e){
+            durations = new ArrayList<>();
+            Log.d("getDuration", "Exception: " + e);
+        }catch (Exception e){
+            Log.d("getDuration", "Exception: " + e);
+        }
+
+    }
+
+
+    public static void setDuration (Context context, Duration duration){
+        durations.add(duration);
+        try {
+            FileOutputStream outputStream = context.openFileOutput("duration.txt", Context.MODE_PRIVATE);
+            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+            output.writeObject(durations);
+            output.close();
+        }catch (Exception e){
+            Log.d("setDuration", "Exception: " + e);
         }
     }
 
