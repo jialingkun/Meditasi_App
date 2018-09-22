@@ -49,8 +49,8 @@ public class MeditationResult extends AppCompatActivity {
 
 
     public void endMeditation(){
-        Global.setRecentMeditation(getApplicationContext(),remainingTime);
-        Global.lastTimerFragmentObject.loadRecentMeditation();
+//        Global.setRecentMeditation(getApplicationContext(),remainingTime);
+//        Global.lastTimerFragmentObject.loadRecentMeditation();
         finish();
 
     }

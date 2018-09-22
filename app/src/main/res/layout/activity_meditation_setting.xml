@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Timer.MeditationSetting">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="MEDITASI"
+        android:textSize="19dp"/>
+
+    <TextView
+        android:id="@+id/ambientMusicLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Musik Latar" />
+
+    <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
+        android:id="@+id/centerHorizontalScrollView"
+        android:layout_below="@+id/ambientMusicLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <LinearLayout
+            android:id="@+id/ambientmusic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+        </LinearLayout>
+
+    </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
+
+    <TextView
+        android:id="@+id/warmuplabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/centerHorizontalScrollView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Durasi Pemanasan" />
+
+    <com.wefika.horizontalpicker.HorizontalPicker
+        android:id="@+id/warmupduration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/warmuplabel"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="2"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:textColor="@color/text_color"
+        android:textSize="15sp"
+        app:dividerSize="10dp"
+        app:sideItems="2"
+        app:values="@array/warmup_value" />
+
+    <TextView
+        android:id="@+id/meditationlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/warmupduration"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Durasi Meditasi" />
+
+    <NumberPicker
+        android:id="@+id/hoursDuration"
+        android:layout_width="35dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/meditationlabel"
+        android:layout_toStartOf="@+id/hoursText"
+        android:layout_marginTop="10dp">
+
+    </NumberPicker>
+
+    <TextView
+        android:id="@+id/hoursText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meditationlabel"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toStartOf="@+id/minutesDuration"
+        android:text="Jam" />
+
+
+    <NumberPicker
+        android:id="@+id/minutesDuration"
+        android:layout_width="35dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/meditationlabel"
+        android:layout_marginTop="10dp">
+
+    </NumberPicker>
+
+    <TextView
+        android:id="@+id/MinutesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meditationlabel"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toEndOf="@+id/minutesDuration"
+        android:text="Menit" />
+
+    <NumberPicker
+        android:id="@+id/secondsDuration"
+        android:layout_width="35dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/meditationlabel"
+        android:layout_toEndOf="@+id/MinutesText"
+        android:layout_marginTop="10dp">
+
+    </NumberPicker>
+
+    <TextView
+        android:id="@+id/secondsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meditationlabel"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/secondsDuration"
+        android:text="Detik" />
+
+    <Button
+        android:id="@+id/startTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/minutesDuration"
+        android:layout_centerHorizontal="true"
+        android:text="START!" />
+
+</RelativeLayout>

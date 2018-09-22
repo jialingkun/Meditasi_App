@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 
-public class TimerCountdown extends AppCompatActivity {
+public class MeditationCountdown extends AppCompatActivity {
     PowerManager.WakeLock wakeLock;
 
     TextView remainingTimeWidget;
@@ -30,7 +30,7 @@ public class TimerCountdown extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timer_countdown);
+        setContentView(R.layout.activity_meditation_countdown);
 
         //initialize iscompleted status
         Global.tempIsCompleted = false;

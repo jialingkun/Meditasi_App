@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_course:
                     fragment = new CourseFragment();
                     break;
+                case R.id.navigation_chart:
+                    // pakai fragment chart di sini
+                    fragment = new AboutFragment();
+                    break;
                 case R.id.navigation_about:
                     fragment = new AboutFragment();
                     break;
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(new TimerFragment());
 
         //get recent meditation database
-        Global.getRecentMeditation(getApplicationContext());
+//        Global.getRecentMeditation(getApplicationContext());
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

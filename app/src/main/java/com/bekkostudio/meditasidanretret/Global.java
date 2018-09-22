@@ -11,7 +11,7 @@ import com.bekkostudio.meditasidanretret.Chart.Mood;
 import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
 import com.bekkostudio.meditasidanretret.Course.Retret.RetretDays;
 import com.bekkostudio.meditasidanretret.Course.Retret.RetretDetail;
-import com.bekkostudio.meditasidanretret.Timer.TimerCountdown;
+import com.bekkostudio.meditasidanretret.Timer.MeditationCountdown;
 import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -30,52 +30,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Global {
-    //timer
-    public static TimerFragment lastTimerFragmentObject;
-
-    //recent meditation
-    public static ArrayList<String> recentMeditation;
-
-    public static void getRecentMeditation(Context context){
-        try {
-            FileInputStream inputStream = context.openFileInput("recentMeditation.txt");
-            ObjectInputStream input = new ObjectInputStream(inputStream);
-            recentMeditation = (ArrayList<String>) input.readObject();
-            input.close();
-        } catch (FileNotFoundException e){
-            recentMeditation = new ArrayList<>();
-            recentMeditation.add(0,"Kosong");
-            recentMeditation.add(0,"Kosong");
-            recentMeditation.add(0,"Kosong");
-            Log.d("getRecentMeditation", "Exception: " + e);
-
-        }catch (Exception e){
-            Log.d("getRecentMeditation", "Exception: " + e);
-        }
-
-    }
-
-    public static void setRecentMeditation (Context context, String timeToSave){
-        recentMeditation.remove(2);
-        recentMeditation.add(0, timeToSave);
-
-        try {
-            FileOutputStream outputStream = context.openFileOutput("recentMeditation.txt", Context.MODE_PRIVATE);
-            //Log.d("Context Directory", "Path: "+context.getFilesDir());
-            ObjectOutputStream output = new ObjectOutputStream(outputStream);
-            output.writeObject(recentMeditation);
-            output.close();
-        }catch (Exception e){
-            Log.d("SetRecentMeditation", "Exception: " + e);
-        }
-
-    }
-
+    //Meditation timer
     public static final int[] ambientImageItem = {R.drawable.ambient0,R.drawable.ambient1,R.drawable.ambient2,R.drawable.ambient3};
     public static final int[] ambientMusicItem = {0,R.raw.mt_airy,R.raw.weaving,R.raw.butterfly_space};
 
@@ -361,7 +320,7 @@ public class Global {
     }
 
     public static void startTimer(Activity activity, int meditationDuration, int warmupDuration, int ambientMusic){
-        Intent intent = new Intent(activity, TimerCountdown.class);
+        Intent intent = new Intent(activity, MeditationCountdown.class);
         intent.putExtra("meditationDuration", meditationDuration);
         intent.putExtra("warmupDuration", warmupDuration);
         intent.putExtra("ambientMusic", ambientMusic);
