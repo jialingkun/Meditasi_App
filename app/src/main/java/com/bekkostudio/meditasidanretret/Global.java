@@ -328,6 +328,7 @@ public class Global {
         activity.startActivityForResult(intent,1);
     }
 
+
     //Mood and medicine database
     public static ArrayList<Mood> moods;
 
@@ -393,7 +394,10 @@ public class Global {
         }
     }
 
-
+    public static String getTodayDate(){
+        Date date = new Date();
+        return simpleDateFormat.format(date);
+    }
 
 
     public static int dpToPx(Context context, int dp) {

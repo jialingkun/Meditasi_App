@@ -36,6 +36,7 @@ public class TimerFragment extends Fragment{
         namaskara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //NAMASKARA GANTI INTENT DI BAWAH DENGAN CLASS NAMASKARA
                 Intent intent = new Intent(getActivity(), MeditationSetting.class);
                 getActivity().startActivity(intent);
             }
@@ -44,6 +45,7 @@ public class TimerFragment extends Fragment{
         nianfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //GANTI INTENT DI BAWAH DENGAN CLASS NIANFO
                 Intent intent = new Intent(getActivity(), MeditationSetting.class);
                 getActivity().startActivity(intent);
             }

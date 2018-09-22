@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bekkostudio.meditasidanretret.Chart.Duration;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 
@@ -49,9 +50,6 @@ public class MeditationResult extends AppCompatActivity {
 
 
     public void endMeditation(){
-//        Global.setRecentMeditation(getApplicationContext(),remainingTime);
-//        Global.lastTimerFragmentObject.loadRecentMeditation();
         finish();
-
     }
 }
