@@ -1,5 +1,6 @@
 package com.bekkostudio.meditasidanretret.Timer;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 import com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView;
+import com.bekkostudio.meditasidanretret.Timer.Namaskara.NamaskaraHomeActivity;
 import com.wefika.horizontalpicker.HorizontalPicker;
 
 public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSelected{
@@ -141,12 +143,14 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
             @Override
             public void onClick(View v) {
                 //get parameter before start Timer
-                meditationDuration = (hoursDurationWidget.getValue()*3600)+(minutesDurationWidget.getValue()*60)+(secondsDurationWidget.getValue());
+                /*meditationDuration = (hoursDurationWidget.getValue()*3600)+(minutesDurationWidget.getValue()*60)+(secondsDurationWidget.getValue());
 //                Log.d("Ambient index", "onClick: "+ambientMusicScrollWidget.getActiveItem());
 
                 ambientMusic = Global.ambientMusicItem[ambientMusicScrollWidget.getActiveItem()];
                 //start timer
-                Global.startTimer(getActivity(),meditationDuration,warmupDuration,ambientMusic);
+                Global.startTimer(getActivity(),meditationDuration,warmupDuration,ambientMusic);*/
+                Intent intent = new Intent(getContext(), NamaskaraHomeActivity.class);
+                getActivity().startActivity(intent);
             }
         });
 
