@@ -143,14 +143,12 @@ public class TimerFragment extends Fragment implements HorizontalPicker.OnItemSe
             @Override
             public void onClick(View v) {
                 //get parameter before start Timer
-                /*meditationDuration = (hoursDurationWidget.getValue()*3600)+(minutesDurationWidget.getValue()*60)+(secondsDurationWidget.getValue());
+                meditationDuration = (hoursDurationWidget.getValue()*3600)+(minutesDurationWidget.getValue()*60)+(secondsDurationWidget.getValue());
 //                Log.d("Ambient index", "onClick: "+ambientMusicScrollWidget.getActiveItem());
 
                 ambientMusic = Global.ambientMusicItem[ambientMusicScrollWidget.getActiveItem()];
                 //start timer
-                Global.startTimer(getActivity(),meditationDuration,warmupDuration,ambientMusic);*/
-                Intent intent = new Intent(getContext(), NamaskaraHomeActivity.class);
-                getActivity().startActivity(intent);
+                Global.startTimer(getActivity(),meditationDuration,warmupDuration,ambientMusic);
             }
         });
 
