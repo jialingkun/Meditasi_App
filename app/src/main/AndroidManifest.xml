@@ -61,6 +61,9 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Course.ShopContentActivity" />
         <activity android:name=".Timer.MeditationSetting"></activity>
+        <activity android:name=".Timer.Namaskara.NamaskaraHomeActivity" />
+        <activity android:name=".Timer.Namaskara.NamaskaraCountdownActivity" />
+        <activity android:name=".Timer.NianFo.NianFoHomeActivity"></activity>
     </application>
 
 </manifest>

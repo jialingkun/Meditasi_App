@@ -17,4 +17,9 @@
         <item>5m</item>
         <item>10m</item>
     </string-array>
+
+    <array name="metode_nian_fo">
+        <item>Manual</item>
+        <item>Automatic</item>
+    </array>
 </resources>
