@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_article:
                     fragment = new ArticleFragment();
                     break;
+                case R.id.navigation_community:
+                    fragment = new CommunityFragment();
+                    break;
                 case R.id.navigation_course:
                     fragment = new CourseFragment();
                     break;
@@ -37,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
                     // pakai fragment chart di sini
                     fragment = new AboutFragment();
                     break;
-                case R.id.navigation_about:
-                    fragment = new AboutFragment();
-                    break;
+//                case R.id.navigation_about:
+//                    fragment = new AboutFragment();
+//                    break;
             }
             return loadFragment(fragment);
         }

@@ -60,7 +60,7 @@
             android:name=".Course.Retret.TimelineContentActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Course.ShopContentActivity" />
-        <activity android:name=".Timer.MeditationSetting"></activity>
+        <activity android:name=".Timer.MeditationSetting" />
     </application>
 
 </manifest>
