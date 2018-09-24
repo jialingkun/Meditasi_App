@@ -13,6 +13,9 @@ import com.bekkostudio.meditasidanretret.Course.Retret.RetretActivity;
 import com.bekkostudio.meditasidanretret.Course.ShopActivity;
 import com.bekkostudio.meditasidanretret.Course.TutorialActivity;
 import com.bekkostudio.meditasidanretret.R;
+import com.bekkostudio.meditasidanretret.Timer.Namaskara.NamaskaraHomeActivity;
+import com.bekkostudio.meditasidanretret.Timer.NianFo.NianFoHomeActivity;
+
 public class TimerFragment extends Fragment{
 
 
@@ -37,7 +40,7 @@ public class TimerFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 //NAMASKARA GANTI INTENT DI BAWAH DENGAN CLASS NAMASKARA
-                Intent intent = new Intent(getActivity(), MeditationSetting.class);
+                Intent intent = new Intent(getActivity(), NamaskaraHomeActivity.class);
                 getActivity().startActivity(intent);
             }
         });
@@ -46,7 +49,7 @@ public class TimerFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 //GANTI INTENT DI BAWAH DENGAN CLASS NIANFO
-                Intent intent = new Intent(getActivity(), MeditationSetting.class);
+                Intent intent = new Intent(getActivity(), NianFoHomeActivity.class);
                 getActivity().startActivity(intent);
             }
         });
