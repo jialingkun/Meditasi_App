@@ -2,8 +2,10 @@
     <string name="app_name">Meditasi dan Retret</string>
     <string name="title_timer">Timer</string>
     <string name="title_Article">Artikel</string>
+    <string name="title_Community">Komunitas</string>
     <string name="title_Course">Pelatihan</string>
-    <string name="title_About">Tentang</string>
+    <string name="title_Chart">Progress</string>
+    <!--<string name="title_About">Tentang</string>-->
     <string name="title_activity_blank_fragment">BlankFragment</string>
     <string name="action_settings">Settings</string>
 
@@ -16,4 +18,9 @@
         <item>5m</item>
         <item>10m</item>
     </string-array>
+
+    <array name="metode_nian_fo">
+        <item>Manual</item>
+        <item>Automatic</item>
+    </array>
 </resources>

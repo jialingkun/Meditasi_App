@@ -30,12 +30,19 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_article:
                     fragment = new ArticleFragment();
                     break;
+                case R.id.navigation_community:
+                    fragment = new CommunityFragment();
+                    break;
                 case R.id.navigation_course:
                     fragment = new CourseFragment();
                     break;
-                case R.id.navigation_about:
+                case R.id.navigation_chart:
+                    // pakai fragment chart di sini
                     fragment = new AboutFragment();
                     break;
+//                case R.id.navigation_about:
+//                    fragment = new AboutFragment();
+//                    break;
             }
             return loadFragment(fragment);
         }
@@ -46,11 +53,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //get meditation duration database
+        Global.getDuration(getApplicationContext());
+        //get Mood Database
+        Global.getMood(getApplicationContext());
+
+        //MOOD MULAI CODING DARI SINI, CEK DATABASE DI VARIABEL Global.Moods
+
+
+
+
+
         //loading the default fragment
         loadFragment(new TimerFragment());
-
-        //get recent meditation database
-        Global.getRecentMeditation(getApplicationContext());
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -64,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
         //debug only, refresh database
         //Global.initializeRetretDetail();
         //Global.setActiveRetretDetail(getApplicationContext());
-
-        //Log.d("Check title", "active title: "+Global.courseRetret.get(Global.activeRetretId).title);
 
 
         //debug refresh retret end date

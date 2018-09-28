@@ -10,10 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bekkostudio.meditasidanretret.Chart.Duration;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 
-public class TimerCountdown extends AppCompatActivity {
+public class MeditationCountdown extends AppCompatActivity {
     PowerManager.WakeLock wakeLock;
 
     TextView remainingTimeWidget;
@@ -30,7 +31,7 @@ public class TimerCountdown extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timer_countdown);
+        setContentView(R.layout.activity_meditation_countdown);
 
         //initialize iscompleted status
         Global.tempIsCompleted = false;
@@ -157,10 +158,12 @@ public class TimerCountdown extends AppCompatActivity {
     private void endMeditation(){
         warmupTimer.cancel();
         if (meditationTimer!=null){meditationTimer.cancel();}
+        //Store meditation duration to database
+        Global.setDuration(getApplicationContext(),new Duration(Global.getTodayDate(),resultTime/1000));
+        //Go to result page
         Intent intent = new Intent(this, MeditationResult.class);
         intent.putExtra("remainingTime", formatMilliSecondsToTime(resultTime));
         this.startActivityForResult(intent, 1);
-        //finish();
     }
 
     @Override
