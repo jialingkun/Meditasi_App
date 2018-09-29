@@ -60,10 +60,12 @@
             android:name=".Course.Retret.TimelineContentActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Course.ShopContentActivity" />
-        <activity android:name=".Timer.MeditationSetting"></activity>
+        <activity android:name=".Timer.MeditationSetting" />
         <activity android:name=".Timer.Namaskara.NamaskaraHomeActivity" />
         <activity android:name=".Timer.Namaskara.NamaskaraCountdownActivity" />
-        <activity android:name=".Timer.NianFo.NianFoHomeActivity"></activity>
+        <activity android:name=".Timer.NianFo.NianFoHomeActivity" />
+        <activity android:name=".Timer.NianFo.NianFoManualActivity" />
+        <activity android:name=".Timer.NianFo.NianFoAutomaticActivity"></activity>
     </application>
 
 </manifest>

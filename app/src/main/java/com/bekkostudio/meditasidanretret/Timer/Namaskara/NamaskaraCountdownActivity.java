@@ -196,5 +196,13 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
 
     private void endMeditation() {
         countSiklusLabel.setText("Done");
+        pauseButton.setEnabled(false);
+        finishEarlyButton.setEnabled(false);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        endMeditation();
     }
 }
