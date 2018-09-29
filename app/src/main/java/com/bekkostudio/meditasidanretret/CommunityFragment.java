@@ -1,11 +1,11 @@
 package com.bekkostudio.meditasidanretret;
 
-
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import com.bekkostudio.compactWebview.DefaultSetting;
 import com.bekkostudio.compactWebview.SmartWebViewCompact;
 
-public class ArticleFragment extends Fragment {
+public class CommunityFragment extends Fragment {
 
     SmartWebViewCompact smartWebViewCompact = new SmartWebViewCompact();
 
@@ -48,7 +48,7 @@ public class ArticleFragment extends Fragment {
         smartWebViewCompact.ASWP_EXTURL      = false;     //open external url with default browser instead of app webview
 
         //Configuration variables
-        smartWebViewCompact.ASWV_URL          = "https://meditasi123.blogspot.com/search/label/artikel"; //complete URL of your website or webpage
+        smartWebViewCompact.ASWV_URL          = "https://www.facebook.com/groups/2146742412010762/"; //complete URL of your website or webpage
         smartWebViewCompact.ASWV_F_TYPE       = "*/*";  //to upload any file type using "*/*"; check file type references for more
 
         //Rating system variables

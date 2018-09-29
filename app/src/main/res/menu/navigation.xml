@@ -12,6 +12,11 @@
         android:title="@string/title_Article" />
 
     <item
+        android:id="@+id/navigation_community"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_Community" />
+
+    <item
         android:id="@+id/navigation_course"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_Course" />
@@ -21,9 +26,9 @@
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_Chart" />
 
-    <item
-        android:id="@+id/navigation_about"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_About" />
+    <!--<item-->
+        <!--android:id="@+id/navigation_about"-->
+        <!--android:icon="@drawable/ic_dashboard_black_24dp"-->
+        <!--android:title="@string/title_About" />-->
 
 </menu>
