@@ -65,7 +65,9 @@
         <activity android:name=".Timer.Namaskara.NamaskaraCountdownActivity" />
         <activity android:name=".Timer.NianFo.NianFoHomeActivity" />
         <activity android:name=".Timer.NianFo.NianFoManualActivity" />
-        <activity android:name=".Timer.NianFo.NianFoAutomaticActivity"></activity>
+        <activity android:name=".Timer.NianFo.NianFoAutomaticActivity" />
+        <activity android:name=".Timer.Namaskara.NamaskaraResultActivity" />
+        <activity android:name=".Timer.NianFo.NianFoResultActivity"></activity>
     </application>
 
 </manifest>
