@@ -1,5 +1,6 @@
 package com.bekkostudio.meditasidanretret.Timer.NianFo;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,11 +22,15 @@ public class NianFoAutomaticActivity extends AppCompatActivity implements View.O
     int counterSiklus = 1;
     // pause button text status
     boolean isButtonPause = true;
+    // record start and total meditation time in millisecond
+    long startTime, totalDurasi = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nian_fo_automatic);
+
+        startTime = System.currentTimeMillis();
 
         pauseButton = findViewById(R.id.pauseButton);
         finishEarlyButton = findViewById(R.id.finishEarlyButton);
@@ -86,6 +91,7 @@ public class NianFoAutomaticActivity extends AppCompatActivity implements View.O
     }
 
     private void endMeditation() {
+        totalDurasi += System.currentTimeMillis() - startTime;
         countSiklusLabel.setText("DONE");
         pauseButton.setEnabled(false);
         finishEarlyButton.setEnabled(false);
@@ -95,6 +101,12 @@ public class NianFoAutomaticActivity extends AppCompatActivity implements View.O
             backgroundSound.release();
             backgroundSound = null;
         }
+
+        Intent intent = new Intent(this, NianFoResultActivity.class);
+        intent.putExtra(NianFoResultActivity.EXTRA_SIKLUS, jumlahSiklus);
+        intent.putExtra(NianFoResultActivity.EXTRA_DURASI, totalDurasi);
+        startActivity(intent);
+        finish();
     }
 
     @Override
