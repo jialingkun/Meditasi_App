@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bekkostudio.meditasidanretret.R;
 
 public class NianFoManualActivity extends AppCompatActivity implements View.OnClickListener {
-    Button pauseButton, finishEarlyButton, nextButton;
+    Button finishEarlyButton, nextButton;
     TextView countSiklusLabel;
 
     //Sound on click BGM image
@@ -20,8 +20,6 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
     int jumlahSiklus;
     int musicId;
     int counterSiklus = 1;
-    // pause button text status
-    boolean isButtonPause = true;
     // record start and total meditation time in millisecond
     long startTime, totalDurasi = 0;
 
@@ -32,7 +30,6 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
 
         startTime = System.currentTimeMillis();
 
-        pauseButton = findViewById(R.id.pauseButton);
         finishEarlyButton = findViewById(R.id.finishEarlyButton);
         nextButton = findViewById(R.id.nianFoNextButton);
         countSiklusLabel = findViewById(R.id.countSiklusLabel);
@@ -42,7 +39,6 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
 
         countSiklusLabel.setText(String.valueOf(counterSiklus));
 
-        pauseButton.setOnClickListener(this);
         finishEarlyButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
 
@@ -67,22 +63,6 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
             countSiklusLabel.setText(String.valueOf(counterSiklus));
             backgroundSound.start();
         }
-        else if(v.getId() == R.id.pauseButton) {
-            if (isButtonPause) {
-                isButtonPause = false;
-                pauseButton.setText("Start");
-                if (backgroundSound.isPlaying()){
-                    backgroundSound.pause();
-                }
-            }
-            else {
-                isButtonPause = true;
-                pauseButton.setText("Pause");
-                if (musicId != 0) {
-                    backgroundSound.start();
-                }
-            }
-        }
         else if(v.getId() == R.id.finishEarlyButton) {
             if (backgroundSound.isPlaying()){
                 backgroundSound.stop();
@@ -95,7 +75,6 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
         totalDurasi += System.currentTimeMillis() - startTime;
         countSiklusLabel.setText("DONE");
         nextButton.setEnabled(false);
-        pauseButton.setEnabled(false);
         finishEarlyButton.setEnabled(false);
 
         if (backgroundSound!=null){

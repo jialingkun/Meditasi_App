@@ -112,6 +112,7 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
         }
 
         // start a bell recursive loop
+        bellSound.start();
         startTimerTegap(durasiTegapInSecond);
     }
 
@@ -122,7 +123,6 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
             return;
         }
 
-        bellSound.start();
         countSiklusLabel.setText(String.valueOf(counter));
         posisiLabel.setText("Posisi Tegap");
         timerTegap = new CountDownTimer(durasiTegap, 1000) {
@@ -158,6 +158,7 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
                 milliTotal += 1000;
                 isRunningSujud = false;
                 counter++;
+                bellSound.start();
                 startTimerTegap(durasiTegapInSecond);
             }
         }.start();
@@ -205,10 +206,16 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
     }
 
     private void endMeditation() {
-        bellSound.start();
         countSiklusLabel.setText("Done");
         pauseButton.setEnabled(false);
         finishEarlyButton.setEnabled(false);
+
+        if(timerSujud != null) {
+            timerSujud.cancel();
+        }
+        if (timerTegap != null) {
+            timerTegap.cancel();
+        }
 
         Intent intent = new Intent(this, NamaskaraResultActivity.class);
         intent.putExtra(EXTRA_SIKLUS, siklus);
@@ -221,5 +228,11 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
     protected void onDestroy() {
         super.onDestroy();
         //endMeditation();
+        if(timerSujud != null) {
+            timerSujud.cancel();
+        }
+        if (timerTegap != null) {
+            timerTegap.cancel();
+        }
     }
 }
