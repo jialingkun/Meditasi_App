@@ -1,5 +1,6 @@
 package com.bekkostudio.meditasidanretret.Timer.NianFo;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView;
 import com.bekkostudio.meditasidanretret.Global;
@@ -31,6 +33,11 @@ public class NianFoHomeActivity extends AppCompatActivity {
 
     Button startButton;
     EditText siklusEdit;
+
+    int musicId;
+
+    public static String EXTRA_MUSIC_ID = "extra_music_id";
+    public static final String EXTRA_SIKLUS = "extra_siklus";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +66,20 @@ public class NianFoHomeActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (musicId == 0) {
+                    Toast.makeText(NianFoHomeActivity.this, "Please select a spell", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent intent = null;
+                if(spinnerMetode.getSelectedItem().toString().equals("Manual")) {
+                    intent = new Intent(NianFoHomeActivity.this, NianFoManualActivity.class);
+                }
+                else if (spinnerMetode.getSelectedItem().toString().equals("Automatic")) {
+                    intent = new Intent(NianFoHomeActivity.this, NianFoAutomaticActivity.class);
+                }
+                intent.putExtra(EXTRA_MUSIC_ID, musicId);
+                intent.putExtra(EXTRA_SIKLUS, siklusEdit.getText().toString());
+                startActivity(intent);
             }
         });
 
@@ -109,7 +129,7 @@ public class NianFoHomeActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(int activeItem) {
                 //On image click
-                int musicId = Global.ambientMusicItem[activeItem];
+                musicId = Global.ambientMusicItem[activeItem];
                 if (backgroundSound!=null){
                     backgroundSound.stop();
                     backgroundSound.release();
@@ -121,5 +141,15 @@ public class NianFoHomeActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (backgroundSound!=null){
+            backgroundSound.stop();
+            backgroundSound.release();
+            backgroundSound = null;
+        }
     }
 }
