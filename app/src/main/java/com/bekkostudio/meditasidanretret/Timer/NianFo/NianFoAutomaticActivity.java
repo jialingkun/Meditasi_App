@@ -70,6 +70,7 @@ public class NianFoAutomaticActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         if(v.getId() == R.id.pauseButton) {
             if (isButtonPause) {
+                totalDurasi += System.currentTimeMillis() - startTime;
                 isButtonPause = false;
                 pauseButton.setText("Start");
                 if (backgroundSound.isPlaying()){
@@ -77,6 +78,7 @@ public class NianFoAutomaticActivity extends AppCompatActivity implements View.O
                 }
             }
             else {
+                startTime = System.currentTimeMillis();
                 isButtonPause = true;
                 pauseButton.setText("Pause");
                 backgroundSound.start();
