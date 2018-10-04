@@ -39,13 +39,13 @@
             android:name=".Course.Retret.RetretActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Article.TutorialActivity"
+            android:name=".Course.TutorialActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Article.TutorialContentActivity"
+            android:name=".Course.TutorialContentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Article.ShopActivity"
+            android:name=".Course.ShopActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Course.ExoPlayerActivity"
@@ -59,12 +59,15 @@
         <activity
             android:name=".Course.Retret.TimelineContentActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Article.ShopContentActivity" />
+        <activity android:name=".Course.ShopContentActivity" />
         <activity android:name=".Timer.MeditationSetting" />
         <activity android:name=".Timer.Namaskara.NamaskaraHomeActivity" />
         <activity android:name=".Timer.Namaskara.NamaskaraCountdownActivity" />
         <activity android:name=".Timer.NianFo.NianFoHomeActivity" />
-        <activity android:name=".Article.ArticleActivity"></activity>
+        <activity android:name=".Timer.NianFo.NianFoManualActivity" />
+        <activity android:name=".Timer.NianFo.NianFoAutomaticActivity" />
+        <activity android:name=".Timer.Namaskara.NamaskaraResultActivity" />
+        <activity android:name=".Timer.NianFo.NianFoResultActivity"></activity>
     </application>
 
 </manifest>

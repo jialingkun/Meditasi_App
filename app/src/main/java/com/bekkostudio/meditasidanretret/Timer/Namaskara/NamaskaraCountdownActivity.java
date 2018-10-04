@@ -1,5 +1,6 @@
 package com.bekkostudio.meditasidanretret.Timer.Namaskara;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.PowerManager;
@@ -23,8 +24,10 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
     private int counter = 1;
 
     CountDownTimer timerSujud, timerTegap;
-    // total millisecond until onFinished
+    // total millisecond until Count Down Timer onFinish
     long milliLeft;
+    // total duration
+    long milliTotal = 0;
     // check if timer is running
     boolean isRunningTegap = false;
     boolean isRunningSujud = false;
@@ -32,6 +35,9 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
     boolean isButtonPause = true;
     // save which timer is paused
     String pauseTimer;
+
+    public static String EXTRA_SIKLUS = "extra_siklus";
+    public static String EXTRA_DURASI = "extra_durasi";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +112,7 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
         }
 
         // start a bell recursive loop
+        bellSound.start();
         startTimerTegap(durasiTegapInSecond);
     }
 
@@ -116,18 +123,19 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
             return;
         }
 
-        bellSound.start();
         countSiklusLabel.setText(String.valueOf(counter));
         posisiLabel.setText("Posisi Tegap");
         timerTegap = new CountDownTimer(durasiTegap, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 milliLeft = millisUntilFinished;
+                milliTotal += 1000;
                 isRunningTegap = true;
             }
 
             @Override
             public void onFinish() {
+                milliTotal += 1000;
                 bellSound.start();
                 posisiLabel.setText("Posisi Sujud");
                 isRunningTegap = false;
@@ -141,13 +149,16 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
             @Override
             public void onTick(long millisUntilFinished) {
                 milliLeft = millisUntilFinished;
+                milliTotal += 1000;
                 isRunningSujud = true;
             }
 
             @Override
             public void onFinish() {
+                milliTotal += 1000;
                 isRunningSujud = false;
                 counter++;
+                bellSound.start();
                 startTimerTegap(durasiTegapInSecond);
             }
         }.start();
@@ -196,5 +207,32 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
 
     private void endMeditation() {
         countSiklusLabel.setText("Done");
+        pauseButton.setEnabled(false);
+        finishEarlyButton.setEnabled(false);
+
+        if(timerSujud != null) {
+            timerSujud.cancel();
+        }
+        if (timerTegap != null) {
+            timerTegap.cancel();
+        }
+
+        Intent intent = new Intent(this, NamaskaraResultActivity.class);
+        intent.putExtra(EXTRA_SIKLUS, siklus);
+        intent.putExtra(EXTRA_DURASI, milliTotal);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //endMeditation();
+        if(timerSujud != null) {
+            timerSujud.cancel();
+        }
+        if (timerTegap != null) {
+            timerTegap.cancel();
+        }
     }
 }
