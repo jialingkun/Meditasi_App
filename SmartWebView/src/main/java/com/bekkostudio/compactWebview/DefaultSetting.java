@@ -1,12 +1,12 @@
 package com.bekkostudio.compactWebview;
 
 /*
-* Android Smart WebView is an Open Source Project available on GitHub.
-* Developed by Ghazi Khan (https://github.com/mgks) under MIT Open Source License.
-* This program is free to use for private and commercial purposes.
-* Please mention project source or developer credits in your Application's License(s) Wiki.
-* Giving right credit to developers encourages them to create better projects, just want you to know that :)
-*/
+ * Android Smart WebView is an Open Source Project available on GitHub.
+ * Developed by Ghazi Khan (https://github.com/mgks) under MIT Open Source License.
+ * This program is free to use for private and commercial purposes.
+ * Please mention project source or developer credits in your Application's License(s) Wiki.
+ * Giving right credit to developers encourages them to create better projects, just want you to know that :)
+ */
 
 public class DefaultSetting {
 
@@ -23,9 +23,11 @@ public class DefaultSetting {
 	public static boolean ASWP_SFORM       = true;    //save form cache and auto-fill information
 	public static boolean ASWP_OFFLINE     = false;    //whether the loading webpages are offline or online
 	public static boolean ASWP_EXTURL      = false;     //open external url with default browser instead of app webview
+	public static boolean ASWP_ROOT			= true;     //Webview activity on root only
+
 
 	//Configuration variables
-	public static String ASWV_URL          = "https://m.facebook.com"; //complete URL of your website or webpage
+	public static String ASWV_URL          = "https://google.com"; //complete URL of your website or webpage
 	public static String ASWV_F_TYPE       = "*/*";  //to upload any file type using "*/*"; check file type references for more
 
 	//Rating system variables
