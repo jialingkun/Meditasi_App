@@ -1,17 +1,19 @@
 package com.bekkostudio.meditasidanretret;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.bekkostudio.meditasidanretret.Article.ArticleFragment;
+import com.bekkostudio.meditasidanretret.Article.TutorialActivity;
 import com.bekkostudio.meditasidanretret.Course.CourseFragment;
-import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
+import com.bekkostudio.meditasidanretret.Course.Retret.RetretActivity;
 import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new CommunityFragment();
                     break;
                 case R.id.navigation_course:
-                    fragment = new CourseFragment();
+                    Intent intent = new Intent(MainActivity.this, RetretActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.navigation_chart:
                     // pakai fragment chart di sini

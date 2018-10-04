@@ -1,4 +1,4 @@
-package com.bekkostudio.meditasidanretret.Course;
+package com.bekkostudio.meditasidanretret.Article;
 
 import android.content.Intent;
 import android.net.Uri;

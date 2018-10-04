@@ -65,12 +65,11 @@ public class SmartWebViewCompact {
     public boolean ASWP_SFORM       = DefaultSetting.ASWP_SFORM;
     public boolean ASWP_OFFLINE	    = DefaultSetting.ASWP_OFFLINE;
     public boolean ASWP_EXTURL		= DefaultSetting.ASWP_EXTURL;
+    public boolean ASWP_ROOT        = DefaultSetting.ASWP_ROOT;
 
     //Configuration variables
     public String ASWV_URL      = DefaultSetting.ASWV_URL;
     public String ASWV_F_TYPE   = DefaultSetting.ASWV_F_TYPE;
-
-    public String ASWV_HOST		= aswm_host(ASWV_URL);
 
     //Careful with these variable names if altering
     WebView asw_view;
@@ -143,7 +142,7 @@ public class SmartWebViewCompact {
         Log.w("WRITE_PERM = ",Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         //Prevent the app from being started again when it is still alive in the background
-        if (!activity.isTaskRoot()) {
+        if (ASWP_ROOT && !activity.isTaskRoot()) {
             activity.finish();
             return;
         }
@@ -188,27 +187,31 @@ public class SmartWebViewCompact {
         asw_view.setDownloadListener(new DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
-                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+                if(!check_permission(2)){
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, file_perm);
+                }else {
+                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
 
-                request.setMimeType(mimeType);
-                String cookies = CookieManager.getInstance().getCookie(url);
-                request.addRequestHeader("cookie", cookies);
-                request.addRequestHeader("User-Agent", userAgent);
-                request.setDescription(activity.getString(R.string.dl_downloading));
-                request.setTitle(URLUtil.guessFileName(url, contentDisposition, mimeType));
-                request.allowScanningByMediaScanner();
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, contentDisposition, mimeType));
-                DownloadManager dm = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
-                assert dm != null;
-                dm.enqueue(request);
-                Toast.makeText(activity.getApplicationContext(), activity.getString(R.string.dl_downloading2), Toast.LENGTH_LONG).show();
+                    request.setMimeType(mimeType);
+                    String cookies = CookieManager.getInstance().getCookie(url);
+                    request.addRequestHeader("cookie", cookies);
+                    request.addRequestHeader("User-Agent", userAgent);
+                    request.setDescription(activity.getString(R.string.dl_downloading));
+                    request.setTitle(URLUtil.guessFileName(url, contentDisposition, mimeType));
+                    request.allowScanningByMediaScanner();
+                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, contentDisposition, mimeType));
+                    DownloadManager dm = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
+                    assert dm != null;
+                    dm.enqueue(request);
+                    Toast.makeText(activity.getApplicationContext(), activity.getString(R.string.dl_downloading2), Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
         if (Build.VERSION.SDK_INT >= 21) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            activity.getWindow().setStatusBarColor(activity.getResources().getColor(R.color.colorPrimaryDark));
             asw_view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         } else if (Build.VERSION.SDK_INT >= 19) {
@@ -418,7 +421,7 @@ public class SmartWebViewCompact {
             activity.startActivity(intent);
 
             //Opening external URLs in android default web browser
-        } else if (ASWP_EXTURL && !aswm_host(url).equals(ASWV_HOST)) {
+        } else if (ASWP_EXTURL && !aswm_host(url).contains(aswm_host(ASWV_URL))) {
             aswm_view(url,true);
         } else {
             a = false;

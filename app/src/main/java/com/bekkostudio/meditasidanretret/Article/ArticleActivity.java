@@ -1,37 +1,29 @@
-package com.bekkostudio.meditasidanretret;
-
+package com.bekkostudio.meditasidanretret.Article;
 
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 import com.bekkostudio.compactWebview.DefaultSetting;
 import com.bekkostudio.compactWebview.SmartWebViewCompact;
+import com.bekkostudio.meditasidanretret.R;
 
-public class ArticleFragment extends Fragment {
+public class ArticleActivity extends AppCompatActivity {
 
     SmartWebViewCompact smartWebViewCompact = new SmartWebViewCompact();
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        smartWebViewCompact.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        smartWebViewCompact.onActivityResult(requestCode, resultCode, intent);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_article_fragment, container, false);
-
-
-        ProgressBar progressBar = view.findViewById(R.id.msw_progress);
-        Global.currentWebview =view.findViewById(R.id.msw_view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_article_article);
 
         //Permission variables
         smartWebViewCompact.ASWP_JSCRIPT     = true;     //enable JavaScript for webview
@@ -46,6 +38,7 @@ public class ArticleFragment extends Fragment {
         smartWebViewCompact.ASWP_SFORM       = true;    //save form cache and auto-fill information
         smartWebViewCompact.ASWP_OFFLINE     = false;    //whether the loading webpages are offline or online
         smartWebViewCompact.ASWP_EXTURL      = false;     //open external url with default browser instead of app webview
+        smartWebViewCompact.ASWP_ROOT        = false;     //change it to false if you need to open webview in other intent activity
 
         //Configuration variables
         smartWebViewCompact.ASWV_URL          = "https://meditasi123.blogspot.com/search/label/artikel"; //complete URL of your website or webpage
@@ -56,24 +49,23 @@ public class ArticleFragment extends Fragment {
         DefaultSetting.ASWR_TIMES           = 10;       //overall request launch times being ignored
         DefaultSetting.ASWR_INTERVAL        = 2;        //reminding users to rate after days interval
 
-        smartWebViewCompact.onCreate(getActivity(),Global.currentWebview,progressBar);
-
-        return view;
+        smartWebViewCompact.onCreate(this,(WebView) findViewById(R.id.msw_view),(ProgressBar) findViewById(R.id.msw_progress));
     }
 
+    @Override
+    public void onBackPressed() {
+        smartWebViewCompact.onBackPressed();
+    }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState ){
         super.onSaveInstanceState(outState);
         smartWebViewCompact.onSaveInstanceState(outState);
     }
 
-
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            smartWebViewCompact.onRestoreInstanceState(savedInstanceState);
-        }
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        smartWebViewCompact.onRestoreInstanceState(savedInstanceState);
     }
 }
