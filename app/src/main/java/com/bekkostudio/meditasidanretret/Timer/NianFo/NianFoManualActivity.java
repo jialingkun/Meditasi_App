@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bekkostudio.meditasidanretret.Chart.Duration;
+import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 
 public class NianFoManualActivity extends AppCompatActivity implements View.OnClickListener {
@@ -84,7 +86,7 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
         }
 
         Intent intent = new Intent(this, NianFoResultActivity.class);
-        intent.putExtra(NianFoResultActivity.EXTRA_SIKLUS, jumlahSiklus);
+        intent.putExtra(NianFoResultActivity.EXTRA_SIKLUS, counterSiklus);
         intent.putExtra(NianFoResultActivity.EXTRA_DURASI, totalDurasi);
         startActivity(intent);
         finish();
@@ -98,5 +100,10 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
             backgroundSound.release();
             backgroundSound = null;
         }
+
+        // save to database
+        int milliTotalInSecond = (int) totalDurasi / 1000;
+        Duration duration = new Duration(Global.getTodayDate(), milliTotalInSecond);
+        Global.setDuration(getApplicationContext(), duration);
     }
 }

@@ -37,6 +37,7 @@ public class Global {
     //Meditation timer
     public static final int[] ambientImageItem = {R.drawable.ambient0,R.drawable.ambient1,R.drawable.ambient2,R.drawable.ambient3};
     public static final int[] ambientMusicItem = {0,R.raw.mt_airy,R.raw.weaving,R.raw.butterfly_space};
+    public static final int[] nianFoMusicItem = {0,R.raw.nian_fo_1,R.raw.nian_fo_2,R.raw.nian_fo_3};
 
     //Article
     public static WebView currentWebview;
