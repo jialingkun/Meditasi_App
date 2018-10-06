@@ -9,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.bekkostudio.meditasidanretret.Course.Retret.RetretActivity;
-import com.bekkostudio.meditasidanretret.Course.ShopActivity;
-import com.bekkostudio.meditasidanretret.Course.TutorialActivity;
 import com.bekkostudio.meditasidanretret.R;
 import com.bekkostudio.meditasidanretret.Timer.Namaskara.NamaskaraHomeActivity;
 import com.bekkostudio.meditasidanretret.Timer.NianFo.NianFoHomeActivity;

@@ -27,7 +27,7 @@ public class CommunityFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_article_fragment, container, false);
+        View view = inflater.inflate(R.layout.activity_community_fragment, container, false);
 
 
         ProgressBar progressBar = view.findViewById(R.id.msw_progress);
