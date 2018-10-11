@@ -22,13 +22,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".Timer.MeditationCountdown"
             android:screenOrientation="portrait" />
@@ -70,7 +64,16 @@
         <activity android:name=".Timer.NianFo.NianFoManualActivity" />
         <activity android:name=".Timer.NianFo.NianFoAutomaticActivity" />
         <activity android:name=".Timer.Namaskara.NamaskaraResultActivity" />
-        <activity android:name=".Timer.NianFo.NianFoResultActivity"></activity>
+        <activity android:name=".Timer.NianFo.NianFoResultActivity" />
+        <activity android:name=".MoodActivity" />
+        <activity android:name=".FirstLauncher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ProgressActivity"></activity>
     </application>
 
 </manifest>

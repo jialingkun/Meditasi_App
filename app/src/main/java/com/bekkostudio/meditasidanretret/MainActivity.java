@@ -16,6 +16,8 @@ import com.bekkostudio.meditasidanretret.Course.CourseFragment;
 import com.bekkostudio.meditasidanretret.Course.Retret.RetretActivity;
 import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -41,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.navigation_chart:
                     // pakai fragment chart di sini
-                    fragment = new AboutFragment();
+                    //fragment = new AboutFragment();
+                    Intent iProgress = new Intent(MainActivity.this, ProgressActivity.class);
+                    startActivity(iProgress);
                     break;
 //                case R.id.navigation_about:
 //                    fragment = new AboutFragment();
@@ -62,10 +66,7 @@ public class MainActivity extends AppCompatActivity {
         Global.getMood(getApplicationContext());
 
         //MOOD MULAI CODING DARI SINI, CEK DATABASE DI VARIABEL Global.Moods
-
-
-
-
+        
 
         //loading the default fragment
         loadFragment(new TimerFragment());

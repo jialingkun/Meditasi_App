@@ -20,4 +20,10 @@ public class Mood implements Serializable {
 
     public static final int TIDAK_MENGISI = 0;
 
+    public Mood(String date, int moodValue, int medicineValue ) {
+        this.date = date;
+        this.moodValue = moodValue;
+        this.medicineValue = medicineValue;
+    }
+
 }

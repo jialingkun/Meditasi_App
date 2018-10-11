@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    tools:context=".MoodActivity">
+
+    <TextView
+        android:id="@+id/moodToday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Bagaimana mood Anda hari ini ?"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <Spinner
+        android:id="@+id/spinMoodToday"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@+id/moodToday"/>
+
+    <TextView
+        android:id="@+id/tv_minumObat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinMoodToday"
+        android:text="Apakah Anda minum obat hari ini ?"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:id="@+id/spinMinumObat"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/tv_minumObat"/>
+
+    <Button
+        android:id="@+id/btn_sumbit"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinMinumObat"
+        android:layout_centerHorizontal="true"
+        android:text="Submit"
+        android:layout_marginTop="80dp"/>
+</RelativeLayout>
