@@ -15,19 +15,9 @@ public class NamaskaraHomeActivity extends AppCompatActivity implements View.OnC
     NumberPicker durasiSujud, durasiTegap;
     Button startTimer;
     EditText siklusEdit;
-    String[] displayedSujud = {
-            "10s", "20s", "30s", "1m", "3m", "5m"
+    String[] displayedPicker = {
+            "1s", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "10s"
     };
-    String[] displayedTegap = {
-            "10s", "20s", "30s", "1m", "3m", "5m"
-    };
-
-    public static final int SEPULUH_DETIK = 0;
-    public static final int DUAPULUH_DETIK = 1;
-    public static final int TIGAPULUH_DETIK = 2;
-    public static final int SATU_MENIT = 3;
-    public static final int TIGA_MENIT = 4;
-    public static final int LIMA_MENIT = 5;
 
     public static final String EXTRA_DURASI_SUJUD = "extra_durasi_sujud";
     public static final String EXTRA_DURASI_TEGAP = "extra_durasi_tegap";
@@ -44,13 +34,13 @@ public class NamaskaraHomeActivity extends AppCompatActivity implements View.OnC
         durasiTegap = findViewById(R.id.durasiTegap);
 
         durasiTegap.setMinValue(0);
-        durasiTegap.setMaxValue(displayedTegap.length-1);
-        durasiTegap.setDisplayedValues(displayedTegap);
+        durasiTegap.setMaxValue(displayedPicker.length-1);
+        durasiTegap.setDisplayedValues(displayedPicker);
         durasiTegap.setWrapSelectorWheel(false);
 
         durasiSujud.setMinValue(0);
-        durasiSujud.setMaxValue(displayedSujud.length-1);
-        durasiSujud.setDisplayedValues(displayedSujud);
+        durasiSujud.setMaxValue(displayedPicker.length-1);
+        durasiSujud.setDisplayedValues(displayedPicker);
         durasiSujud.setWrapSelectorWheel(false);
 
         startTimer = findViewById(R.id.startTimerNamaskara);

@@ -129,7 +129,7 @@ public class NianFoHomeActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(int activeItem) {
                 //On image click
-                musicId = Global.ambientMusicItem[activeItem];
+                musicId = Global.nianFoMusicItem[activeItem];
                 if (backgroundSound!=null){
                     backgroundSound.stop();
                     backgroundSound.release();
