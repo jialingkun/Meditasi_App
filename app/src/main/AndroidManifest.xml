@@ -39,14 +39,18 @@
             android:name=".Course.Retret.RetretActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Course.TutorialActivity"
+            android:name=".Article.TutorialActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Course.TutorialContentActivity"
+            android:name=".Article.TutorialContentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Course.ShopActivity"
+            android:name=".Article.ArticleActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Article.ShopActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".Article.ShopContentActivity" />
         <activity
             android:name=".Course.ExoPlayerActivity"
             android:screenOrientation="landscape" />
@@ -59,7 +63,6 @@
         <activity
             android:name=".Course.Retret.TimelineContentActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Course.ShopContentActivity" />
         <activity android:name=".Timer.MeditationSetting" />
         <activity android:name=".Timer.Namaskara.NamaskaraHomeActivity" />
         <activity android:name=".Timer.Namaskara.NamaskaraCountdownActivity" />
