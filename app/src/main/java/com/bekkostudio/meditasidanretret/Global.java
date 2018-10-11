@@ -330,7 +330,7 @@ public class Global {
 
 
     //Mood and medicine database
-    public static ArrayList<Mood> moods;
+    public static ArrayList<Mood> moods = new ArrayList<Mood>();
 
 
     public static void getMood(Context context){

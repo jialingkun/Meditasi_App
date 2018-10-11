@@ -23,4 +23,22 @@
         <item>Manual</item>
         <item>Automatic</item>
     </array>
+
+    <array name="metode_mood">
+        <item>Sangat Tidak Tenang</item>
+        <item>Tidak Tenang</item>
+        <item>Tenang</item>
+        <item>Sangat Tenang</item>
+    </array>
+
+    <array name="minum_obat">
+        <item>Tidak Minum Obat</item>
+        <item>Kurang Dosis</item>
+        <item>Minum Obat</item>
+    </array>
+
+    <array name="metode_progressChart">
+        <item>Mood</item>
+        <item>Meditasi</item>
+    </array>
 </resources>
