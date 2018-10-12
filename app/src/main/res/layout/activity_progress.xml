@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProgressActivity">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Title" />
+    <Spinner
+        android:id="@+id/spProgress"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp" />
+
+    <lecho.lib.hellocharts.view.LineChartView
+        android:id="@+id/progress_chart"
+        android:layout_width="363dp"
+        android:layout_height="353dp"
+        android:layout_below="@+id/spProgress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/tvMood"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@+id/progress_chart"
+        android:textSize="12sp"
+        android:textColor="#e60000"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/tvMedicine"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@+id/tvMood"
+        android:textSize="12sp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffff00"/>
+
+
+</RelativeLayout>
