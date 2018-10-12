@@ -83,6 +83,7 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
     private void startTimerTegap(final long durasiTegap) {
         if(counter > siklus) {
             Global.tempIsCompleted = true;
+            counter--;
             endMeditation();
             return;
         }
