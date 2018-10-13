@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
         //get meditation duration database
         Global.getDuration(getApplicationContext());
-        //get Mood Database
-        Global.getMood(getApplicationContext());
 
         //MOOD MULAI CODING DARI SINI, CEK DATABASE DI VARIABEL Global.Moods
         
