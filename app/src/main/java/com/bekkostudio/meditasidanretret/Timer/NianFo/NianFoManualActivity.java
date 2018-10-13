@@ -54,6 +54,7 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
             counterSiklus++;
 
             if (counterSiklus > jumlahSiklus) {
+                counterSiklus--;
                 endMeditation();
                 return;
             }
