@@ -431,9 +431,18 @@ public class Global {
 
     public static String getTodayDate(){
         Date date = new Date();
-        return simpleDateFormatNew.format(date);
+        return simpleDateFormat.format(date);
     }
 
+    public static String newFormatDate(String date){
+        try {
+            Date newDate = simpleDateFormat.parse(date);
+            return simpleDateFormatNew.format(newDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "Error: "+e;
+        }
+    }
 
     public static int dpToPx(Context context, int dp) {
         float density = context.getResources()
