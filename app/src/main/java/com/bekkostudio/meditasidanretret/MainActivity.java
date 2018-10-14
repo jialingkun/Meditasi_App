@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         //get meditation duration database
         Global.getDuration(getApplicationContext());
 
-        //MOOD MULAI CODING DARI SINI, CEK DATABASE DI VARIABEL Global.Moods
-        
+        //get note database
+        Global.getNote(getApplicationContext());
 
         //loading the default fragment
         loadFragment(new TimerFragment());

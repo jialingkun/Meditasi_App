@@ -8,11 +8,11 @@ import android.webkit.WebView;
 
 import com.bekkostudio.meditasidanretret.Chart.Duration;
 import com.bekkostudio.meditasidanretret.Chart.Mood;
+import com.bekkostudio.meditasidanretret.Chart.Note;
 import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
 import com.bekkostudio.meditasidanretret.Course.Retret.RetretDays;
 import com.bekkostudio.meditasidanretret.Course.Retret.RetretDetail;
-import com.bekkostudio.meditasidanretret.Timer.MeditationCountdown;
-import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
+import com.bekkostudio.meditasidanretret.Timer.Meditasi.MeditationCountdown;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
@@ -392,6 +392,39 @@ public class Global {
             output.close();
         }catch (Exception e){
             Log.d("setDuration", "Exception: " + e);
+        }
+    }
+
+
+    //Note database
+    public static ArrayList<Note> notes;
+
+
+    public static void getNote(Context context){
+        try {
+            FileInputStream inputStream = context.openFileInput("note.txt");
+            ObjectInputStream input = new ObjectInputStream(inputStream);
+            notes = (ArrayList<Note>) input.readObject();
+            input.close();
+        } catch (FileNotFoundException e){
+            notes = new ArrayList<>();
+            Log.d("getNote", "Exception: " + e);
+        }catch (Exception e){
+            Log.d("getNote", "Exception: " + e);
+        }
+
+    }
+
+
+    public static void setNote (Context context, Note note){
+        notes.add(note);
+        try {
+            FileOutputStream outputStream = context.openFileOutput("note.txt", Context.MODE_PRIVATE);
+            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+            output.writeObject(notes);
+            output.close();
+        }catch (Exception e){
+            Log.d("setNote", "Exception: " + e);
         }
     }
 

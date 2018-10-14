@@ -24,10 +24,10 @@
             android:name=".MainActivity"
             android:label="@string/app_name"></activity>
         <activity
-            android:name=".Timer.MeditationCountdown"
+            android:name=".Timer.Meditasi.MeditationCountdown"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Timer.MeditationResult"
+            android:name=".Timer.Meditasi.MeditationResult"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Course.Retret.RetretActivity"
@@ -57,7 +57,7 @@
         <activity
             android:name=".Course.Retret.TimelineContentActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Timer.MeditationSetting" />
+        <activity android:name=".Timer.Meditasi.MeditationSetting" />
         <activity android:name=".Timer.Namaskara.NamaskaraHomeActivity" />
         <activity android:name=".Timer.Namaskara.NamaskaraCountdownActivity" />
         <activity android:name=".Timer.NianFo.NianFoHomeActivity" />

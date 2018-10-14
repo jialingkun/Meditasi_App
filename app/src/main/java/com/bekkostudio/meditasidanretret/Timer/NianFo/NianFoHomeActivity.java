@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
-import com.bekkostudio.meditasidanretret.Timer.MeditationSetting;
 
 public class NianFoHomeActivity extends AppCompatActivity {
     // spinner and its adapter

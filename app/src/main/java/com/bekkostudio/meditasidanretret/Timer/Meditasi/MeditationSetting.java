@@ -1,4 +1,4 @@
-package com.bekkostudio.meditasidanretret.Timer;
+package com.bekkostudio.meditasidanretret.Timer.Meditasi;
 
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.TextView;
 
 import com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView;
 import com.bekkostudio.meditasidanretret.Global;

@@ -1,13 +1,16 @@
-package com.bekkostudio.meditasidanretret.Timer;
+package com.bekkostudio.meditasidanretret.Timer.Meditasi;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bekkostudio.meditasidanretret.Chart.Duration;
+import com.bekkostudio.meditasidanretret.Chart.Note;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 
@@ -16,6 +19,10 @@ public class MeditationResult extends AppCompatActivity {
     TextView resultTimeWidget;
     Button doneWidget;
     String remainingTime;
+
+    //note
+    EditText noteWidget;
+    CheckBox importantWidget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,20 @@ public class MeditationResult extends AppCompatActivity {
         //get widget
         resultTimeWidget = findViewById(R.id.resultTime);
         doneWidget = findViewById(R.id.done);
+
+        //note
+        noteWidget = findViewById(R.id.note);
+        importantWidget = findViewById(R.id.important);
+
+        if (noteWidget.getText().length()>0){
+            //set note
+            String text = noteWidget.getText().toString();
+            boolean important = importantWidget.isChecked();
+            String dateToday = Global.getTodayDate();
+            Note note = new Note(dateToday, text, important);
+            Global.setNote(getApplicationContext(), note);
+        }
+
 
         resultTimeWidget.setText(remainingTime);
 
