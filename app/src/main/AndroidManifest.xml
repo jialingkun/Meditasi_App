@@ -22,7 +22,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Timer.Meditasi.MeditationCountdown"
             android:screenOrientation="portrait" />
@@ -40,11 +41,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Article.ArticleActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Article.ShopActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Article.ShopContentActivity" />
+        <activity android:name=".Article.ShopContentActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Course.ExoPlayerActivity"
             android:screenOrientation="landscape" />
@@ -57,23 +59,36 @@
         <activity
             android:name=".Course.Retret.TimelineContentActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Timer.Meditasi.MeditationSetting" />
-        <activity android:name=".Timer.Namaskara.NamaskaraHomeActivity" />
-        <activity android:name=".Timer.Namaskara.NamaskaraCountdownActivity" />
-        <activity android:name=".Timer.NianFo.NianFoHomeActivity" />
-        <activity android:name=".Timer.NianFo.NianFoManualActivity" />
-        <activity android:name=".Timer.NianFo.NianFoAutomaticActivity" />
-        <activity android:name=".Timer.Namaskara.NamaskaraResultActivity" />
-        <activity android:name=".Timer.NianFo.NianFoResultActivity" />
-        <activity android:name=".MoodActivity" />
-        <activity android:name=".FirstLauncher">
+        <activity android:name=".Timer.Meditasi.MeditationSetting"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Timer.Namaskara.NamaskaraHomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Timer.Namaskara.NamaskaraCountdownActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Timer.NianFo.NianFoHomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Timer.NianFo.NianFoManualActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Timer.NianFo.NianFoAutomaticActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Timer.Namaskara.NamaskaraResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Timer.NianFo.NianFoResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MoodActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FirstLauncher"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProgressActivity"></activity>
+        <activity android:name=".ProgressActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Chart.NoteActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

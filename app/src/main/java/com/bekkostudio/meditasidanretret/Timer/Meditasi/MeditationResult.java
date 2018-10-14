@@ -41,16 +41,6 @@ public class MeditationResult extends AppCompatActivity {
         noteWidget = findViewById(R.id.note);
         importantWidget = findViewById(R.id.important);
 
-        if (noteWidget.getText().length()>0){
-            //set note
-            String text = noteWidget.getText().toString();
-            boolean important = importantWidget.isChecked();
-            String dateToday = Global.getTodayDate();
-            Note note = new Note(dateToday, text, important);
-            Global.setNote(getApplicationContext(), note);
-        }
-
-
         resultTimeWidget.setText(remainingTime);
 
         //Click Done
@@ -71,6 +61,19 @@ public class MeditationResult extends AppCompatActivity {
 
 
     public void endMeditation(){
+        saveNote();
         finish();
+    }
+
+
+    public void saveNote(){
+        if (noteWidget.getText().length()>0){
+            //set note
+            String text = noteWidget.getText().toString();
+            boolean important = importantWidget.isChecked();
+            String dateToday = Global.getTodayDate();
+            Note note = new Note(dateToday, text, important);
+            Global.setNote(getApplicationContext(), note);
+        }
     }
 }

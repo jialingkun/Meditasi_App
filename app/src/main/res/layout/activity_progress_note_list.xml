@@ -21,17 +21,17 @@
         android:layout_below="@+id/date"
         android:textStyle="bold"
         android:textColor="#c0392b"
-        android:textSize="22sp"/>
+        android:textSize="19sp"/>
 
     <TextView
         android:id="@+id/text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
         android:gravity="center"
         android:layout_toEndOf="@+id/date"
-        android:paddingLeft="5dp"
+        android:paddingLeft="15dp"
         android:text="Pengalaman yang bagus dan menyenangkan. Saya merasa tenang bermeditasi. Saya akan coba lebih tenang lagi"
         android:textSize="18sp" />
 
