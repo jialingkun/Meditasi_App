@@ -67,7 +67,7 @@ public class ProgressActivity extends AppCompatActivity {
                         //moodDate to hold data from Global mood date
                         moodDate = new ArrayList<>();
                         for (int i = 0; i < size; i++) {
-                            moodDate.add(Global.moods.get(i).date);
+                            moodDate.add(Global.newFormatDate(Global.moods.get(i).date));
                             dateAxisValue.add(i, new AxisValue(i).setLabel(moodDate.get(i)));
                         }
 
@@ -136,14 +136,14 @@ public class ProgressActivity extends AppCompatActivity {
                                 }
                                 else {
                                     totalDurasi = totalDurasi + Global.durations.get(i).duration;
-                                    dateArray.add(Global.durations.get(i).date);
+                                    dateArray.add(Global.newFormatDate(Global.durations.get(i).date));
                                     durasi.add(totalDurasi);
                                     totalDurasi = 0;
                                 }
                             }
                             else {
                                 totalDurasi = totalDurasi + Global.durations.get(i).duration;
-                                dateArray.add(Global.durations.get(i).date);
+                                dateArray.add(Global.newFormatDate(Global.durations.get(i).date));
                                 durasi.add(totalDurasi);
                             }
                         }
