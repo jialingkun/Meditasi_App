@@ -221,6 +221,7 @@ public class Global {
 
     //universal pattern for date
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE,dd-MM-yyyy");
+    public static SimpleDateFormat simpleDateFormatNew = new SimpleDateFormat("dd/MM");
 
 
     public static void getActiveRetret(Context context){
@@ -430,7 +431,7 @@ public class Global {
 
     public static String getTodayDate(){
         Date date = new Date();
-        return simpleDateFormat.format(date);
+        return simpleDateFormatNew.format(date);
     }
 
 
