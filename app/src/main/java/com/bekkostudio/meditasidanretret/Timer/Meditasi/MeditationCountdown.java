@@ -1,4 +1,4 @@
-package com.bekkostudio.meditasidanretret.Timer;
+package com.bekkostudio.meditasidanretret.Timer.Meditasi;
 
 import android.content.Intent;
 import android.media.MediaPlayer;

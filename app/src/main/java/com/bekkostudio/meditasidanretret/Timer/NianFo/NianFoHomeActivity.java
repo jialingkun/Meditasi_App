@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
-import com.bekkostudio.meditasidanretret.Timer.MeditationSetting;
 
 public class NianFoHomeActivity extends AppCompatActivity {
     // spinner and its adapter
@@ -78,7 +77,11 @@ public class NianFoHomeActivity extends AppCompatActivity {
                     intent = new Intent(NianFoHomeActivity.this, NianFoAutomaticActivity.class);
                 }
                 intent.putExtra(EXTRA_MUSIC_ID, musicId);
-                intent.putExtra(EXTRA_SIKLUS, siklusEdit.getText().toString());
+                String jumlahSiklus = siklusEdit.getText().toString();
+                if (jumlahSiklus.equals("")){
+                    jumlahSiklus = "1";
+                }
+                intent.putExtra(EXTRA_SIKLUS, jumlahSiklus);
                 startActivity(intent);
             }
         });

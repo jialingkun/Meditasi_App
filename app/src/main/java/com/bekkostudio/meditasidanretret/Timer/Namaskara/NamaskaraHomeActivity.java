@@ -52,7 +52,11 @@ public class NamaskaraHomeActivity extends AppCompatActivity implements View.OnC
         Intent intent = new Intent(NamaskaraHomeActivity.this, NamaskaraCountdownActivity.class);
         intent.putExtra(EXTRA_DURASI_TEGAP, durasiTegap.getValue());
         intent.putExtra(EXTRA_DURASI_SUJUD, durasiSujud.getValue());
-        intent.putExtra(EXTRA_SIKLUS, siklusEdit.getText().toString());
+        String jumlahSiklus = siklusEdit.getText().toString();
+        if (jumlahSiklus.equals("")){
+            jumlahSiklus = "1";
+        }
+        intent.putExtra(EXTRA_SIKLUS, jumlahSiklus);
         startActivity(intent);
     }
 }

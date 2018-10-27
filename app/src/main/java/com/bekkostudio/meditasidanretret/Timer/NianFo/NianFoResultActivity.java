@@ -4,9 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bekkostudio.meditasidanretret.Chart.Note;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 import com.bekkostudio.meditasidanretret.Timer.Namaskara.NamaskaraCountdownActivity;
@@ -17,6 +20,10 @@ public class NianFoResultActivity extends AppCompatActivity {
     int siklus;
     long durasi;
     String durasiFinal;
+
+    //note
+    EditText noteWidget;
+    CheckBox importantWidget;
 
     public static String EXTRA_DURASI = "extra_durasi";
     public static String EXTRA_SIKLUS = "extra_siklus";
@@ -30,10 +37,14 @@ public class NianFoResultActivity extends AppCompatActivity {
         siklusLabel = findViewById(R.id.siklusResultLabel);
         durasiLabel = findViewById(R.id.durasiResultLabel);
 
+        //note
+        noteWidget = findViewById(R.id.note);
+        importantWidget = findViewById(R.id.important);
+
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                endMeditation();
             }
         });
 
@@ -45,5 +56,29 @@ public class NianFoResultActivity extends AppCompatActivity {
 
         siklusLabel.setText(String.valueOf(siklus));
         durasiLabel.setText(durasiFinal);
+    }
+
+    @Override
+    public void onBackPressed() {
+        endMeditation();
+        return;
+    }
+
+
+    public void endMeditation(){
+        saveNote();
+        finish();
+    }
+
+
+    public void saveNote(){
+        if (noteWidget.getText().length()>0){
+            //set note
+            String text = noteWidget.getText().toString();
+            boolean important = importantWidget.isChecked();
+            String dateToday = Global.getTodayDate();
+            Note note = new Note(dateToday, text, important);
+            Global.setNote(getApplicationContext(), note);
+        }
     }
 }

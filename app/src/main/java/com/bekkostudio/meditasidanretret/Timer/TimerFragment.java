@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.bekkostudio.meditasidanretret.R;
+import com.bekkostudio.meditasidanretret.Timer.Meditasi.MeditationSetting;
 import com.bekkostudio.meditasidanretret.Timer.Namaskara.NamaskaraHomeActivity;
 import com.bekkostudio.meditasidanretret.Timer.NianFo.NianFoHomeActivity;
 

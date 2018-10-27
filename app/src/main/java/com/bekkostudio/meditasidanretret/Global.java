@@ -8,11 +8,11 @@ import android.webkit.WebView;
 
 import com.bekkostudio.meditasidanretret.Chart.Duration;
 import com.bekkostudio.meditasidanretret.Chart.Mood;
+import com.bekkostudio.meditasidanretret.Chart.Note;
 import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
 import com.bekkostudio.meditasidanretret.Course.Retret.RetretDays;
 import com.bekkostudio.meditasidanretret.Course.Retret.RetretDetail;
-import com.bekkostudio.meditasidanretret.Timer.MeditationCountdown;
-import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
+import com.bekkostudio.meditasidanretret.Timer.Meditasi.MeditationCountdown;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
@@ -221,6 +221,7 @@ public class Global {
 
     //universal pattern for date
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE,dd-MM-yyyy");
+    public static SimpleDateFormat simpleDateFormatNew = new SimpleDateFormat("dd/MM");
 
 
     public static void getActiveRetret(Context context){
@@ -331,7 +332,7 @@ public class Global {
 
 
     //Mood and medicine database
-    public static ArrayList<Mood> moods = new ArrayList<Mood>();
+    public static ArrayList<Mood> moods;
 
 
     public static void getMood(Context context){
@@ -395,11 +396,53 @@ public class Global {
         }
     }
 
+
+    //Note database
+    public static ArrayList<Note> notes;
+
+
+    public static void getNote(Context context){
+        try {
+            FileInputStream inputStream = context.openFileInput("note.txt");
+            ObjectInputStream input = new ObjectInputStream(inputStream);
+            notes = (ArrayList<Note>) input.readObject();
+            input.close();
+        } catch (FileNotFoundException e){
+            notes = new ArrayList<>();
+            Log.d("getNote", "Exception: " + e);
+        }catch (Exception e){
+            Log.d("getNote", "Exception: " + e);
+        }
+
+    }
+
+
+    public static void setNote (Context context, Note note){
+        notes.add(note);
+        try {
+            FileOutputStream outputStream = context.openFileOutput("note.txt", Context.MODE_PRIVATE);
+            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+            output.writeObject(notes);
+            output.close();
+        }catch (Exception e){
+            Log.d("setNote", "Exception: " + e);
+        }
+    }
+
     public static String getTodayDate(){
         Date date = new Date();
         return simpleDateFormat.format(date);
     }
 
+    public static String newFormatDate(String date){
+        try {
+            Date newDate = simpleDateFormat.parse(date);
+            return simpleDateFormatNew.format(newDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "Error: "+e;
+        }
+    }
 
     public static int dpToPx(Context context, int dp) {
         float density = context.getResources()

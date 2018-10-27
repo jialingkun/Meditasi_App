@@ -11,6 +11,8 @@ public class FirstLauncher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //get Mood Database
+        Global.getMood(getApplicationContext());
 
         //check file mood
         if (Global.moods.size() > 0){
