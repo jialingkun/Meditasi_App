@@ -19,11 +19,6 @@
         <item>10m</item>
     </string-array>
 
-    <array name="metode_nian_fo">
-        <item>Manual</item>
-        <item>Automatic</item>
-    </array>
-
     <array name="metode_mood">
         <item>Sangat Tidak Tenang</item>
         <item>Tidak Tenang</item>
