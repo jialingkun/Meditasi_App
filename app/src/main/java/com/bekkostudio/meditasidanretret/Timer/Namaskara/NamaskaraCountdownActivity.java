@@ -88,14 +88,14 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
             return;
         }
 
+        isRunningTegap = true;
         countSiklusLabel.setText(String.valueOf(counter));
-        posisiLabel.setText("Posisi Tegap");
+        posisiLabel.setText("Posisi Berdiri");
         timerTegap = new CountDownTimer(durasiTegap, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 milliLeft = millisUntilFinished;
                 milliTotal += 1000;
-                isRunningTegap = true;
             }
 
             @Override
@@ -110,12 +110,12 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
     }
 
     private void startTimerSujud(final long durasiSujud) {
+        isRunningSujud = true;
         timerSujud = new CountDownTimer(durasiSujud, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 milliLeft = millisUntilFinished;
                 milliTotal += 1000;
-                isRunningSujud = true;
             }
 
             @Override
@@ -151,9 +151,11 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
                     isRunningSujud = false;
                 }
                 else {
-                    startTimerSujud(milliLeft);
-                    isRunningTegap = false;
-                    isRunningSujud = true;
+                    counter++;
+                    bellTegap.start();
+                    startTimerTegap(durasiTegapInSecond);
+                    isRunningTegap = true;
+                    isRunningSujud = false;
                 }
                 pauseButton.setText("Pause");
                 isButtonPause = true;
