@@ -39,11 +39,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Durasi Tegap"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="30dp"/>
                 <NumberPicker
                     android:id="@+id/durasiTegap"
                     android:layout_width="35dp"
                     android:layout_height="150dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
                     android:descendantFocusability="blocksDescendants">
 
                 </NumberPicker>
@@ -58,11 +60,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Durasi Sujud"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="30dp"/>
                 <NumberPicker
                     android:id="@+id/durasiSujud"
                     android:layout_width="35dp"
                     android:layout_height="150dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
                     android:descendantFocusability="blocksDescendants">
 
                 </NumberPicker>
@@ -72,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jumlah Siklus"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="40dp" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,7 +87,7 @@
                 android:id="@+id/siklusEdit"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

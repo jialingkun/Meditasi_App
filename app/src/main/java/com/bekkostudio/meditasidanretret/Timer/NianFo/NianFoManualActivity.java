@@ -53,17 +53,24 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
         if(v.getId() == R.id.nianFoNextButton) {
             counterSiklus++;
 
-            if (counterSiklus > jumlahSiklus) {
-                endMeditation();
-                return;
-            }
-
             if (backgroundSound.isPlaying()){
                 backgroundSound.pause();
                 backgroundSound.seekTo(0);
             }
             countSiklusLabel.setText(String.valueOf(counterSiklus));
             backgroundSound.start();
+
+            if (counterSiklus == jumlahSiklus) {
+                // check if this is a last meditation, then play a bell sound
+                backgroundSound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        MediaPlayer bellSound = MediaPlayer.create(NianFoManualActivity.this,R.raw.bell_2);
+                        bellSound.start();
+                        endMeditation();
+                    }
+                });
+            }
         }
         else if(v.getId() == R.id.finishEarlyButton) {
             if (backgroundSound.isPlaying()){

@@ -38,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new CommunityFragment();
                     break;
                 case R.id.navigation_course:
-                    Intent intent = new Intent(MainActivity.this, RetretActivity.class);
-                    startActivity(intent);
+                    fragment = new CourseFragment();
                     break;
                 case R.id.navigation_chart:
                     // pakai fragment chart di sini
@@ -63,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
         //get meditation duration database
         Global.getDuration(getApplicationContext());
 
-        //MOOD MULAI CODING DARI SINI, CEK DATABASE DI VARIABEL Global.Moods
-        
+        //get note database
+        Global.getNote(getApplicationContext());
 
         //loading the default fragment
         loadFragment(new TimerFragment());
@@ -133,4 +132,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        for (Fragment fragment : getSupportFragmentManager().getFragments())
+        {
+            if (fragment != null)
+            {
+                fragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
 }

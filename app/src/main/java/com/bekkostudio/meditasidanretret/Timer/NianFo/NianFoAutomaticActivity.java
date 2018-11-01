@@ -54,6 +54,7 @@ public class NianFoAutomaticActivity extends AppCompatActivity implements View.O
                 counterSiklus++;
 
                 if (counterSiklus > jumlahSiklus) {
+                    counterSiklus--;
                     endMeditation();
                     return;
                 }

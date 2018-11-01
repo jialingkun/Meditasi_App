@@ -1,13 +1,18 @@
 package com.bekkostudio.meditasidanretret;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.bekkostudio.meditasidanretret.Chart.NoteActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 import lecho.lib.hellocharts.model.Axis;
@@ -27,6 +32,8 @@ public class ProgressActivity extends AppCompatActivity {
     ArrayList<String> moodDate, meditasiDate;
     ArrayList<Integer> moodValue, medicineValue, durationValue;
     List dateMeditasi, yDuration;
+
+    int lastPosition = 0;
 
 
     @Override
@@ -52,6 +59,7 @@ public class ProgressActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(parent.getItemAtPosition(position).toString().equals("Mood")) {
+                    lastPosition = position;
                     tvTitle.setText("Progress Mood");
                     int size = Global.moods.size();
                     if (size > 1) {
@@ -120,7 +128,8 @@ public class ProgressActivity extends AppCompatActivity {
                     }
 
 
-                } else {
+                } else if(parent.getItemAtPosition(position).toString().equals("Meditasi")) {
+                    lastPosition = position;
                     tvTitle.setText("Progress Meditasi");
                     int size = Global.durations.size();
                     ArrayList<String> dateArray = new ArrayList();
@@ -194,6 +203,10 @@ public class ProgressActivity extends AppCompatActivity {
                         tvMedicine.setText(null);
                     }
 
+                } else if(parent.getItemAtPosition(position).toString().equals("Catatan")) {
+                    spProgress.setSelection(lastPosition);
+                    Intent intent = new Intent(ProgressActivity.this, NoteActivity.class);
+                    startActivity(intent);
                 }
             }
 
