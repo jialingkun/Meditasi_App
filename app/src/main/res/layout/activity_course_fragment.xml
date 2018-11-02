@@ -40,11 +40,32 @@
                 />
 
             <TextView
-                android:id="@+id/beginnerCourseLabel"
+                android:id="@+id/freeCourseLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/activeCourseImage"
+                android:text="Video Tutorial Gratis" />
+
+            <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
+                android:id="@+id/freeCourseCenterHorizontalScrollView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/freeCourseLabel">
+                <LinearLayout
+                    android:id="@+id/freeCourseLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                </LinearLayout>
+            </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
+
+            <TextView
+                android:id="@+id/beginnerCourseLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/freeCourseCenterHorizontalScrollView"
                 android:text="Kursus Pemula" />
 
             <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView

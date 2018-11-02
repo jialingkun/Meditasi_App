@@ -22,6 +22,7 @@ public class MeditationCountdown extends AppCompatActivity {
     Button finishWidget;
 
     MediaPlayer bellSound;
+    MediaPlayer finishSound;
     MediaPlayer backgroundSound;
 
     CountDownTimer warmupTimer;
@@ -44,11 +45,10 @@ public class MeditationCountdown extends AppCompatActivity {
 
         //initialize sound
         bellSound = MediaPlayer.create(this,R.raw.bell);
+        finishSound = MediaPlayer.create(this,R.raw.bell2);
 
         if (ambientMusic != 0){
             backgroundSound = MediaPlayer.create(this,ambientMusic);
-            backgroundSound.start();
-            backgroundSound.isLooping();
         }
 
 
@@ -80,6 +80,9 @@ public class MeditationCountdown extends AppCompatActivity {
                 bellSound.start();
                 messageWidget.setText("Meditasi");
 
+                backgroundSound.start();
+                backgroundSound.isLooping();
+
                 //start Meditation Timer
                 meditationTimer = new CountDownTimer(meditationDuration*1000, 1000) {
 
@@ -89,7 +92,7 @@ public class MeditationCountdown extends AppCompatActivity {
                     }
 
                     public void onFinish() {
-                        bellSound.start();
+                        finishSound.start();
 //                        if (ambientMusic != 0){
 //                            backgroundSound.stop();
 //                        }

@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Meditasi dan Retret</string>
-    <string name="title_timer">Timer</string>
+    <string name="title_timer">Meditasi</string>
     <string name="title_Article">Artikel</string>
     <string name="title_Community">Komunitas</string>
     <string name="title_Course">Pelatihan</string>
-    <string name="title_Chart">Progress</string>
+    <string name="title_Chart">Rekap</string>
     <!--<string name="title_About">Tentang</string>-->
     <string name="title_activity_blank_fragment">BlankFragment</string>
     <string name="action_settings">Settings</string>

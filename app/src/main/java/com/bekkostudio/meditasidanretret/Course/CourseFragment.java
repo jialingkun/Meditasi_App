@@ -20,6 +20,7 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.bekkostudio.meditasidanretret.Article.ShopActivity;
 import com.bekkostudio.meditasidanretret.Article.TutorialActivity;
+import com.bekkostudio.meditasidanretret.Article.TutorialContentActivity;
 import com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView;
 import com.bekkostudio.meditasidanretret.Course.Retret.AttentionActivity;
 import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
@@ -31,6 +32,8 @@ import com.bekkostudio.meditasidanretret.R;
 public class CourseFragment extends Fragment implements BillingProcessor.IBillingHandler {
 
     //BGM image picker
+    CenteringHorizontalScrollView freeCourseScrollWidget;
+    LinearLayout freeCourseLinearWidget;
     CenteringHorizontalScrollView beginnerCourseScrollWidget;
     LinearLayout beginnerCourseLinearWidget;
     CenteringHorizontalScrollView intermediateCourseScrollWidget;
@@ -59,6 +62,8 @@ public class CourseFragment extends Fragment implements BillingProcessor.IBillin
 
 
         //Scroll item picker
+        freeCourseScrollWidget = view.findViewById(R.id.freeCourseCenterHorizontalScrollView);
+        freeCourseLinearWidget = view.findViewById(R.id.freeCourseLinearLayout);
         beginnerCourseScrollWidget = view.findViewById(R.id.beginnerCourseCenterHorizontalScrollView);
         beginnerCourseLinearWidget = view.findViewById(R.id.beginnerCourseLinearLayout);
         intermediateCourseScrollWidget = view.findViewById(R.id.intermediateCourseCenterHorizontalScrollView);
@@ -76,13 +81,49 @@ public class CourseFragment extends Fragment implements BillingProcessor.IBillin
 
 
         //set gap to center first item and last item
+        freeCourseScrollWidget.setLeftRightGap(getActivity(),courseItemWidth);
         beginnerCourseScrollWidget.setLeftRightGap(getActivity(),courseItemWidth);
         intermediateCourseScrollWidget.setLeftRightGap(getActivity(),courseItemWidth);
         advanceCourseScrollWidget.setLeftRightGap(getActivity(),courseItemWidth);
 
+        //free video tutorial
+        // center thumbnail
+        for(int i = 0; i< Global.videoTitle.length; i++){
+            courseItem= getLayoutInflater().inflate(R.layout.activity_course_retret_item, null);
+            //set height width
+            params = new LinearLayout.LayoutParams(Global.dpToPx(getActivity(), courseItemWidth), Global.dpToPx(getActivity(), courseItemHeight));
+            if (i==0){
+                //If first item
+                params.setMargins(0,0,Global.dpToPx(getActivity(),courseItemMargin),0);
+            }else if (i==3){
+                //if last item
+                params.setMargins(Global.dpToPx(getActivity(),courseItemMargin),0,0,0);
+            }else{
+                params.setMargins(Global.dpToPx(getActivity(),courseItemMargin),0,Global.dpToPx(getActivity(),courseItemMargin),0);
+            }
+            courseItem.setLayoutParams(params);
+
+            //set item content
+            TextView title = courseItem.findViewById(R.id.itemText);
+            title.setText(Global.videoTitle[i]);
+
+            freeCourseLinearWidget.addView(courseItem);
+
+            //On course item click
+            final int index = i;
+            courseItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), TutorialContentActivity.class);
+                    intent.putExtra("contentIndex", index);
+                    startActivity(intent);
+                }
+            });
+        }
+
         // center thumbnail
         for(int i = 0; i< BillingParameter.courseSKUList.size(); i++){
-            courseItem= getLayoutInflater().inflate(R.layout.activity_course_retret_item, null);;
+            courseItem= getLayoutInflater().inflate(R.layout.activity_course_retret_item, null);
             //set height width
             params = new LinearLayout.LayoutParams(Global.dpToPx(getActivity(), courseItemWidth), Global.dpToPx(getActivity(), courseItemHeight));
             if (i==0){
