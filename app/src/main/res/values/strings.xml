@@ -33,8 +33,7 @@
     </array>
 
     <array name="metode_progressChart">
-        <item>Mood</item>
-        <item>Meditasi</item>
+        <item>Progress</item>
         <item>Catatan</item>
     </array>
 </resources>
