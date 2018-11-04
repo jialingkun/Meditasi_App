@@ -300,8 +300,32 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        long milliAwal = 0;
+        long milliAkhir = 0;
         switch (id) {
             case R.id.btnFilter :
+                String parseEdtTglAwal = Global.newFormatDateFilter(edtTglAwal.getText().toString());
+                String parseEdtTglAkhir = Global.newFormatDateFilter(edtTglAkhir.getText().toString());
+                String newTglAwal = Global.newFormatDate(parseEdtTglAwal);
+                String newTglAkhir = Global.newFormatDate(parseEdtTglAkhir);
+
+                try {
+                    Date ptAwal = Global.simpleDateFormatNew.parse(newTglAwal);
+                    Date ptAkhir = Global.simpleDateFormatNew.parse(newTglAkhir);
+                    int dayDiff = (int) Global.getDateDiff(ptAwal, ptAkhir, TimeUnit.DAYS);
+                    System.out.print(dayDiff);
+                    milliAwal  = ptAwal.getTime();
+                    milliAkhir = ptAkhir.getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                for (int i = 0; i < moodDate.size(); i++) {
+                    if (millMoodDate.get(i) >= milliAwal && millMoodDate.get(i) <= milliAkhir) {
+                        System.out.print(moodDate.get(i));
+                        //Terakhir Coding yang codinganku udah tak hapus ko.
+                    }
+                }
                 break;
             case R.id.edtTglAwal :
                 showDateDialogAwal();
