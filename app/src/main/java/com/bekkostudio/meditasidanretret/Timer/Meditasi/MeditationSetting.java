@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
@@ -20,6 +21,13 @@ public class MeditationSetting extends AppCompatActivity implements HorizontalPi
     NumberPicker hoursDurationWidget;
     NumberPicker minutesDurationWidget;
     NumberPicker secondsDurationWidget;
+
+    //audio guide
+    CheckBox checkDISWidget;
+    CheckBox checkPMRWidget;
+    CheckBox checkBodyScanningWidget;
+    CheckBox check315Widget;
+    CheckBox check426Widget;
 
     //warmup horizontal picker
     HorizontalPicker warmupDurationPickerWidget;
@@ -55,6 +63,13 @@ public class MeditationSetting extends AppCompatActivity implements HorizontalPi
         secondsDurationWidget = findViewById(R.id.secondsDuration);
         secondsDurationWidget.setMinValue(0);
         secondsDurationWidget.setMaxValue(59);
+
+        //audio guide
+        checkDISWidget = findViewById(R.id.checkDIS);
+        checkPMRWidget = findViewById(R.id.checkPMR);
+        checkBodyScanningWidget = findViewById(R.id.checkBodyScanning);
+        check315Widget = findViewById(R.id.check315);
+        check426Widget = findViewById(R.id.check426);
 
         //Horizontal picker library
         warmupDurationPickerWidget = findViewById(R.id.warmupduration);
@@ -131,7 +146,8 @@ public class MeditationSetting extends AppCompatActivity implements HorizontalPi
 
                 ambientMusic = Global.ambientMusicItem[ambientMusicScrollWidget.getActiveItem()];
                 //start timer
-                Global.startTimer(MeditationSetting.this,meditationDuration,warmupDuration,ambientMusic);
+                Global.startTimer(MeditationSetting.this,meditationDuration,warmupDuration,ambientMusic,
+                        checkDISWidget.isChecked(),checkPMRWidget.isChecked(),checkBodyScanningWidget.isChecked(),check315Widget.isChecked(),check426Widget.isChecked());
             }
         });
 

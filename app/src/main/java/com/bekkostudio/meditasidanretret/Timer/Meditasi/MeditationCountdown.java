@@ -24,11 +24,26 @@ public class MeditationCountdown extends AppCompatActivity {
     MediaPlayer bellSound;
     MediaPlayer finishSound;
     MediaPlayer backgroundSound;
+    //audio guide
+    MediaPlayer audioGuideSound;
+    MediaPlayer.OnCompletionListener audioGuideCompleteListener;
+    int playlistposition;
 
     CountDownTimer warmupTimer;
     CountDownTimer meditationTimer;
 
     int resultTime;
+
+    //parameter
+    int meditationDuration;
+    int warmupDuration;
+    int ambientMusic;
+    //audio guide
+    boolean dis;
+    boolean pmr;
+    boolean bodyscanning;
+    boolean guide315;
+    boolean guide426;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +54,16 @@ public class MeditationCountdown extends AppCompatActivity {
 
         //get parameter
         Intent intent = getIntent();
-        final int meditationDuration = intent.getIntExtra("meditationDuration",60);
-        int warmupDuration = intent.getIntExtra("warmupDuration",60);
-        final int ambientMusic = intent.getIntExtra("ambientMusic",60);
+        meditationDuration = intent.getIntExtra("meditationDuration",60);
+        warmupDuration = intent.getIntExtra("warmupDuration",60);
+        ambientMusic = intent.getIntExtra("ambientMusic",60);
+        //sequential audio
+        dis = intent.getBooleanExtra("DIS",false);
+        pmr = intent.getBooleanExtra("PMR",false);
+        bodyscanning = intent.getBooleanExtra("bodyScanning",false);
+        guide315 = intent.getBooleanExtra("315",false);
+        guide426 = intent.getBooleanExtra("426",false);
+
 
         //initialize sound
         bellSound = MediaPlayer.create(this,R.raw.bell);
@@ -51,15 +73,10 @@ public class MeditationCountdown extends AppCompatActivity {
             backgroundSound = MediaPlayer.create(this,ambientMusic);
         }
 
-
         //get widget
         messageWidget = findViewById(R.id.message);
         remainingTimeWidget = findViewById(R.id.remainingTime);
         finishWidget = findViewById(R.id.finish);
-
-        //set message
-        messageWidget.setText("Pemanasan");
-        remainingTimeWidget.setText(formatMilliSecondsToTime(warmupDuration*1000));
 
         //start wakelock to keep countdown awake
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -67,8 +84,84 @@ public class MeditationCountdown extends AppCompatActivity {
                 "MyWakelockTag");
         wakeLock.acquire();
 
+
+
+        //run sequential audio DIS, PMR, Body Scanning, 315, 426, then Timer Countdown
+        playlistposition = 0;
+        audioGuideSound = MediaPlayer.create(this,R.raw.guide_dis); //Initialize dummy instance so it can be released
+        //set listener
+        audioGuideCompleteListener = new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                //go to next audio
+                startSequentialAudio();
+            }
+        };
+
+        //start
+        startSequentialAudio();
+
+
+
+
+        //finish early on click
+        finishWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Global.tempIsCompleted = false;
+                endMeditation();
+            }
+        });
+    }
+
+    private void startSequentialAudio(){
+        playlistposition++;
+
+        if (playlistposition==1 && dis){
+            audioGuideSound.release();
+            audioGuideSound = MediaPlayer.create(this,R.raw.guide_dis);
+            audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
+            audioGuideSound.start();
+            messageWidget.setText("DIS");
+        }else if (playlistposition==2 && pmr){
+            audioGuideSound.release();
+            audioGuideSound = MediaPlayer.create(this,R.raw.guide_pmr);
+            audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
+            audioGuideSound.start();
+            messageWidget.setText("PMR");
+        }else if (playlistposition==3 && bodyscanning){
+            audioGuideSound.release();
+            audioGuideSound = MediaPlayer.create(this,R.raw.guide_bodyscanning);
+            audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
+            audioGuideSound.start();
+            messageWidget.setText("Body Scanning");
+        }else if (playlistposition==4 && guide315){
+            audioGuideSound.release();
+            audioGuideSound = MediaPlayer.create(this,R.raw.guide_315);
+            audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
+            audioGuideSound.start();
+            messageWidget.setText("315");
+        }else if (playlistposition==5 && guide426){
+            audioGuideSound.release();
+            audioGuideSound = MediaPlayer.create(this,R.raw.guide_426);
+            audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
+            audioGuideSound.start();
+            messageWidget.setText("426");
+        }else if (playlistposition==6){
+            startTimer();
+        }else if (playlistposition>7){
+            //just to make sure the loop stop
+        }else{
+            //loop to next audio
+            startSequentialAudio();
+        }
+    }
+
+    private void startTimer(){
         //start Warmup Timer
         bellSound.start();
+        messageWidget.setText("Pemanasan");
+        remainingTimeWidget.setText(formatMilliSecondsToTime(warmupDuration*1000));
         resultTime = 0;
         warmupTimer = new CountDownTimer(warmupDuration*1000, 1000) {
 
@@ -80,8 +173,10 @@ public class MeditationCountdown extends AppCompatActivity {
                 bellSound.start();
                 messageWidget.setText("Meditasi");
 
-                backgroundSound.start();
-                backgroundSound.isLooping();
+                if (ambientMusic != 0){
+                    backgroundSound.start();
+                    backgroundSound.isLooping();
+                }
 
                 //start Meditation Timer
                 meditationTimer = new CountDownTimer(meditationDuration*1000, 1000) {
@@ -103,16 +198,6 @@ public class MeditationCountdown extends AppCompatActivity {
                 }.start();
             }
         }.start();
-
-
-        //finish early on click
-        finishWidget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Global.tempIsCompleted = false;
-                endMeditation();
-            }
-        });
     }
 
     @Override
@@ -127,6 +212,11 @@ public class MeditationCountdown extends AppCompatActivity {
             bellSound.stop();
             bellSound.release();
             bellSound = null;
+        }
+        if (audioGuideSound!=null){
+            audioGuideSound.stop();
+            audioGuideSound.release();
+            audioGuideSound = null;
         }
         super.onDestroy();
     }

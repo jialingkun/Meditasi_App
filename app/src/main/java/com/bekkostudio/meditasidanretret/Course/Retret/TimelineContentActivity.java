@@ -125,7 +125,8 @@ public class TimelineContentActivity extends AppCompatActivity {
                 }else if (isCurrentTimeBetweenTwoHours(4,11)){
                     meditationDuration = retretDays.morningDuration * 60; //minutes to seconds
                     Global.isMorningTimer = true;
-                    Global.startTimer(TimelineContentActivity.this,meditationDuration,warmupDuration,retretDays.morningBGM);
+                    Global.startTimer(TimelineContentActivity.this,meditationDuration,warmupDuration,retretDays.morningBGM,
+                            false,false,false,false,false);
                 }else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(TimelineContentActivity.this);
                     alert.setTitle("Peringatan");
@@ -144,7 +145,8 @@ public class TimelineContentActivity extends AppCompatActivity {
                 }else if (isCurrentTimeBetweenTwoHours(16,23)){
                     meditationDuration = retretDays.nightDuration * 60; //minutes to seconds
                     Global.isMorningTimer = false;
-                    Global.startTimer(TimelineContentActivity.this,meditationDuration,warmupDuration,retretDays.morningBGM);
+                    Global.startTimer(TimelineContentActivity.this,meditationDuration,warmupDuration,retretDays.morningBGM,
+                            false,false,false,false,false);
                 }else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(TimelineContentActivity.this);
                     alert.setTitle("Peringatan");

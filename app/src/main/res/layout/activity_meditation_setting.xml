@@ -15,10 +15,53 @@
         android:textSize="19dp"/>
 
     <TextView
-        android:id="@+id/ambientMusicLabel"
+        android:id="@+id/audioGuideLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Audio Panduan" />
+
+    <LinearLayout
+        android:id="@+id/checkboxLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@+id/audioGuideLabel">
+        <CheckBox
+            android:id="@+id/checkDIS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DIS"/>
+        <CheckBox
+            android:id="@+id/checkPMR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PMR"/>
+        <CheckBox
+            android:id="@+id/checkBodyScanning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Body Scanning"/>
+        <CheckBox
+            android:id="@+id/check315"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="315"/>
+        <CheckBox
+            android:id="@+id/check426"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="426"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ambientMusicLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkboxLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="Musik Latar" />
