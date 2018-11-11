@@ -1,11 +1,10 @@
-package com.bekkostudio.meditasidanretret;
+package com.bekkostudio.meditasidanretret.Chart;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,7 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.bekkostudio.meditasidanretret.Chart.NoteActivity;
+import com.bekkostudio.meditasidanretret.Global;
+import com.bekkostudio.meditasidanretret.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,6 +30,7 @@ import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
 
@@ -152,8 +153,8 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
             yMedicineAxisValue = new ArrayList<>();
 
             //line will hold data value mood, medicine
-            Line line = new Line(yMoodAxisValue).setColor(Color.parseColor("#e60000"));
-            Line line1 = new Line(yMedicineAxisValue).setColor(Color.parseColor("#ffff00"));
+            Line line = new Line(yMoodAxisValue).setColor(Color.parseColor("#27ae60"));
+            Line line1 = new Line(yMedicineAxisValue).setColor(Color.parseColor("#c0392b"));
 
             //moodDate to hold data from Global mood date
             for (int i = 0; i < size; i++) {
@@ -207,12 +208,22 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
             //set data in the Chart
             progressChartMood.setLineChartData(data);
 
+            //set chart data to initialize viewport, otherwise it will be[0,0;0,0]
+            //get initialized viewport and change if ranges according to your needs.
+            final Viewport v = new Viewport(progressChartMood.getMaximumViewport());
+            v.top =10; //example max value
+            v.bottom = 0;  //example min value
+            progressChartMood.setMaximumViewport(v);
+            progressChartMood.setCurrentViewport(v);
+            //Optional step: disable viewport recalculations, thanks to this animations will not change viewport automatically.
+            progressChartMood.setViewportCalculationEnabled(false);
+
             tvMood.setText("Mood");
             tvMedicine.setText("Medicine");
             tvKet1.setText("1 : Sangat Tidak Tenang");
-            tvKet2.setText("2 : Tidak Tenang");
-            tvKet3.setText("3 : Tenang");
-            tvKet4.setText("4 : Sangat Tenang");
+            tvKet2.setText("4 : Tidak Tenang");
+            tvKet3.setText("7 : Tenang");
+            tvKet4.setText("10 : Sangat Tenang");
 
         } else {
             tvTextMood.setText("Data kurang");
@@ -243,7 +254,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
                     else {
                         totalDurasi = totalDurasi + Global.durations.get(i).duration;
                         dateArray.add(Global.newFormatDate(Global.durations.get(i).date));
-                        durasi.add(totalDurasi);
+                        durasi.add(totalDurasi/60); //convert ke menit
                         totalDurasi = 0;
                     }
                 }
@@ -258,7 +269,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         if (sizeMeditasi > 1) {
             dateMeditasi = new ArrayList();
             yDuration = new ArrayList();
-            Line lineMeditasi = new Line(yDuration).setColor(Color.parseColor("#e60000"));
+            Line lineMeditasi = new Line(yDuration).setColor(Color.parseColor("#27ae60"));
 
             meditasiDate = new ArrayList<>();
             for (int i = 0; i < dateArray.size(); i++) {

@@ -1,4 +1,4 @@
-package com.bekkostudio.meditasidanretret;
+package com.bekkostudio.meditasidanretret.Chart;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bekkostudio.meditasidanretret.Chart.Mood;
+import com.bekkostudio.meditasidanretret.Global;
+import com.bekkostudio.meditasidanretret.MainActivity;
+import com.bekkostudio.meditasidanretret.R;
 
 public class MoodActivity extends AppCompatActivity implements View.OnClickListener{
 

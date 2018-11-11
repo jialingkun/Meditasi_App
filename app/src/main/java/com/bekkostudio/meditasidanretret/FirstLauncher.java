@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import java.io.File;
+import com.bekkostudio.meditasidanretret.Chart.MoodActivity;
 
 public class FirstLauncher extends AppCompatActivity {
     Intent intent;

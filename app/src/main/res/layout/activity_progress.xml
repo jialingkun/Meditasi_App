@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProgressActivity">
+    tools:context=".Chart.ProgressActivity">
     <RelativeLayout
         android:id="@+id/rlative1"
         android:layout_width="match_parent"
@@ -100,7 +100,7 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textSize="12sp"
-                android:textColor="#e60000"
+                android:textColor="#27ae60"
                 />
             <TextView
                 android:id="@+id/tvMedicine"
@@ -110,7 +110,7 @@
                 android:layout_toRightOf="@+id/tvMood"
                 android:textSize="12sp"
                 android:textAlignment="center"
-                android:textColor="#ffff00"/>
+                android:textColor="#c0392b"/>
             <TextView
                 android:id="@+id/ket1"
                 android:layout_width="210dp"

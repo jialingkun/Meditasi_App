@@ -11,12 +11,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.bekkostudio.meditasidanretret.Article.ArticleFragment;
-import com.bekkostudio.meditasidanretret.Article.TutorialActivity;
+import com.bekkostudio.meditasidanretret.Chart.ProgressActivity;
 import com.bekkostudio.meditasidanretret.Course.CourseFragment;
-import com.bekkostudio.meditasidanretret.Course.Retret.RetretActivity;
 import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
-
-import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 

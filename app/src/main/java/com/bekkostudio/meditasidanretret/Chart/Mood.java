@@ -8,14 +8,14 @@ public class Mood implements Serializable {
     public int medicineValue;
 
     //Mood value constant
-    public static final int SANGAT_TENANG = 4;
-    public static final int TENANG = 3;
-    public static final int TIDAK_TENANG = 2;
+    public static final int SANGAT_TENANG = 10;
+    public static final int TENANG = 7;
+    public static final int TIDAK_TENANG = 4;
     public static final int SANGAT_TIDAK_TENANG = 1;
 
     //Medicine value constant
-    public static final int MINUM_OBAT = 3;
-    public static final int KURANGI_DOSIS = 2;
+    public static final int MINUM_OBAT = 10;
+    public static final int KURANGI_DOSIS = 5;
     public static final int TIDAK_MINUM_OBAT = 1;
 
     public static final int TIDAK_MENGISI = 0;

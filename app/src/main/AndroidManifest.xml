@@ -75,7 +75,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Timer.NianFo.NianFoResultActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".MoodActivity"
+        <activity android:name=".Chart.MoodActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".FirstLauncher"
             android:screenOrientation="portrait">
@@ -85,7 +85,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProgressActivity"
+        <activity android:name=".Chart.ProgressActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".Chart.NoteActivity"
             android:screenOrientation="portrait"></activity>
