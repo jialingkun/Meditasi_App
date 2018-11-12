@@ -222,7 +222,6 @@ public class Global {
     //universal pattern for date
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE,dd-MM-yyyy");
     public static SimpleDateFormat simpleDateFormatNew = new SimpleDateFormat("dd/MM");
-    public static  SimpleDateFormat simpleDateFormatFilter = new SimpleDateFormat("dd-MM-yyyy");
 
 
     public static void getActiveRetret(Context context){
@@ -445,16 +444,6 @@ public class Global {
         try {
             Date newDate = simpleDateFormat.parse(date);
             return simpleDateFormatNew.format(newDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "Error: "+e;
-        }
-    }
-
-    public static String newFormatDateFilter(String date){
-        try {
-            Date newDate = simpleDateFormatFilter.parse(date);
-            return simpleDateFormat.format(newDate);
         } catch (ParseException e) {
             e.printStackTrace();
             return "Error: "+e;

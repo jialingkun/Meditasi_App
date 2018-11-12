@@ -85,63 +85,82 @@
             android:layout_height="wrap_content"
             android:text="Keterangan"
             android:layout_marginTop="30dp"
-            android:textAlignment="center"
+            android:layout_marginBottom="5dp"
             android:layout_below="@id/progress_chartMood"/>
 
-        <RelativeLayout
-            android:id="@+id/rlative2"
+        <LinearLayout
+            android:id="@+id/linearketerangan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/keterangan">
-            <TextView
-                android:id="@+id/tvMood"
-                android:layout_width="210dp"
+            android:layout_below="@id/keterangan"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textColor="#27ae60"
-                />
-            <TextView
-                android:id="@+id/tvMedicine"
-                android:layout_width="210dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvMood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mood"
+                    android:textSize="12sp"
+                    android:textColor="#27ae60"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1 : Sangat Tidak Tenang"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4 : Tidak Tenang"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="7 : Tenang"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10 : Sangat Tenang"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:layout_toRightOf="@+id/tvMood"
-                android:textSize="12sp"
-                android:textAlignment="center"
-                android:textColor="#c0392b"/>
-            <TextView
-                android:id="@+id/ket1"
-                android:layout_width="210dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:layout_below="@id/tvMedicine"/>
-            <TextView
-                android:id="@+id/ket2"
-                android:layout_width="210dp"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ket1"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:layout_below="@id/tvMedicine"/>
-            <TextView
-                android:id="@+id/ket3"
-                android:layout_width="210dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:layout_below="@id/ket1"/>
-            <TextView
-                android:id="@+id/ket4"
-                android:layout_width="210dp"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ket3"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:layout_below="@id/ket2"/>
-        </RelativeLayout>
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tvMedicine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Medicine"
+                    android:textSize="12sp"
+                    android:textColor="#c0392b"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1 : Tidak Minum Obat"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5 : Kurangi Dosis"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10 : Minum Obat"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvTitleMeditasi"
@@ -151,7 +170,7 @@
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_below="@id/rlative2"
+            android:layout_below="@id/linearketerangan"
             android:text="Title" />
         <TextView
             android:id="@+id/tvTextMeditasi"

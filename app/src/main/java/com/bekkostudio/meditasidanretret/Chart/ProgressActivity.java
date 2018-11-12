@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,7 +36,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 
 public class ProgressActivity extends AppCompatActivity implements View.OnClickListener{
-    TextView tvTitleMood, tvMood, tvMedicine, tvTextMood, tvKet1, tvKet2, tvKet3, tvKet4, tvTextMeditasi, tvTitleMeditasi;
+    TextView tvTitleMood, tvMood, tvMedicine, tvTextMood, tvTextMeditasi, tvTitleMeditasi;
     EditText edtTglAwal, edtTglAkhir;
     Button btnFilter;
     DatePickerDialog datePickerDialog;
@@ -46,16 +47,10 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     List yMoodAxisValue, dateAxisValue, yMedicineAxisValue;
     ArrayList<String> moodDate = new ArrayList<>();
     ArrayList<String> meditasiDate = new ArrayList<>();
-    ArrayList<Date> newMoodDate = new ArrayList<>();
-    ArrayList<Date> newMediasi = new ArrayList<>();
-    ArrayList<Long> millMoodDate = new ArrayList<>();
     ArrayList<Integer> moodValue = new ArrayList<>();
     ArrayList<Integer> medicineValue = new ArrayList<>();
     ArrayList<Integer> durationValue = new ArrayList<>();
     List dateMeditasi, yDuration;
-
-    int lastPosition = 0;
-    //boolean clicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +63,6 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         tvTextMood = (TextView) findViewById(R.id.tvTextMood);
         tvMood = (TextView) findViewById(R.id.tvMood);
         tvMedicine = (TextView) findViewById(R.id.tvMedicine);
-        tvKet1 = (TextView) findViewById(R.id.ket1);
-        tvKet2 = (TextView) findViewById(R.id.ket2);
-        tvKet3 = (TextView) findViewById(R.id.ket3);
-        tvKet4 = (TextView) findViewById(R.id.ket4);
         tvTextMeditasi = (TextView) findViewById(R.id.tvTextMeditasi);
         tvTitleMeditasi = (TextView) findViewById(R.id.tvTitleMeditasi);
 
@@ -97,12 +88,9 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(parent.getItemAtPosition(position).toString().equals("Progress")) {
-                    //lastPosition = position;
-                    LineChartMood();
-                    LineChartMeditasi();
+
 
                 } else if(parent.getItemAtPosition(position).toString().equals("Catatan")) {
-                    spProgress.setSelection(lastPosition);
                     Intent intent = new Intent(ProgressActivity.this, NoteActivity.class);
                     startActivity(intent);
                 }
@@ -113,6 +101,9 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
+        //show chart
+        LineChartMood();
+        LineChartMeditasi();
     }
 
     private void showDateDialogAwal() {
@@ -160,14 +151,6 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
             for (int i = 0; i < size; i++) {
                 moodDate.add(Global.newFormatDate(Global.moods.get(i).date));
                 dateAxisValue.add(i, new AxisValue(i).setLabel(moodDate.get(i)));
-                try {
-                    newMoodDate.add(Global.simpleDateFormatNew.parse(moodDate.get(i)));
-                    millMoodDate.add(newMoodDate.get(i).getTime());
-                    System.out.print(newMoodDate.get(i));
-                    System.out.print(millMoodDate.get(i));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
             }
 
             //hold data value from moodValue in Global
@@ -220,10 +203,6 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
 
             tvMood.setText("Mood");
             tvMedicine.setText("Medicine");
-            tvKet1.setText("1 : Sangat Tidak Tenang");
-            tvKet2.setText("4 : Tidak Tenang");
-            tvKet3.setText("7 : Tenang");
-            tvKet4.setText("10 : Sangat Tenang");
 
         } else {
             tvTextMood.setText("Data kurang");
@@ -237,7 +216,6 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
 
     private void LineChartMeditasi () {
         //MEDITASI
-        //lastPosition = position;
         tvTitleMeditasi.setText("Progress Meditasi");
         int sizeMeditasi = Global.durations.size();
         ArrayList<String> dateArray = new ArrayList();
@@ -311,31 +289,19 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        long milliAwal = 0;
-        long milliAkhir = 0;
         switch (id) {
             case R.id.btnFilter :
-                String parseEdtTglAwal = Global.newFormatDateFilter(edtTglAwal.getText().toString());
-                String parseEdtTglAkhir = Global.newFormatDateFilter(edtTglAkhir.getText().toString());
-                String newTglAwal = Global.newFormatDate(parseEdtTglAwal);
-                String newTglAkhir = Global.newFormatDate(parseEdtTglAkhir);
-
                 try {
-                    Date ptAwal = Global.simpleDateFormatNew.parse(newTglAwal);
-                    Date ptAkhir = Global.simpleDateFormatNew.parse(newTglAkhir);
+                    Date ptAwal = dateFormatFilter.parse(edtTglAwal.getText().toString());
+                    Date ptAkhir = dateFormatFilter.parse(edtTglAkhir.getText().toString());
                     int dayDiff = (int) Global.getDateDiff(ptAwal, ptAkhir, TimeUnit.DAYS);
-                    System.out.print(dayDiff);
-                    milliAwal  = ptAwal.getTime();
-                    milliAkhir = ptAkhir.getTime();
+                    Log.d("FILTER", "daydiff: "+dayDiff);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
                 for (int i = 0; i < moodDate.size(); i++) {
-                    if (millMoodDate.get(i) >= milliAwal && millMoodDate.get(i) <= milliAkhir) {
-                        System.out.print(moodDate.get(i));
-                        //Terakhir Coding yang codinganku udah tak hapus ko.
-                    }
+                    //Terakhir Coding yang codinganku udah tak hapus ko.
                 }
                 break;
             case R.id.edtTglAwal :
