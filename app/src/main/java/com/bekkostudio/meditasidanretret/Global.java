@@ -455,6 +455,15 @@ public class Global {
         }
     }
 
+    public static Date parseDate(String date){
+        try {
+            return simpleDateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return new Date();
+        }
+    }
+
 
     public static int dpToPx(Context context, int dp) {
         float density = context.getResources()

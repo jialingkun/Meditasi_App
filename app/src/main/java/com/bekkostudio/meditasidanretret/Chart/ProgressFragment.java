@@ -48,10 +48,10 @@ public class ProgressFragment extends Fragment {
     ArrayAdapter adapterProgress;
     LineChartView progressChartMood, progressChartMeditasi;
     List yMoodAxisValue, dateAxisValue, yMedicineAxisValue;
-    ArrayList<String> moodDate = new ArrayList<>();
+    ArrayList<String> moodDate;
     ArrayList<String> meditasiDate = new ArrayList<>();
-    ArrayList<Integer> moodValue = new ArrayList<>();
-    ArrayList<Integer> medicineValue = new ArrayList<>();
+    ArrayList<Integer> moodValue;
+    ArrayList<Integer> medicineValue;
     ArrayList<Integer> durationValue = new ArrayList<>();
     List dateMeditasi, yDuration;
 
@@ -178,37 +178,54 @@ public class ProgressFragment extends Fragment {
     }
 
     private void LineChartMood() {
-        tvTitleMood.setText("Progress Mood");
-        int size = Global.moods.size();
+
+        //Hold data mood, date, medicine
+        yMoodAxisValue = new ArrayList();
+        dateAxisValue = new ArrayList();
+        yMedicineAxisValue = new ArrayList<>();
+
+        moodDate = new ArrayList<>();
+        moodValue = new ArrayList<>();
+        medicineValue = new ArrayList<>();
+
+        //line will hold data value mood, medicine
+        Line line = new Line(yMoodAxisValue).setColor(Color.parseColor("#27ae60"));
+        Line line1 = new Line(yMedicineAxisValue).setColor(Color.parseColor("#c0392b"));
+
+        try {
+            Date ptAwal = dateFormatFilter.parse(edtTglAwal.getText().toString());
+            Date ptAkhir = dateFormatFilter.parse(edtTglAkhir.getText().toString());
+            boolean keTglAkhir = false;
+            int dayDiff;
+            for (int i = 0; i < Global.moods.size(); i++){
+                if (!keTglAkhir){
+                    dayDiff = (int) Global.getDateDiff(ptAwal, Global.parseDate(Global.moods.get(i).date), TimeUnit.DAYS);
+                    if (dayDiff>=0){
+                        addMoodData(i);
+                        //to data by date akhir
+                        keTglAkhir = true;
+                    }
+                }else{
+                    dayDiff = (int) Global.getDateDiff(Global.parseDate(Global.moods.get(i).date), ptAkhir, TimeUnit.DAYS);
+                    if (dayDiff>=0){
+                        addMoodData(i);
+                        //to data by date akhir
+                        keTglAkhir = true;
+                    }else{
+                        break;
+                    }
+                }
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        int size = moodDate.size();
         if (size > 1) {
-            //Hold data mood, date, medicine
-            yMoodAxisValue = new ArrayList();
-            dateAxisValue = new ArrayList();
-            yMedicineAxisValue = new ArrayList<>();
-
-            //line will hold data value mood, medicine
-            Line line = new Line(yMoodAxisValue).setColor(Color.parseColor("#27ae60"));
-            Line line1 = new Line(yMedicineAxisValue).setColor(Color.parseColor("#c0392b"));
-
-            //moodDate to hold data from Global mood date
-            for (int i = 0; i < size; i++) {
-                moodDate.add(Global.newFormatDate(Global.moods.get(i).date));
-                dateAxisValue.add(i, new AxisValue(i).setLabel(moodDate.get(i)));
-            }
-
-            //hold data value from moodValue in Global
-            for (int i = 0; i < size; i++) {
-                moodValue.add(Global.moods.get(i).moodValue);
-                yMoodAxisValue.add(new PointValue(i, moodValue.get(i)));
-            }
-
-            //hold data value from medicineValue in Global
-            medicineValue = new ArrayList<>();
-            for (int i = 0; i < size; i++) {
-                medicineValue.add(Global.moods.get(i).medicineValue);
-                yMedicineAxisValue.add(new PointValue(i, medicineValue.get(i)));
-            }
-
             //hold the line of the graph chart
             List lines = new ArrayList();
             lines.add(line);
@@ -244,22 +261,28 @@ public class ProgressFragment extends Fragment {
             //Optional step: disable viewport recalculations, thanks to this animations will not change viewport automatically.
             progressChartMood.setViewportCalculationEnabled(false);
 
-            tvMood.setText("Mood");
-            tvMedicine.setText("Medicine");
-
         } else {
             tvTextMood.setText("Data kurang");
             progressChartMood.setLineChartData(null);
-            tvMood.setText(null);
-            tvMedicine.setText(null);
         }
+    }
 
 
+    private void addMoodData(int i){
+        //add date
+        moodDate.add(Global.newFormatDate(Global.moods.get(i).date));
+        int dataIndex = moodDate.size()-1;
+        dateAxisValue.add(new AxisValue(dataIndex).setLabel(moodDate.get(dataIndex)));
+        //add value
+        moodValue.add(Global.moods.get(i).moodValue);
+        yMoodAxisValue.add(new PointValue(dataIndex, Global.moods.get(i).moodValue));
+        //add medicine value
+        medicineValue.add(Global.moods.get(i).medicineValue);
+        yMedicineAxisValue.add(new PointValue(dataIndex, Global.moods.get(i).medicineValue));
     }
 
     private void LineChartMeditasi () {
         //MEDITASI
-        tvTitleMeditasi.setText("Progress Meditasi");
         int sizeMeditasi = Global.durations.size();
         ArrayList<String> dateArray = new ArrayList();
         ArrayList<Integer> durasi = new ArrayList<>();
