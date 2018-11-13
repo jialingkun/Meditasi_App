@@ -278,12 +278,17 @@ public class Global {
     public static String calculateRetretDaysDate(int currentIndex){
         int numberofDays = courseRetret.get(activeRetretId).retretDays.length;
         try {
-            Date date = new Date(simpleDateFormat.parse(activeRetretEndDate).getTime() - TimeUnit.DAYS.toMillis( numberofDays-currentIndex-1 ));
+            Date date = substractDateByDays(simpleDateFormat.parse(activeRetretEndDate),numberofDays-currentIndex-1);
             return simpleDateFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
             return "Error: "+e;
         }
+    }
+
+    public static Date substractDateByDays(Date currentDate,int days){
+        Date date = new Date(currentDate.getTime() - TimeUnit.DAYS.toMillis( days ));
+        return date;
     }
 
     public static int checkEndDateDifference(){

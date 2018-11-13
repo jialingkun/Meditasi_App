@@ -1,12 +1,15 @@
 package com.bekkostudio.meditasidanretret.Chart;
 
 import android.app.DatePickerDialog;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,7 +38,7 @@ import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
 
-public class ProgressActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProgressFragment extends Fragment {
     TextView tvTitleMood, tvMood, tvMedicine, tvTextMood, tvTextMeditasi, tvTitleMeditasi;
     EditText edtTglAwal, edtTglAkhir;
     Button btnFilter;
@@ -52,33 +55,48 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<Integer> durationValue = new ArrayList<>();
     List dateMeditasi, yDuration;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_progress);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_progress_fragment, container, false);
 
         dateFormatFilter = new SimpleDateFormat("dd-MM-yyyy");
- 
-        tvTitleMood = (TextView) findViewById(R.id.tvTitleMood);
-        tvTextMood = (TextView) findViewById(R.id.tvTextMood);
-        tvMood = (TextView) findViewById(R.id.tvMood);
-        tvMedicine = (TextView) findViewById(R.id.tvMedicine);
-        tvTextMeditasi = (TextView) findViewById(R.id.tvTextMeditasi);
-        tvTitleMeditasi = (TextView) findViewById(R.id.tvTitleMeditasi);
 
-        edtTglAwal = (EditText) findViewById(R.id.edtTglAwal);
-        edtTglAkhir = (EditText) findViewById(R.id.edtTglAkhir);
-        edtTglAwal.setOnClickListener(this);
-        edtTglAkhir.setOnClickListener(this);
+        tvTitleMood = (TextView) view.findViewById(R.id.tvTitleMood);
+        tvTextMood = (TextView) view.findViewById(R.id.tvTextMood);
+        tvMood = (TextView) view.findViewById(R.id.tvMood);
+        tvMedicine = (TextView) view.findViewById(R.id.tvMedicine);
+        tvTextMeditasi = (TextView) view.findViewById(R.id.tvTextMeditasi);
+        tvTitleMeditasi = (TextView) view.findViewById(R.id.tvTitleMeditasi);
 
-        btnFilter = (Button) findViewById(R.id.btnFilter) ;
-        btnFilter.setOnClickListener(this);
+        edtTglAwal = (EditText) view.findViewById(R.id.edtTglAwal);
+        edtTglAkhir = (EditText) view.findViewById(R.id.edtTglAkhir);
+        edtTglAwal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialogAwal();
+            }
+        });
+        edtTglAkhir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialogAkhir();
+            }
+        });
 
-        spProgress = (Spinner) findViewById(R.id.spProgress);
-        progressChartMood = (LineChartView) findViewById(R.id.progress_chartMood);
-        progressChartMeditasi = (LineChartView) findViewById(R.id.progress_chartMeditasi);
+        btnFilter = (Button) view.findViewById(R.id.btnFilter) ;
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        adapterProgress = ArrayAdapter.createFromResource(this, R.array.metode_progressChart, android.R.layout.simple_spinner_item);
+            }
+        });
+
+        spProgress = (Spinner) view.findViewById(R.id.spProgress);
+        progressChartMood = (LineChartView) view.findViewById(R.id.progress_chartMood);
+        progressChartMeditasi = (LineChartView) view.findViewById(R.id.progress_chartMeditasi);
+
+        adapterProgress = ArrayAdapter.createFromResource(getActivity(), R.array.metode_progressChart, android.R.layout.simple_spinner_item);
         adapterProgress.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spProgress.setAdapter(adapterProgress);
@@ -91,7 +109,7 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
 
 
                 } else if(parent.getItemAtPosition(position).toString().equals("Catatan")) {
-                    Intent intent = new Intent(ProgressActivity.this, NoteActivity.class);
+                    Intent intent = new Intent(getActivity(), NoteActivity.class);
                     startActivity(intent);
                 }
             }
@@ -101,14 +119,32 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
+
+        //set default date
+        Date todayDate = new Date();
+        edtTglAkhir.setText(dateFormatFilter.format(todayDate));
+        edtTglAwal.setText(dateFormatFilter.format(Global.substractDateByDays(todayDate,10)));
+
+
         //show chart
         LineChartMood();
         LineChartMeditasi();
+
+
+
+        return view;
     }
 
     private void showDateDialogAwal() {
         Calendar calendar = Calendar.getInstance();
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+        try {
+            calendar.setTime(dateFormatFilter.parse(edtTglAwal.getText().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
@@ -122,7 +158,14 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
 
     private void showDateDialogAkhir() {
         Calendar calendar = Calendar.getInstance();
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+        try {
+            calendar.setTime(dateFormatFilter.parse(edtTglAkhir.getText().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
@@ -286,31 +329,14 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id) {
-            case R.id.btnFilter :
-                try {
-                    Date ptAwal = dateFormatFilter.parse(edtTglAwal.getText().toString());
-                    Date ptAkhir = dateFormatFilter.parse(edtTglAkhir.getText().toString());
-                    int dayDiff = (int) Global.getDateDiff(ptAwal, ptAkhir, TimeUnit.DAYS);
-                    Log.d("FILTER", "daydiff: "+dayDiff);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                for (int i = 0; i < moodDate.size(); i++) {
-                    //Terakhir Coding yang codinganku udah tak hapus ko.
-                }
-                break;
-            case R.id.edtTglAwal :
-                showDateDialogAwal();
-                break;
-            case R.id.edtTglAkhir :
-                showDateDialogAkhir();
-                break;
+    public void filterDate(){
+        try {
+            Date ptAwal = dateFormatFilter.parse(edtTglAwal.getText().toString());
+            Date ptAkhir = dateFormatFilter.parse(edtTglAkhir.getText().toString());
+            int dayDiff = (int) Global.getDateDiff(ptAwal, ptAkhir, TimeUnit.DAYS);
+            Log.d("FILTER", "daydiff: "+dayDiff);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-
     }
 }

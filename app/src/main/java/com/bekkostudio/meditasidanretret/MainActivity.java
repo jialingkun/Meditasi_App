@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.bekkostudio.meditasidanretret.Article.ArticleFragment;
-import com.bekkostudio.meditasidanretret.Chart.ProgressActivity;
+import com.bekkostudio.meditasidanretret.Chart.ProgressFragment;
 import com.bekkostudio.meditasidanretret.Course.CourseFragment;
 import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
 
@@ -38,14 +38,10 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new CourseFragment();
                     break;
                 case R.id.navigation_chart:
-                    // pakai fragment chart di sini
-                    //fragment = new AboutFragment();
-                    Intent iProgress = new Intent(MainActivity.this, ProgressActivity.class);
-                    startActivity(iProgress);
+                    fragment = new ProgressFragment();
+//                    Intent iProgress = new Intent(MainActivity.this, ProgressActivity.class);
+//                    startActivity(iProgress);
                     break;
-//                case R.id.navigation_about:
-//                    fragment = new AboutFragment();
-//                    break;
             }
             return loadFragment(fragment);
         }
