@@ -8,34 +8,18 @@
     <RelativeLayout
         android:id="@+id/rlative1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_margin="16dp">
-        <TextView
-            android:id="@+id/tvTitleMood"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Progress Mood" />
-        <Spinner
-            android:id="@+id/spProgress"
-            style="@android:style/Widget.Holo.Light.Spinner"
-            android:layout_width="316dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvTitleMood"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp" />
+
+
         <LinearLayout
             android:id="@+id/lTanggal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@+id/spProgress"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp">
             <EditText
@@ -64,11 +48,22 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvTitleMood"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lTanggal"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Progress Mood" />
+
+        <TextView
             android:id="@+id/tvTextMood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:layout_below="@+id/lTanggal"
+            android:layout_below="@+id/tvTitleMood"
             android:text=""/>
 
         <lecho.lib.hellocharts.view.LineChartView
@@ -188,5 +183,26 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
+
+
+        <TextView
+            android:id="@+id/titleNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progress_chartMeditasi"
+            android:layout_marginTop="30dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Catatan"/>
+
+
+        <ListView
+            android:id="@+id/listNote"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/titleNote"
+            android:layout_marginBottom="50dp">
+        </ListView>
     </RelativeLayout>
 </ScrollView>

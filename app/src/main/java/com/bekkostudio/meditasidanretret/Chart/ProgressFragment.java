@@ -2,20 +2,18 @@ package com.bekkostudio.meditasidanretret.Chart;
 
 import android.app.DatePickerDialog;
 import android.support.v4.app.Fragment;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.bekkostudio.meditasidanretret.Global;
@@ -26,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -44,23 +43,31 @@ public class ProgressFragment extends Fragment {
     Button btnFilter;
     DatePickerDialog datePickerDialog;
     SimpleDateFormat dateFormatFilter;
-    Spinner spProgress;
-    ArrayAdapter adapterProgress;
     LineChartView progressChartMood, progressChartMeditasi;
-    List yMoodAxisValue, dateAxisValue, yMedicineAxisValue;
+
+
+    List<PointValue> yMoodAxisValue, yMedicineAxisValue;
+    List<AxisValue> dateAxisValue;
     ArrayList<String> moodDate;
-    ArrayList<String> meditasiDate = new ArrayList<>();
     ArrayList<Integer> moodValue;
     ArrayList<Integer> medicineValue;
-    ArrayList<Integer> durationValue = new ArrayList<>();
-    List dateMeditasi, yDuration;
+
+    List<PointValue> yDurationAxisValue;
+    List<AxisValue> dateMeditasiAxisValue;
+    ArrayList<String> meditasiDate;
+    ArrayList<Integer> durationValue;
+    Date lastMeditasiDate; ////help adding duration on same date
+
+    //note
+    ListView noteListView;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_progress_fragment, container, false);
 
-        dateFormatFilter = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormatFilter = new SimpleDateFormat("dd MMM yyyy");
 
         tvTitleMood = (TextView) view.findViewById(R.id.tvTitleMood);
         tvTextMood = (TextView) view.findViewById(R.id.tvTextMood);
@@ -91,44 +98,22 @@ public class ProgressFragment extends Fragment {
 
             }
         });
-
-        spProgress = (Spinner) view.findViewById(R.id.spProgress);
         progressChartMood = (LineChartView) view.findViewById(R.id.progress_chartMood);
         progressChartMeditasi = (LineChartView) view.findViewById(R.id.progress_chartMeditasi);
-
-        adapterProgress = ArrayAdapter.createFromResource(getActivity(), R.array.metode_progressChart, android.R.layout.simple_spinner_item);
-        adapterProgress.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spProgress.setAdapter(adapterProgress);
-
-        //set spinner Mood or Meditasi
-        spProgress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(parent.getItemAtPosition(position).toString().equals("Progress")) {
-
-
-                } else if(parent.getItemAtPosition(position).toString().equals("Catatan")) {
-                    Intent intent = new Intent(getActivity(), NoteActivity.class);
-                    startActivity(intent);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         //set default date
         Date todayDate = new Date();
         edtTglAkhir.setText(dateFormatFilter.format(todayDate));
-        edtTglAwal.setText(dateFormatFilter.format(Global.substractDateByDays(todayDate,10)));
+        edtTglAwal.setText(dateFormatFilter.format(Global.substractDateByDays(todayDate,30))); //minus 30 hari
 
 
         //show chart
         LineChartMood();
         LineChartMeditasi();
+
+        //show note
+        noteListView = view.findViewById(R.id.listNote);
+        showNote();
 
 
 
@@ -178,10 +163,9 @@ public class ProgressFragment extends Fragment {
     }
 
     private void LineChartMood() {
-
         //Hold data mood, date, medicine
-        yMoodAxisValue = new ArrayList();
-        dateAxisValue = new ArrayList();
+        yMoodAxisValue = new ArrayList<>();
+        dateAxisValue = new ArrayList<>();
         yMedicineAxisValue = new ArrayList<>();
 
         moodDate = new ArrayList<>();
@@ -221,13 +205,10 @@ public class ProgressFragment extends Fragment {
             e.printStackTrace();
         }
 
-
-
-
         int size = moodDate.size();
         if (size > 1) {
             //hold the line of the graph chart
-            List lines = new ArrayList();
+            List<Line> lines = new ArrayList<>();
             lines.add(line);
             lines.add(line1);
 
@@ -238,7 +219,7 @@ public class ProgressFragment extends Fragment {
             //show value date in line graph chart
             Axis axis = new Axis();
             axis.setValues(dateAxisValue);
-            axis.setTextSize(16);
+            axis.setTextSize(14);
             axis.setTextColor(Color.parseColor("#03A9F4"));
             data.setAxisXBottom(axis);
 
@@ -254,7 +235,7 @@ public class ProgressFragment extends Fragment {
             //set chart data to initialize viewport, otherwise it will be[0,0;0,0]
             //get initialized viewport and change if ranges according to your needs.
             final Viewport v = new Viewport(progressChartMood.getMaximumViewport());
-            v.top =10; //example max value
+            v.top =10.5f; //example max value
             v.bottom = 0;  //example min value
             progressChartMood.setMaximumViewport(v);
             progressChartMood.setCurrentViewport(v);
@@ -282,68 +263,71 @@ public class ProgressFragment extends Fragment {
     }
 
     private void LineChartMeditasi () {
-        //MEDITASI
-        int sizeMeditasi = Global.durations.size();
-        ArrayList<String> dateArray = new ArrayList();
-        ArrayList<Integer> durasi = new ArrayList<>();
-        int totalDurasi = 0;
+        //Hold data
+        yDurationAxisValue = new ArrayList<>();
+        dateMeditasiAxisValue = new ArrayList<>();
 
-        //Calculate total duration & insert data total and date in the dateArray and durasi
-        if (sizeMeditasi > 0) {
-            for (int i = 0; i < sizeMeditasi; i++) {
-                if (i != sizeMeditasi-1) {
-                    if (Global.durations.get(i).date.equals(Global.durations.get(i + 1).date)) {
-                        totalDurasi = totalDurasi + Global.durations.get(i).duration;
+        meditasiDate = new ArrayList<>();
+        durationValue = new ArrayList<>();
+
+        //line will hold data value
+        Line line = new Line(yDurationAxisValue).setColor(Color.parseColor("#27ae60"));
+
+
+        lastMeditasiDate = null; //help adding duration on same date
+        try {
+            Date ptAwal = dateFormatFilter.parse(edtTglAwal.getText().toString());
+            Date ptAkhir = dateFormatFilter.parse(edtTglAkhir.getText().toString());
+            boolean keTglAkhir = false;
+            int dayDiff;
+            for (int i = 0; i < Global.durations.size(); i++){
+                if (!keTglAkhir){
+                    dayDiff = (int) Global.getDateDiff(ptAwal, Global.parseDate(Global.durations.get(i).date), TimeUnit.DAYS);
+                    if (dayDiff>=0){
+                        addDurationData(i);
+                        //to data by date akhir
+                        keTglAkhir = true;
                     }
-                    else {
-                        totalDurasi = totalDurasi + Global.durations.get(i).duration;
-                        dateArray.add(Global.newFormatDate(Global.durations.get(i).date));
-                        durasi.add(totalDurasi/60); //convert ke menit
-                        totalDurasi = 0;
+                }else{
+                    dayDiff = (int) Global.getDateDiff(Global.parseDate(Global.durations.get(i).date), ptAkhir, TimeUnit.DAYS);
+                    if (dayDiff>=0){
+                        addDurationData(i);
+                        //to data by date akhir
+                        keTglAkhir = true;
+                    }else{
+                        break;
                     }
-                }
-                else {
-                    totalDurasi = totalDurasi + Global.durations.get(i).duration;
-                    dateArray.add(Global.newFormatDate(Global.durations.get(i).date));
-                    durasi.add(totalDurasi);
                 }
             }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
-        if (sizeMeditasi > 1) {
-            dateMeditasi = new ArrayList();
-            yDuration = new ArrayList();
-            Line lineMeditasi = new Line(yDuration).setColor(Color.parseColor("#27ae60"));
+        int size = meditasiDate.size();
+        if (size > 1) {
+            //hold the line of the graph chart
+            List<Line> lines = new ArrayList<>();
+            lines.add(line);
 
-            meditasiDate = new ArrayList<>();
-            for (int i = 0; i < dateArray.size(); i++) {
-                meditasiDate.add(dateArray.get(i));
-                dateMeditasi.add(i, new AxisValue(i).setLabel(meditasiDate.get(i)));
-            }
-            durationValue = new ArrayList<>();
-            for (int i = 0; i < durasi.size(); i++) {
-                durationValue.add(durasi.get(i));
-                yDuration.add(new PointValue(i, durationValue.get(i)));
-            }
-
-            List linesMeditasi = new ArrayList();
-            linesMeditasi.add(lineMeditasi);
-
+            //add the graph line to the overall data chart
             LineChartData data = new LineChartData();
-            data.setLines(linesMeditasi);
+            data.setLines(lines);
 
+            //show value date in line graph chart
             Axis axis = new Axis();
-            axis.setValues(dateMeditasi);
-            axis.setTextSize(16);
+            axis.setValues(dateMeditasiAxisValue);
+            axis.setTextSize(14);
             axis.setTextColor(Color.parseColor("#03A9F4"));
             data.setAxisXBottom(axis);
 
             Axis yAxis = new Axis();
-            yAxis.setName("duration(menit)");
+            yAxis.setName("Durasi (Menit)");
             yAxis.setTextColor(Color.parseColor("#03A9F4"));
             yAxis.setTextSize(16);
             data.setAxisYLeft(yAxis);
 
+            //set data in the Chart
             progressChartMeditasi.setLineChartData(data);
 
         } else {
@@ -352,14 +336,87 @@ public class ProgressFragment extends Fragment {
         }
     }
 
-    public void filterDate(){
-        try {
-            Date ptAwal = dateFormatFilter.parse(edtTglAwal.getText().toString());
-            Date ptAkhir = dateFormatFilter.parse(edtTglAkhir.getText().toString());
-            int dayDiff = (int) Global.getDateDiff(ptAwal, ptAkhir, TimeUnit.DAYS);
-            Log.d("FILTER", "daydiff: "+dayDiff);
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+    private void addDurationData(int i){
+        if (lastMeditasiDate!=null){
+            int dayDiff = (int) Global.getDateDiff(lastMeditasiDate, Global.parseDate(Global.durations.get(i).date), TimeUnit.DAYS);
+            if (dayDiff==0){
+                //accumulate duration
+                int dataIndex = meditasiDate.size()-1;
+                yDurationAxisValue.get(dataIndex).set(dataIndex,yDurationAxisValue.get(dataIndex).getY()+Global.durations.get(i).duration/60f); //convert to minutes
+
+            }else{
+                addNewDurationData(i);
+            }
+        }else{
+            addNewDurationData(i);
         }
+
+        lastMeditasiDate = Global.parseDate(Global.durations.get(i).date);
+    }
+
+
+    private void addNewDurationData(int i){
+        //add date
+        meditasiDate.add(Global.newFormatDate(Global.durations.get(i).date));
+        int dataIndex = meditasiDate.size()-1;
+        dateMeditasiAxisValue.add(new AxisValue(dataIndex).setLabel(meditasiDate.get(dataIndex)));
+        //add value
+        durationValue.add(Global.durations.get(i).duration);
+        yDurationAxisValue.add(new PointValue(dataIndex, Global.durations.get(i).duration/60f)); //convert to minutes
+
+    }
+
+    private void showNote(){
+        List<HashMap<String, String>> aList = new ArrayList<>();
+
+        for (int i = 0; i < Global.notes.size(); i++) {
+            HashMap<String, String> hm = new HashMap<>();
+
+            //date
+            hm.put("date", dateFormatFilter.format(Global.parseDate(Global.notes.get(i).date)));
+
+            //important
+            if (Global.notes.get(i).important){
+                hm.put("important", "PENTING!");
+            }else{
+                hm.put("important", "");
+            }
+
+            //text
+            hm.put("text", Global.notes.get(i).noteValue);
+
+            aList.add(hm);
+        }
+
+        String[] from = {"date", "important", "text"};
+        int[] to = {R.id.date, R.id.important, R.id.text};
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), aList, R.layout.activity_progress_note_list, from, to);
+        noteListView.setAdapter(simpleAdapter);
+
+        setListViewHeightBasedOnChildren(noteListView);
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)
+            return;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 100; //+100 height extension to avoid cropping. Default 0
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0)
+                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
     }
 }
+

@@ -221,7 +221,7 @@ public class Global {
 
     //universal pattern for date
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE,dd-MM-yyyy");
-    public static SimpleDateFormat simpleDateFormatNew = new SimpleDateFormat("dd/MM");
+    public static SimpleDateFormat simpleDateFormatNew = new SimpleDateFormat("dd MMM");
 
 
     public static void getActiveRetret(Context context){
