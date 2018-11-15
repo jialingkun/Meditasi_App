@@ -60,6 +60,7 @@ public class ProgressFragment extends Fragment {
 
     //note
     ListView noteListView;
+    List<HashMap<String, String>> noteList;
 
 
     @Nullable
@@ -95,7 +96,11 @@ public class ProgressFragment extends Fragment {
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //show chart
+                LineChartMood();
+                LineChartMeditasi();
+                //show note
+                showNote();
             }
         });
         progressChartMood = (LineChartView) view.findViewById(R.id.progress_chartMood);
@@ -106,15 +111,15 @@ public class ProgressFragment extends Fragment {
         edtTglAkhir.setText(dateFormatFilter.format(todayDate));
         edtTglAwal.setText(dateFormatFilter.format(Global.substractDateByDays(todayDate,30))); //minus 30 hari
 
+        //note
+        noteListView = view.findViewById(R.id.listNote);
 
         //show chart
         LineChartMood();
         LineChartMeditasi();
 
         //show note
-        noteListView = view.findViewById(R.id.listNote);
         showNote();
-
 
 
         return view;
@@ -367,37 +372,6 @@ public class ProgressFragment extends Fragment {
 
     }
 
-    private void showNote(){
-        List<HashMap<String, String>> aList = new ArrayList<>();
-
-        for (int i = 0; i < Global.notes.size(); i++) {
-            HashMap<String, String> hm = new HashMap<>();
-
-            //date
-            hm.put("date", dateFormatFilter.format(Global.parseDate(Global.notes.get(i).date)));
-
-            //important
-            if (Global.notes.get(i).important){
-                hm.put("important", "PENTING!");
-            }else{
-                hm.put("important", "");
-            }
-
-            //text
-            hm.put("text", Global.notes.get(i).noteValue);
-
-            aList.add(hm);
-        }
-
-        String[] from = {"date", "important", "text"};
-        int[] to = {R.id.date, R.id.important, R.id.text};
-
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), aList, R.layout.activity_progress_note_list, from, to);
-        noteListView.setAdapter(simpleAdapter);
-
-        setListViewHeightBasedOnChildren(noteListView);
-    }
-
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null)
@@ -417,6 +391,63 @@ public class ProgressFragment extends Fragment {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
+    }
+
+    private void showNote(){
+        noteList = new ArrayList<>();
+        try {
+            Date ptAwal = dateFormatFilter.parse(edtTglAwal.getText().toString());
+            Date ptAkhir = dateFormatFilter.parse(edtTglAkhir.getText().toString());
+            boolean keTglAkhir = false;
+            int dayDiff;
+            for (int i = 0; i < Global.notes.size(); i++){
+                if (!keTglAkhir){
+                    dayDiff = (int) Global.getDateDiff(ptAwal, Global.parseDate(Global.notes.get(i).date), TimeUnit.DAYS);
+                    if (dayDiff>=0){
+                        addNoteData(i);
+                        //to data by date akhir
+                        keTglAkhir = true;
+                    }
+                }else{
+                    dayDiff = (int) Global.getDateDiff(Global.parseDate(Global.notes.get(i).date), ptAkhir, TimeUnit.DAYS);
+                    if (dayDiff>=0){
+                        addNoteData(i);
+                        //to data by date akhir
+                        keTglAkhir = true;
+                    }else{
+                        break;
+                    }
+                }
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String[] from = {"date", "important", "text"};
+        int[] to = {R.id.date, R.id.important, R.id.text};
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), noteList, R.layout.activity_progress_note_list, from, to);
+        noteListView.setAdapter(simpleAdapter);
+
+        setListViewHeightBasedOnChildren(noteListView);
+    }
+
+
+    private void addNoteData(int i){
+        HashMap<String, String> hm = new HashMap<>();
+        //date
+        hm.put("date", dateFormatFilter.format(Global.parseDate(Global.notes.get(i).date)));
+        //important
+        if (Global.notes.get(i).important){
+            hm.put("important", "PENTING!");
+        }else{
+            hm.put("important", "");
+        }
+
+        //text
+        hm.put("text", Global.notes.get(i).noteValue);
+        noteList.add(hm);
     }
 }
 
