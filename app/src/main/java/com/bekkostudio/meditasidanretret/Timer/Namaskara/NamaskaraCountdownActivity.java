@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,7 +21,8 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
     Button pauseButton, finishEarlyButton;
     MediaPlayer bellTegap, bellSujud;
     PowerManager.WakeLock wakeLock;
-    int durasiSujud, durasiTegap, siklus;
+    float durasiSujud, durasiTegap;
+    int siklus;
     long durasiSujudInSecond, durasiTegapInSecond;
     private int counter = 1;
 
@@ -67,13 +69,13 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
         bellSujud = MediaPlayer.create(this,R.raw.bell_2);
 
         // get parameter
-        durasiTegap = getIntent().getIntExtra(NamaskaraHomeActivity.EXTRA_DURASI_TEGAP, 0);
-        durasiSujud = getIntent().getIntExtra(NamaskaraHomeActivity.EXTRA_DURASI_SUJUD, 0);
+        durasiTegap = getIntent().getFloatExtra(NamaskaraHomeActivity.EXTRA_DURASI_TEGAP, 0);
+        durasiSujud = getIntent().getFloatExtra(NamaskaraHomeActivity.EXTRA_DURASI_SUJUD, 0);
         siklus = Integer.valueOf(getIntent().getStringExtra(NamaskaraHomeActivity.EXTRA_SIKLUS));
 
         // get the actual time duration in second
-        durasiTegapInSecond = (durasiTegap + 1) * 1000;
-        durasiSujudInSecond = (durasiSujud + 1) * 1000;
+        durasiTegapInSecond =(long) ((durasiTegap + 1) * 1000);
+        durasiSujudInSecond =(long) ((durasiSujud + 1) * 1000);
 
         // start a bell recursive loop
         bellTegap.start();

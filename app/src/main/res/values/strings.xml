@@ -10,13 +10,13 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="warmup_value">
+        <item>0s</item>
         <item>5s</item>
         <item>10s</item>
         <item>30s</item>
         <item>45s</item>
         <item>1m</item>
         <item>5m</item>
-        <item>10m</item>
     </string-array>
 
     <array name="metode_mood">

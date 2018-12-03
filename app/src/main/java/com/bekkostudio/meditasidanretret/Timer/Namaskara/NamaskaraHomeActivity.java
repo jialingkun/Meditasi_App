@@ -16,7 +16,7 @@ public class NamaskaraHomeActivity extends AppCompatActivity implements View.OnC
     Button startTimer;
     EditText siklusEdit;
     String[] displayedPicker = {
-            "1s", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "10s"
+            "1s", "1.5s", "2s", "2.5s", "3s", "3.5s", "4s", "4.5s", "5s"
     };
 
     public static final String EXTRA_DURASI_SUJUD = "extra_durasi_sujud";
@@ -50,8 +50,10 @@ public class NamaskaraHomeActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(NamaskaraHomeActivity.this, NamaskaraCountdownActivity.class);
-        intent.putExtra(EXTRA_DURASI_TEGAP, durasiTegap.getValue());
-        intent.putExtra(EXTRA_DURASI_SUJUD, durasiSujud.getValue());
+        float valueTegap = Float.parseFloat(displayedPicker[durasiTegap.getValue()].substring(0,displayedPicker[durasiTegap.getValue()].length()-1));
+        float valueSujud = Float.parseFloat(displayedPicker[durasiSujud.getValue()].substring(0,displayedPicker[durasiSujud.getValue()].length()-1));
+        intent.putExtra(EXTRA_DURASI_TEGAP, valueTegap);
+        intent.putExtra(EXTRA_DURASI_SUJUD, valueSujud);
         String jumlahSiklus = siklusEdit.getText().toString();
         if (jumlahSiklus.equals("")){
             jumlahSiklus = "1";
