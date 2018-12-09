@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,6 +25,9 @@ public class MeditationCountdown extends AppCompatActivity {
     MediaPlayer bellSound;
     MediaPlayer finishSound;
     MediaPlayer backgroundSound;
+
+    Intent intent;
+
     //audio guide
     MediaPlayer audioGuideSound;
     MediaPlayer.OnCompletionListener audioGuideCompleteListener;
@@ -39,11 +43,8 @@ public class MeditationCountdown extends AppCompatActivity {
     int warmupDuration;
     int ambientMusic;
     //audio guide
-    boolean dis;
-    boolean pmr;
-    boolean bodyscanning;
-    boolean guide315;
-    boolean guide426;
+    String[] checkboxItem;
+    int[] audioSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,16 +54,26 @@ public class MeditationCountdown extends AppCompatActivity {
         Global.tempIsCompleted = false;
 
         //get parameter
-        Intent intent = getIntent();
+        intent = getIntent();
         meditationDuration = intent.getIntExtra("meditationDuration",60);
         warmupDuration = intent.getIntExtra("warmupDuration",60);
         ambientMusic = intent.getIntExtra("ambientMusic",60);
         //sequential audio
-        dis = intent.getBooleanExtra("DIS",false);
-        pmr = intent.getBooleanExtra("PMR",false);
-        bodyscanning = intent.getBooleanExtra("bodyScanning",false);
-        guide315 = intent.getBooleanExtra("315",false);
-        guide426 = intent.getBooleanExtra("426",false);
+        checkboxItem = getResources().getStringArray(R.array.checkbox_value);
+        audioSource = new int[checkboxItem.length];
+        audioSource[0] = R.raw.guide_dis;
+        audioSource[1] = R.raw.guide_pmr;
+        audioSource[2] = R.raw.guide_pmr;
+        audioSource[3] = R.raw.guide_dis;
+        audioSource[4] = R.raw.guide_bodyscanning;
+        audioSource[5] = R.raw.guide_315;
+        audioSource[6] = R.raw.guide_bodyscanning;
+        audioSource[7] = R.raw.guide_bodyscanning;
+        audioSource[8] = R.raw.guide_dis;
+        audioSource[9] = R.raw.guide_dis;
+        audioSource[10] = R.raw.guide_426;
+        audioSource[11] = R.raw.guide_426;
+        audioSource[12] = R.raw.guide_426;
 
 
         //initialize sound
@@ -86,7 +97,7 @@ public class MeditationCountdown extends AppCompatActivity {
 
 
 
-        //run sequential audio DIS, PMR, Body Scanning, 315, 426, then Timer Countdown
+        //run sequential audio then Timer Countdown
         playlistposition = 0;
         audioGuideSound = MediaPlayer.create(this,R.raw.guide_dis); //Initialize dummy instance so it can be released
         //set listener
@@ -116,44 +127,30 @@ public class MeditationCountdown extends AppCompatActivity {
 
     private void startSequentialAudio(){
         playlistposition++;
+        boolean isGuiding = false;
 
-        if (playlistposition==1 && dis){
-            audioGuideSound.release();
-            audioGuideSound = MediaPlayer.create(this,R.raw.guide_dis);
-            audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
-            audioGuideSound.start();
-            messageWidget.setText("DIS");
-        }else if (playlistposition==2 && pmr){
-            audioGuideSound.release();
-            audioGuideSound = MediaPlayer.create(this,R.raw.guide_pmr);
-            audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
-            audioGuideSound.start();
-            messageWidget.setText("PMR");
-        }else if (playlistposition==3 && bodyscanning){
-            audioGuideSound.release();
-            audioGuideSound = MediaPlayer.create(this,R.raw.guide_bodyscanning);
-            audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
-            audioGuideSound.start();
-            messageWidget.setText("Body Scanning");
-        }else if (playlistposition==4 && guide315){
-            audioGuideSound.release();
-            audioGuideSound = MediaPlayer.create(this,R.raw.guide_315);
-            audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
-            audioGuideSound.start();
-            messageWidget.setText("315");
-        }else if (playlistposition==5 && guide426){
-            audioGuideSound.release();
-            audioGuideSound = MediaPlayer.create(this,R.raw.guide_426);
-            audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
-            audioGuideSound.start();
-            messageWidget.setText("426");
-        }else if (playlistposition==6){
-            startTimer();
-        }else if (playlistposition>7){
-            //just to make sure the loop stop
-        }else{
-            //loop to next audio
-            startSequentialAudio();
+        for (int i = 0;i<checkboxItem.length;i++){
+            Log.d("SEQUENT", "Checkbox Value "+i+":"+intent.getBooleanExtra(checkboxItem[i],false));
+            if (playlistposition==(i+1) && intent.getBooleanExtra(checkboxItem[i],false)){
+                audioGuideSound.release();
+                audioGuideSound = MediaPlayer.create(this,audioSource[i]);
+                audioGuideSound.setOnCompletionListener(audioGuideCompleteListener);
+                audioGuideSound.start();
+                messageWidget.setText(checkboxItem[i]);
+                isGuiding = true;
+                break;
+            }
+        }
+
+        if (!isGuiding){
+            if (playlistposition==(checkboxItem.length+1)){
+                startTimer();
+            }else if (playlistposition>(checkboxItem.length+2)){
+                //just to make sure the loop stop
+            }else{
+                //loop to next audio
+                startSequentialAudio();
+            }
         }
     }
 
@@ -218,6 +215,11 @@ public class MeditationCountdown extends AppCompatActivity {
             audioGuideSound.release();
             audioGuideSound = null;
         }
+        if (finishSound!=null){
+            finishSound.stop();
+            finishSound.release();
+            finishSound = null;
+        }
         super.onDestroy();
     }
 
@@ -249,8 +251,9 @@ public class MeditationCountdown extends AppCompatActivity {
     }
 
     private void endMeditation(){
-        warmupTimer.cancel();
+        if (warmupTimer!=null){warmupTimer.cancel();}
         if (meditationTimer!=null){meditationTimer.cancel();}
+        if (audioGuideSound!=null){audioGuideSound.stop();}
         //Store meditation duration to database
         Global.setDuration(getApplicationContext(),new Duration(Global.getTodayDate(),resultTime/1000));
         //Go to result page

@@ -19,6 +19,10 @@ public class NianFoAutomaticActivity extends AppCompatActivity implements View.O
     //Sound on click BGM image
     MediaPlayer backgroundSound;
 
+    //108 ketukan
+    MediaPlayer knockSound;
+    int intervalKetukan;
+
     int jumlahSiklus;
     int musicId;
     int counterSiklus = 1;
@@ -57,16 +61,25 @@ public class NianFoAutomaticActivity extends AppCompatActivity implements View.O
                     counterSiklus--;
                     endMeditation();
                     return;
-                }
+                }else{
+                    if (backgroundSound.isPlaying()){
+                        backgroundSound.pause();
+                        backgroundSound.seekTo(0);
+                    }
+                    countSiklusLabel.setText(String.valueOf(counterSiklus));
+                    backgroundSound.start();
 
-                if (backgroundSound.isPlaying()){
-                    backgroundSound.pause();
-                    backgroundSound.seekTo(0);
+
+                    if (counterSiklus%intervalKetukan==0){
+                        knockSound.start();
+                    }
                 }
-                countSiklusLabel.setText(String.valueOf(counterSiklus));
-                backgroundSound.start();
             }
         });
+
+
+        knockSound = MediaPlayer.create(this,R.raw.knock);
+        intervalKetukan = 108;
     }
 
     @Override

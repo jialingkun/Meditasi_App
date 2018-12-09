@@ -327,16 +327,15 @@ public class Global {
     }
 
     public static void startTimer(Activity activity, int meditationDuration, int warmupDuration, int ambientMusic,
-                                  boolean DIS, boolean PMR, boolean bodyScanning, boolean check315, boolean check426){
+                                  boolean[] checkStatus){
+        String[] checkboxItem = activity.getResources().getStringArray(R.array.checkbox_value);
         Intent intent = new Intent(activity, MeditationCountdown.class);
         intent.putExtra("meditationDuration", meditationDuration);
         intent.putExtra("warmupDuration", warmupDuration);
         intent.putExtra("ambientMusic", ambientMusic);
-        intent.putExtra("DIS", DIS);
-        intent.putExtra("PMR", PMR);
-        intent.putExtra("bodyScanning", bodyScanning);
-        intent.putExtra("315", check315);
-        intent.putExtra("426", check426);
+        for (int i = 0;i<checkStatus.length;i++){
+            intent.putExtra(checkboxItem[i], checkStatus[i]);
+        }
 
         activity.startActivityForResult(intent,1);
     }

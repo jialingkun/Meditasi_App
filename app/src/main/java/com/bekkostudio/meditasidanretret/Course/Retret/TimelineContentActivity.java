@@ -126,7 +126,7 @@ public class TimelineContentActivity extends AppCompatActivity {
                     meditationDuration = retretDays.morningDuration * 60; //minutes to seconds
                     Global.isMorningTimer = true;
                     Global.startTimer(TimelineContentActivity.this,meditationDuration,warmupDuration,retretDays.morningBGM,
-                            false,false,false,false,false);
+                            new boolean[0]);
                 }else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(TimelineContentActivity.this);
                     alert.setTitle("Peringatan");
@@ -146,7 +146,7 @@ public class TimelineContentActivity extends AppCompatActivity {
                     meditationDuration = retretDays.nightDuration * 60; //minutes to seconds
                     Global.isMorningTimer = false;
                     Global.startTimer(TimelineContentActivity.this,meditationDuration,warmupDuration,retretDays.morningBGM,
-                            false,false,false,false,false);
+                            new boolean[0]);
                 }else{
                     AlertDialog.Builder alert = new AlertDialog.Builder(TimelineContentActivity.this);
                     alert.setTitle("Peringatan");

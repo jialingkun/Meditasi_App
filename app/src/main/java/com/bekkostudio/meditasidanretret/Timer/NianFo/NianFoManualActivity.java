@@ -18,6 +18,11 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
 
     //Sound on click BGM image
     MediaPlayer backgroundSound;
+    MediaPlayer bellSound;
+
+    //108 ketukan
+    MediaPlayer knockSound;
+    int intervalKetukan;
 
     int jumlahSiklus;
     int musicId;
@@ -46,33 +51,38 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
 
         backgroundSound = MediaPlayer.create(this, musicId);
         backgroundSound.start();
+
+        knockSound = MediaPlayer.create(NianFoManualActivity.this,R.raw.knock);
+        intervalKetukan = 108;
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.nianFoNextButton) {
             counterSiklus++;
-
-            if (backgroundSound.isPlaying()){
-                backgroundSound.pause();
-                backgroundSound.seekTo(0);
+            if (counterSiklus<=jumlahSiklus){
+                if (backgroundSound.isPlaying()){
+                    backgroundSound.pause();
+                    backgroundSound.seekTo(0);
+                }
+                countSiklusLabel.setText(String.valueOf(counterSiklus));
+                backgroundSound.start();
             }
-            countSiklusLabel.setText(String.valueOf(counterSiklus));
-            backgroundSound.start();
 
             if (counterSiklus == jumlahSiklus) {
                 // check if this is a last meditation, then play a bell sound
                 backgroundSound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
-                        MediaPlayer bellSound = MediaPlayer.create(NianFoManualActivity.this,R.raw.bell_2);
+                        bellSound = MediaPlayer.create(NianFoManualActivity.this,R.raw.bell_2);
                         bellSound.start();
                         endMeditation();
                     }
                 });
+            }else if (counterSiklus%intervalKetukan==0){
+                knockSound.start();
             }
-        }
-        else if(v.getId() == R.id.finishEarlyButton) {
+        } else if(v.getId() == R.id.finishEarlyButton) {
             if (backgroundSound.isPlaying()){
                 backgroundSound.stop();
             }
@@ -106,6 +116,16 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
             backgroundSound.stop();
             backgroundSound.release();
             backgroundSound = null;
+        }
+        if (bellSound!=null){
+            bellSound.stop();
+            bellSound.release();
+            bellSound = null;
+        }
+        if (knockSound!=null){
+            knockSound.stop();
+            knockSound.release();
+            knockSound = null;
         }
 
         // save to database

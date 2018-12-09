@@ -3,6 +3,7 @@ package com.bekkostudio.meditasidanretret.Timer.Meditasi;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +16,9 @@ import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 import com.wefika.horizontalpicker.HorizontalPicker;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MeditationSetting extends AppCompatActivity implements HorizontalPicker.OnItemSelected {
 
     //reference widget in xml
@@ -23,11 +27,8 @@ public class MeditationSetting extends AppCompatActivity implements HorizontalPi
     NumberPicker secondsDurationWidget;
 
     //audio guide
-    CheckBox checkDISWidget;
-    CheckBox checkPMRWidget;
-    CheckBox checkBodyScanningWidget;
-    CheckBox check315Widget;
-    CheckBox check426Widget;
+    String [] checkboxItem;
+    boolean[] audioCheckStatus;
 
     //warmup horizontal picker
     HorizontalPicker warmupDurationPickerWidget;
@@ -65,15 +66,12 @@ public class MeditationSetting extends AppCompatActivity implements HorizontalPi
         secondsDurationWidget.setMaxValue(59);
 
         //audio guide
-        checkDISWidget = findViewById(R.id.checkDIS);
-        checkPMRWidget = findViewById(R.id.checkPMR);
-        checkBodyScanningWidget = findViewById(R.id.checkBodyScanning);
-        check315Widget = findViewById(R.id.check315);
-        check426Widget = findViewById(R.id.check426);
+        checkboxItem = getResources().getStringArray(R.array.checkbox_value);
+        audioCheckStatus = new boolean[checkboxItem.length];
 
         //Horizontal picker library
         warmupDurationPickerWidget = findViewById(R.id.warmupduration);
-        warmupDuration = 5; //default 5 seconds
+        warmupDuration = 0; //default 0 seconds
         warmupItem = getResources().getStringArray(R.array.warmup_value);
         warmupDurationPickerWidget.setOnItemSelectedListener(this);
 
@@ -145,9 +143,26 @@ public class MeditationSetting extends AppCompatActivity implements HorizontalPi
 //                Log.d("Ambient index", "onClick: "+ambientMusicScrollWidget.getActiveItem());
 
                 ambientMusic = Global.ambientMusicItem[ambientMusicScrollWidget.getActiveItem()];
+
+                //get checkbox status
+                audioCheckStatus[0] = ((CheckBox) findViewById(R.id.checkDIS)).isChecked();
+                audioCheckStatus[1] = ((CheckBox) findViewById(R.id.checkStandingBAB)).isChecked();
+                audioCheckStatus[2] = ((CheckBox) findViewById(R.id.checkPMR)).isChecked();
+                audioCheckStatus[3] = ((CheckBox) findViewById(R.id.checkPME)).isChecked();
+                audioCheckStatus[4] = ((CheckBox) findViewById(R.id.checkAdjustingPosture)).isChecked();
+                audioCheckStatus[5] = ((CheckBox) findViewById(R.id.check315and426)).isChecked();
+                audioCheckStatus[6] = ((CheckBox) findViewById(R.id.checkSittingBAB)).isChecked();
+                audioCheckStatus[7] = ((CheckBox) findViewById(R.id.checkBodyScanning)).isChecked();
+                audioCheckStatus[8] = ((CheckBox) findViewById(R.id.checkJustSitting)).isChecked();
+                audioCheckStatus[9] = ((CheckBox) findViewById(R.id.checkAbdominalBreathing)).isChecked();
+                audioCheckStatus[10] = ((CheckBox) findViewById(R.id.checkExperiencingTheBreath)).isChecked();
+                audioCheckStatus[11] = ((CheckBox) findViewById(R.id.checkCountingTheBreath)).isChecked();
+                audioCheckStatus[12] = ((CheckBox) findViewById(R.id.checkFollowingTheBreath)).isChecked();
+
+
+
                 //start timer
-                Global.startTimer(MeditationSetting.this,meditationDuration,warmupDuration,ambientMusic,
-                        checkDISWidget.isChecked(),checkPMRWidget.isChecked(),checkBodyScanningWidget.isChecked(),check315Widget.isChecked(),check426Widget.isChecked());
+                Global.startTimer(MeditationSetting.this,meditationDuration,warmupDuration,ambientMusic,audioCheckStatus);
             }
         });
 
