@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //get active retret database
-        Global.getActiveRetret(getApplicationContext());
+//        Global.getActiveRetret(getApplicationContext());
 
         //get active retret detail database
-        Global.getActiveRetretDetail(getApplicationContext());
+//        Global.getActiveRetretDetail(getApplicationContext());
 
         //debug only, refresh database
         //Global.initializeRetretDetail();

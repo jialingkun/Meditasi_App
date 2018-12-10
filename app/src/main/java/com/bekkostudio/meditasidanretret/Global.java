@@ -9,9 +9,9 @@ import android.webkit.WebView;
 import com.bekkostudio.meditasidanretret.Chart.Duration;
 import com.bekkostudio.meditasidanretret.Chart.Mood;
 import com.bekkostudio.meditasidanretret.Chart.Note;
-import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
-import com.bekkostudio.meditasidanretret.Course.Retret.RetretDays;
-import com.bekkostudio.meditasidanretret.Course.Retret.RetretDetail;
+//import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
+//import com.bekkostudio.meditasidanretret.Course.Retret.RetretDays;
+//import com.bekkostudio.meditasidanretret.Course.Retret.RetretDetail;
 import com.bekkostudio.meditasidanretret.Timer.Meditasi.MeditationCountdown;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -106,113 +106,113 @@ public class Global {
 
 
     //retret
-    public static Map<String,RetretDetail> courseRetret = new HashMap<>();
+//    public static Map<String,RetretDetail> courseRetret = new HashMap<>();
 //    static {
 //        initializeRetretDetail();
 //    }
-    public static  void initializeRetretDetail(){
-        String tempId = BillingParameter.courseSKUList.get(0);
-        RetretDetail tempRetretDetail = new RetretDetail();
-        tempRetretDetail.title = "Belajar Meditasi untuk Pemula";
-        tempRetretDetail.thumbnailImage = R.drawable.course_thumbnail_dummy;
-        tempRetretDetail.description = "Panduan :\nAkan ada 5 hari retret yang akan dimulai sesuai tanggal yang tertera di bawah. Pastikan akan kembali ke halaman ini di pagi hari dan menekan menu sesi yang aktif sesuai tanggal. Akan ada 2 sesi di pagi hari dan malam hari. Anda bisa menonton video panduan dan memulai sesi meditasi sesuai timer yang disediakan.";
-        tempRetretDetail.retretDays = new RetretDays[5];
-        //day 1
-        tempRetretDetail.retretDays[0] = new RetretDays();
-        tempRetretDetail.retretDays[0].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[0].videoThumbnail = R.drawable.thumbnail_dummy;
-        tempRetretDetail.retretDays[0].morningDuration = 60;
-        tempRetretDetail.retretDays[0].morningBGM = R.raw.butterfly_space;
-        tempRetretDetail.retretDays[0].nightDuration = 120;
-        tempRetretDetail.retretDays[0].nightBGM = R.raw.butterfly_space;
-        tempRetretDetail.retretDays[0].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
-        //day 2
-        tempRetretDetail.retretDays[1] = new RetretDays();
-        tempRetretDetail.retretDays[1].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[1].videoThumbnail = R.drawable.thumbnail_dummy;
-        tempRetretDetail.retretDays[1].morningDuration = 100;
-        tempRetretDetail.retretDays[1].morningBGM = R.raw.butterfly_space;
-        tempRetretDetail.retretDays[1].nightDuration = 5;
-        tempRetretDetail.retretDays[1].nightBGM = R.raw.butterfly_space;
-        tempRetretDetail.retretDays[1].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
-
-        //day 3
-        tempRetretDetail.retretDays[2] = new RetretDays();
-        tempRetretDetail.retretDays[2].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[2].videoThumbnail = R.drawable.thumbnail_dummy;
-        tempRetretDetail.retretDays[2].morningDuration = 3;
-        tempRetretDetail.retretDays[2].morningBGM = R.raw.butterfly_space;
-        tempRetretDetail.retretDays[2].nightDuration = 10;
-        tempRetretDetail.retretDays[2].nightBGM = R.raw.butterfly_space;
-        tempRetretDetail.retretDays[2].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
-
-        //day 4
-        tempRetretDetail.retretDays[3] = new RetretDays();
-        tempRetretDetail.retretDays[3].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[3].videoThumbnail = R.drawable.thumbnail_dummy;
-        tempRetretDetail.retretDays[3].morningDuration = 1;
-        tempRetretDetail.retretDays[3].morningBGM = R.raw.butterfly_space;
-        tempRetretDetail.retretDays[3].nightDuration = 4;
-        tempRetretDetail.retretDays[3].nightBGM = R.raw.butterfly_space;
-        tempRetretDetail.retretDays[3].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
-
-        //day 5
-        tempRetretDetail.retretDays[4] = new RetretDays();
-        tempRetretDetail.retretDays[4].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
-        tempRetretDetail.retretDays[4].videoThumbnail = R.drawable.thumbnail_dummy;
-        tempRetretDetail.retretDays[4].morningDuration = 1;
-        tempRetretDetail.retretDays[4].morningBGM = R.raw.butterfly_space;
-        tempRetretDetail.retretDays[4].nightDuration = 2;
-        tempRetretDetail.retretDays[4].nightBGM = R.raw.butterfly_space;
-        tempRetretDetail.retretDays[4].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
-
-        courseRetret.put(tempId,tempRetretDetail);
-    }
+//    public static  void initializeRetretDetail(){
+//        String tempId = BillingParameter.courseSKUList.get(0);
+//        RetretDetail tempRetretDetail = new RetretDetail();
+//        tempRetretDetail.title = "Belajar Meditasi untuk Pemula";
+//        tempRetretDetail.thumbnailImage = R.drawable.course_thumbnail_dummy;
+//        tempRetretDetail.description = "Panduan :\nAkan ada 5 hari retret yang akan dimulai sesuai tanggal yang tertera di bawah. Pastikan akan kembali ke halaman ini di pagi hari dan menekan menu sesi yang aktif sesuai tanggal. Akan ada 2 sesi di pagi hari dan malam hari. Anda bisa menonton video panduan dan memulai sesi meditasi sesuai timer yang disediakan.";
+//        tempRetretDetail.retretDays = new RetretDays[5];
+//        //day 1
+//        tempRetretDetail.retretDays[0] = new RetretDays();
+//        tempRetretDetail.retretDays[0].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
+//        tempRetretDetail.retretDays[0].videoThumbnail = R.drawable.thumbnail_dummy;
+//        tempRetretDetail.retretDays[0].morningDuration = 60;
+//        tempRetretDetail.retretDays[0].morningBGM = R.raw.butterfly_space;
+//        tempRetretDetail.retretDays[0].nightDuration = 120;
+//        tempRetretDetail.retretDays[0].nightBGM = R.raw.butterfly_space;
+//        tempRetretDetail.retretDays[0].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+//        //day 2
+//        tempRetretDetail.retretDays[1] = new RetretDays();
+//        tempRetretDetail.retretDays[1].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
+//        tempRetretDetail.retretDays[1].videoThumbnail = R.drawable.thumbnail_dummy;
+//        tempRetretDetail.retretDays[1].morningDuration = 100;
+//        tempRetretDetail.retretDays[1].morningBGM = R.raw.butterfly_space;
+//        tempRetretDetail.retretDays[1].nightDuration = 5;
+//        tempRetretDetail.retretDays[1].nightBGM = R.raw.butterfly_space;
+//        tempRetretDetail.retretDays[1].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+//
+//        //day 3
+//        tempRetretDetail.retretDays[2] = new RetretDays();
+//        tempRetretDetail.retretDays[2].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
+//        tempRetretDetail.retretDays[2].videoThumbnail = R.drawable.thumbnail_dummy;
+//        tempRetretDetail.retretDays[2].morningDuration = 3;
+//        tempRetretDetail.retretDays[2].morningBGM = R.raw.butterfly_space;
+//        tempRetretDetail.retretDays[2].nightDuration = 10;
+//        tempRetretDetail.retretDays[2].nightBGM = R.raw.butterfly_space;
+//        tempRetretDetail.retretDays[2].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+//
+//        //day 4
+//        tempRetretDetail.retretDays[3] = new RetretDays();
+//        tempRetretDetail.retretDays[3].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
+//        tempRetretDetail.retretDays[3].videoThumbnail = R.drawable.thumbnail_dummy;
+//        tempRetretDetail.retretDays[3].morningDuration = 1;
+//        tempRetretDetail.retretDays[3].morningBGM = R.raw.butterfly_space;
+//        tempRetretDetail.retretDays[3].nightDuration = 4;
+//        tempRetretDetail.retretDays[3].nightBGM = R.raw.butterfly_space;
+//        tempRetretDetail.retretDays[3].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+//
+//        //day 5
+//        tempRetretDetail.retretDays[4] = new RetretDays();
+//        tempRetretDetail.retretDays[4].videoUrl = "https://firebasestorage.googleapis.com/v0/b/bekko-studio.appspot.com/o/6.%20transfer%20aplikasi%20ke%20akun%20developer%20lain%20-%20YouTube.MP4?alt=media";
+//        tempRetretDetail.retretDays[4].videoThumbnail = R.drawable.thumbnail_dummy;
+//        tempRetretDetail.retretDays[4].morningDuration = 1;
+//        tempRetretDetail.retretDays[4].morningBGM = R.raw.butterfly_space;
+//        tempRetretDetail.retretDays[4].nightDuration = 2;
+//        tempRetretDetail.retretDays[4].nightBGM = R.raw.butterfly_space;
+//        tempRetretDetail.retretDays[4].description = "Perhatikan nafas dengan sangat teliti \n Tarik nafas dan keluarkan secara terus menerus";
+//
+//        courseRetret.put(tempId,tempRetretDetail);
+//    }
 
     //To refresh completed status back to false
-    public static void refreshRetretDetail(String tempId, Context context){
-        RetretDetail tempRetretDetail = courseRetret.get(tempId);
-        for (int i = 0; i < tempRetretDetail.retretDays.length; i++) {
-            tempRetretDetail.retretDays[i].morningCompleted = false;
-            tempRetretDetail.retretDays[i].nightCompleted = false;
-        }
+//    public static void refreshRetretDetail(String tempId, Context context){
+//        RetretDetail tempRetretDetail = courseRetret.get(tempId);
+//        for (int i = 0; i < tempRetretDetail.retretDays.length; i++) {
+//            tempRetretDetail.retretDays[i].morningCompleted = false;
+//            tempRetretDetail.retretDays[i].nightCompleted = false;
+//        }
+//
+//        setActiveRetretDetail(context);
+//    }
 
-        setActiveRetretDetail(context);
-    }
-
-    public static void getActiveRetretDetail(Context context){
-        try {
-            //get retret detail
-            FileInputStream inputStream = context.openFileInput("activeRetretDetail.txt");
-            ObjectInputStream input = new ObjectInputStream(inputStream);
-            courseRetret = (HashMap<String,RetretDetail>) input.readObject();
-            input.close();
-        } catch (FileNotFoundException e){
-            initializeRetretDetail();
-            Log.d("getActiveRetretDetail", "Exception: " + e);
-        }catch (Exception e){
-            Log.d("getActiveRetretDetail", "Exception: " + e);
-        }
-
-    }
+//    public static void getActiveRetretDetail(Context context){
+//        try {
+//            //get retret detail
+//            FileInputStream inputStream = context.openFileInput("activeRetretDetail.txt");
+//            ObjectInputStream input = new ObjectInputStream(inputStream);
+//            courseRetret = (HashMap<String,RetretDetail>) input.readObject();
+//            input.close();
+//        } catch (FileNotFoundException e){
+//            initializeRetretDetail();
+//            Log.d("getActiveRetretDetail", "Exception: " + e);
+//        }catch (Exception e){
+//            Log.d("getActiveRetretDetail", "Exception: " + e);
+//        }
+//
+//    }
 
 
-    public static void setActiveRetretDetail (Context context){
-        try {
-            //save retret detail
-            FileOutputStream outputStream = context.openFileOutput("activeRetretDetail.txt", Context.MODE_PRIVATE);
-            //Log.d("Context Directory", "Path: "+context.getFilesDir());
-            ObjectOutputStream output = new ObjectOutputStream(outputStream);
-            output.writeObject(courseRetret);
-            output.close();
-        }catch (Exception e){
-            Log.d("setActiveRetretDetail", "Exception: " + e);
-        }
-    }
+//    public static void setActiveRetretDetail (Context context){
+//        try {
+//            //save retret detail
+//            FileOutputStream outputStream = context.openFileOutput("activeRetretDetail.txt", Context.MODE_PRIVATE);
+//            //Log.d("Context Directory", "Path: "+context.getFilesDir());
+//            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+//            output.writeObject(courseRetret);
+//            output.close();
+//        }catch (Exception e){
+//            Log.d("setActiveRetretDetail", "Exception: " + e);
+//        }
+//    }
 
     //active retret save data
-    public static String activeRetretId;
-    public static String activeRetretEndDate;
+//    public static String activeRetretId;
+//    public static String activeRetretEndDate;
 
     //temp variable to check timer completed status
     public static boolean tempIsCompleted;
@@ -224,102 +224,102 @@ public class Global {
     public static SimpleDateFormat simpleDateFormatNew = new SimpleDateFormat("dd MMM");
 
 
-    public static void getActiveRetret(Context context){
-        try {
-            //get id
-            FileInputStream inputStream = context.openFileInput("activeRetretId.txt");
-            ObjectInputStream input = new ObjectInputStream(inputStream);
-            activeRetretId = (String) input.readObject();
-            input.close();
-            //get end date
-            inputStream = context.openFileInput("activeRetretEndDate.txt");
-            input = new ObjectInputStream(inputStream);
-            activeRetretEndDate = (String) input.readObject();
-            input.close();
+//    public static void getActiveRetret(Context context){
+//        try {
+//            //get id
+//            FileInputStream inputStream = context.openFileInput("activeRetretId.txt");
+//            ObjectInputStream input = new ObjectInputStream(inputStream);
+//            activeRetretId = (String) input.readObject();
+//            input.close();
+//            //get end date
+//            inputStream = context.openFileInput("activeRetretEndDate.txt");
+//            input = new ObjectInputStream(inputStream);
+//            activeRetretEndDate = (String) input.readObject();
+//            input.close();
+//
+//        } catch (FileNotFoundException e){
+//            activeRetretId = "";
+//            activeRetretEndDate = "";
+//            Log.d("getActiveRetret", "Exception: " + e);
+//        }catch (Exception e){
+//            Log.d("getActiveRetret", "Exception: " + e);
+//        }
+//
+//    }
 
-        } catch (FileNotFoundException e){
-            activeRetretId = "";
-            activeRetretEndDate = "";
-            Log.d("getActiveRetret", "Exception: " + e);
-        }catch (Exception e){
-            Log.d("getActiveRetret", "Exception: " + e);
-        }
 
-    }
+//    public static void setActiveRetret (Context context, String idToSave, String endDateToSave){
+//        activeRetretId = idToSave;
+//        activeRetretEndDate = endDateToSave;
+//        try {
+//            //save id
+//            FileOutputStream outputStream = context.openFileOutput("activeRetretId.txt", Context.MODE_PRIVATE);
+//            //Log.d("Context Directory", "Path: "+context.getFilesDir());
+//            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+//            output.writeObject(activeRetretId);
+//            output.close();
+//
+//            //save end date
+//            outputStream = context.openFileOutput("activeRetretEndDate.txt", Context.MODE_PRIVATE);
+//            output = new ObjectOutputStream(outputStream);
+//            output.writeObject(activeRetretEndDate);
+//            output.close();
+//        }catch (Exception e){
+//            Log.d("setActiveRetret", "Exception: " + e);
+//        }
+//    }
 
+//    public static String calculateEndDate(){
+//        int numberofDays = courseRetret.get(activeRetretId).retretDays.length; //cheat -1
+//        Date endDate = new Date(new Date().getTime() + TimeUnit.DAYS.toMillis( numberofDays ));
+//        return simpleDateFormat.format(endDate);
+//    }
 
-    public static void setActiveRetret (Context context, String idToSave, String endDateToSave){
-        activeRetretId = idToSave;
-        activeRetretEndDate = endDateToSave;
-        try {
-            //save id
-            FileOutputStream outputStream = context.openFileOutput("activeRetretId.txt", Context.MODE_PRIVATE);
-            //Log.d("Context Directory", "Path: "+context.getFilesDir());
-            ObjectOutputStream output = new ObjectOutputStream(outputStream);
-            output.writeObject(activeRetretId);
-            output.close();
-
-            //save end date
-            outputStream = context.openFileOutput("activeRetretEndDate.txt", Context.MODE_PRIVATE);
-            output = new ObjectOutputStream(outputStream);
-            output.writeObject(activeRetretEndDate);
-            output.close();
-        }catch (Exception e){
-            Log.d("setActiveRetret", "Exception: " + e);
-        }
-    }
-
-    public static String calculateEndDate(){
-        int numberofDays = courseRetret.get(activeRetretId).retretDays.length; //cheat -1
-        Date endDate = new Date(new Date().getTime() + TimeUnit.DAYS.toMillis( numberofDays ));
-        return simpleDateFormat.format(endDate);
-    }
-
-    public static String calculateRetretDaysDate(int currentIndex){
-        int numberofDays = courseRetret.get(activeRetretId).retretDays.length;
-        try {
-            Date date = substractDateByDays(simpleDateFormat.parse(activeRetretEndDate),numberofDays-currentIndex-1);
-            return simpleDateFormat.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "Error: "+e;
-        }
-    }
+//    public static String calculateRetretDaysDate(int currentIndex){
+//        int numberofDays = courseRetret.get(activeRetretId).retretDays.length;
+//        try {
+//            Date date = substractDateByDays(simpleDateFormat.parse(activeRetretEndDate),numberofDays-currentIndex-1);
+//            return simpleDateFormat.format(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//            return "Error: "+e;
+//        }
+//    }
 
     public static Date substractDateByDays(Date currentDate,int days){
         Date date = new Date(currentDate.getTime() - TimeUnit.DAYS.toMillis( days ));
         return date;
     }
 
-    public static int checkEndDateDifference(){
-        if (activeRetretId == ""){
-            return -1;
-        }else if (activeRetretEndDate==""){
-            return 0; //Counted as active course, but not being activated yet
-        }else{
-            try {
-                Date endDate = simpleDateFormat.parse(activeRetretEndDate);
+//    public static int checkEndDateDifference(){
+//        if (activeRetretId == ""){
+//            return -1;
+//        }else if (activeRetretEndDate==""){
+//            return 0; //Counted as active course, but not being activated yet
+//        }else{
+//            try {
+//                Date endDate = simpleDateFormat.parse(activeRetretEndDate);
+//
+//                //To neutralize the clock, we have to parse from String format
+//                Date currentDate = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
+//
+//                int dayDiff = (int) getDateDiff(currentDate,endDate,TimeUnit.DAYS);
+//                return dayDiff;
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//                return -1;
+//            }
+//
+//        }
+//    }
 
-                //To neutralize the clock, we have to parse from String format
-                Date currentDate = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
-
-                int dayDiff = (int) getDateDiff(currentDate,endDate,TimeUnit.DAYS);
-                return dayDiff;
-            } catch (ParseException e) {
-                e.printStackTrace();
-                return -1;
-            }
-
-        }
-    }
-
-    public static boolean checkActiveRetretStatus(){
-        if (checkEndDateDifference()>=0){
-            return true;
-        }else{
-            return false;
-        }
-    }
+//    public static boolean checkActiveRetretStatus(){
+//        if (checkEndDateDifference()>=0){
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    }
 
     public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
         long diffInMillies = date2.getTime() - date1.getTime();

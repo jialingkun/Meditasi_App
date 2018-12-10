@@ -14,37 +14,36 @@
             android:layout_height="match_parent">
 
 
-            <TextView
-                android:id="@+id/activeCourseLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Kursus Saat Ini" />
+            <!--<TextView-->
+                <!--android:id="@+id/activeCourseLabel"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:text="Kursus Saat Ini" />-->
 
-            <TextView
-                android:id="@+id/activeCourseTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/activeCourseLabel"
-                android:text="Current Course Title" />
+            <!--<TextView-->
+                <!--android:id="@+id/activeCourseTitle"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_below="@id/activeCourseLabel"-->
+                <!--android:text="Current Course Title" />-->
 
-            <ImageView
-                android:id="@+id/activeCourseImage"
-                android:layout_width="200dp"
-                android:layout_height="150dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/activeCourseTitle"
-                android:src="@drawable/ambient0"
-                />
+            <!--<ImageView-->
+                <!--android:id="@+id/activeCourseImage"-->
+                <!--android:layout_width="200dp"-->
+                <!--android:layout_height="150dp"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_below="@+id/activeCourseTitle"-->
+                <!--android:src="@drawable/ambient0"-->
+                <!--/>-->
 
             <TextView
                 android:id="@+id/freeCourseLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/activeCourseImage"
                 android:text="Video Tutorial Gratis" />
 
             <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
@@ -60,68 +59,68 @@
                 </LinearLayout>
             </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
 
-            <TextView
-                android:id="@+id/beginnerCourseLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/freeCourseCenterHorizontalScrollView"
-                android:text="Kursus Pemula" />
+            <!--<TextView-->
+                <!--android:id="@+id/beginnerCourseLabel"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_below="@+id/freeCourseCenterHorizontalScrollView"-->
+                <!--android:text="Kursus Pemula" />-->
 
-            <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
-                android:id="@+id/beginnerCourseCenterHorizontalScrollView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/beginnerCourseLabel">
-                <LinearLayout
-                    android:id="@+id/beginnerCourseLinearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                </LinearLayout>
-            </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
+            <!--<com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView-->
+                <!--android:id="@+id/beginnerCourseCenterHorizontalScrollView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/beginnerCourseLabel">-->
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/beginnerCourseLinearLayout"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="horizontal">-->
+                <!--</LinearLayout>-->
+            <!--</com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>-->
 
-            <TextView
-                android:id="@+id/intermediateCourseLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/beginnerCourseCenterHorizontalScrollView"
-                android:text="Kursus Menengah" />
+            <!--<TextView-->
+                <!--android:id="@+id/intermediateCourseLabel"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_below="@+id/beginnerCourseCenterHorizontalScrollView"-->
+                <!--android:text="Kursus Menengah" />-->
 
-            <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
-                android:id="@+id/intermediateCourseCenterHorizontalScrollView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/intermediateCourseLabel">
-                <LinearLayout
-                    android:id="@+id/intermediateCourseLinearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                </LinearLayout>
-            </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
+            <!--<com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView-->
+                <!--android:id="@+id/intermediateCourseCenterHorizontalScrollView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/intermediateCourseLabel">-->
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/intermediateCourseLinearLayout"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="horizontal">-->
+                <!--</LinearLayout>-->
+            <!--</com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>-->
 
-            <TextView
-                android:id="@+id/advanceCourseLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/intermediateCourseCenterHorizontalScrollView"
-                android:text="Kursus Lanjut" />
+            <!--<TextView-->
+                <!--android:id="@+id/advanceCourseLabel"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_below="@+id/intermediateCourseCenterHorizontalScrollView"-->
+                <!--android:text="Kursus Lanjut" />-->
 
-            <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
-                android:id="@+id/advanceCourseCenterHorizontalScrollView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/advanceCourseLabel">
-                <LinearLayout
-                    android:id="@+id/advanceCourseLinearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                </LinearLayout>
-            </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
+            <!--<com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView-->
+                <!--android:id="@+id/advanceCourseCenterHorizontalScrollView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/advanceCourseLabel">-->
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/advanceCourseLinearLayout"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="horizontal">-->
+                <!--</LinearLayout>-->
+            <!--</com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>-->
 
 
 
