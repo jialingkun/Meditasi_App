@@ -84,10 +84,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Timer.Namaskara.NamaskaraMenuActivity" />
-        <activity android:name=".Timer.Namaskara.NamaskaraGratitudeActivity" />
-        <activity android:name=".Timer.Namaskara.NamaskaraRepentanceActivity" />
-        <activity android:name=".Timer.Namaskara.NamaskaraAudioResultActivity"></activity>
+        <activity
+            android:name=".Timer.Namaskara.NamaskaraMenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Timer.Namaskara.NamaskaraGratitudeActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Timer.Namaskara.NamaskaraRepentanceActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Timer.Namaskara.NamaskaraAudioResultActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
