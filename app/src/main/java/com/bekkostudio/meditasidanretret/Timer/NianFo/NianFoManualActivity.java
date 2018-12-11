@@ -110,8 +110,12 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
+    public void onBackPressed() {
+        return;
+    }
+
+    @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (backgroundSound!=null){
             backgroundSound.stop();
             backgroundSound.release();
@@ -132,5 +136,7 @@ public class NianFoManualActivity extends AppCompatActivity implements View.OnCl
         int milliTotalInSecond = (int) totalDurasi / 1000;
         Duration duration = new Duration(Global.getTodayDate(), milliTotalInSecond);
         Global.setDuration(getApplicationContext(), duration);
+
+        super.onDestroy();
     }
 }

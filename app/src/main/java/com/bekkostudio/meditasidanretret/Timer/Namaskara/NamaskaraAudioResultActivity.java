@@ -1,4 +1,4 @@
-package com.bekkostudio.meditasidanretret.Timer.Meditasi;
+package com.bekkostudio.meditasidanretret.Timer.Namaskara;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +9,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.bekkostudio.meditasidanretret.Chart.Duration;
 import com.bekkostudio.meditasidanretret.Chart.Note;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 
-public class MeditationResult extends AppCompatActivity {
+public class NamaskaraAudioResultActivity extends AppCompatActivity {
 
     TextView resultTimeWidget;
     Button doneWidget;
@@ -26,7 +25,7 @@ public class MeditationResult extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meditation_result);
+        setContentView(R.layout.activity_namaskara_audio_result);
 
         //get parameter
         Intent intent = getIntent();
@@ -50,7 +49,6 @@ public class MeditationResult extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public void onBackPressed() {

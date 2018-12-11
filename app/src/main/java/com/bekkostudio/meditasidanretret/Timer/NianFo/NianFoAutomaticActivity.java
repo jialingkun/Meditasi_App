@@ -2,6 +2,7 @@ package com.bekkostudio.meditasidanretret.Timer.NianFo;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.bekkostudio.meditasidanretret.R;
 public class NianFoAutomaticActivity extends AppCompatActivity implements View.OnClickListener {
     Button pauseButton, finishEarlyButton;
     TextView countSiklusLabel;
+
+    PowerManager.WakeLock wakeLock;
 
     //Sound on click BGM image
     MediaPlayer backgroundSound;
@@ -35,6 +38,12 @@ public class NianFoAutomaticActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nian_fo_automatic);
+
+        //start wakelock to keep countdown awake
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                "MyWakelockTag");
+        wakeLock.acquire();
 
         startTime = System.currentTimeMillis();
 
@@ -128,17 +137,29 @@ public class NianFoAutomaticActivity extends AppCompatActivity implements View.O
     }
 
     @Override
+    public void onBackPressed() {
+        return;
+    }
+
+    @Override
     protected void onDestroy() {
-        super.onDestroy();
+        wakeLock.release();
         if (backgroundSound!=null){
             backgroundSound.stop();
             backgroundSound.release();
             backgroundSound = null;
+        }
+        if (knockSound!=null){
+            knockSound.stop();
+            knockSound.release();
+            knockSound = null;
         }
 
         // save to database
         int milliTotalInSecond = (int) totalDurasi / 1000;
         Duration duration = new Duration(Global.getTodayDate(), milliTotalInSecond);
         Global.setDuration(getApplicationContext(), duration);
+
+        super.onDestroy();
     }
 }

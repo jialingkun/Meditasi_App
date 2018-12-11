@@ -62,18 +62,18 @@ public class MeditationCountdown extends AppCompatActivity {
         checkboxItem = getResources().getStringArray(R.array.checkbox_value);
         audioSource = new int[checkboxItem.length];
         audioSource[0] = R.raw.guide_dis;
-        audioSource[1] = R.raw.guide_pmr;
+        audioSource[1] = R.raw.guide_standingbab;
         audioSource[2] = R.raw.guide_pmr;
-        audioSource[3] = R.raw.guide_dis;
-        audioSource[4] = R.raw.guide_bodyscanning;
-        audioSource[5] = R.raw.guide_315;
-        audioSource[6] = R.raw.guide_bodyscanning;
+        audioSource[3] = R.raw.guide_pme;
+        audioSource[4] = R.raw.guide_adjustingposture;
+        audioSource[5] = R.raw.guide_315and426;
+        audioSource[6] = R.raw.guide_sittingbab;
         audioSource[7] = R.raw.guide_bodyscanning;
-        audioSource[8] = R.raw.guide_dis;
-        audioSource[9] = R.raw.guide_dis;
-        audioSource[10] = R.raw.guide_426;
-        audioSource[11] = R.raw.guide_426;
-        audioSource[12] = R.raw.guide_426;
+        audioSource[8] = R.raw.guide_justsitting;
+        audioSource[9] = R.raw.guide_abdominalbreathing;
+        audioSource[10] = R.raw.guide_experiencingthebreath;
+        audioSource[11] = R.raw.guide_countingthebreath;
+        audioSource[12] = R.raw.guide_followingthebreath;
 
 
         //initialize sound

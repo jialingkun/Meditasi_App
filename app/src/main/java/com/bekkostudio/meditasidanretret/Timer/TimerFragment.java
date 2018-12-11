@@ -11,7 +11,8 @@ import android.widget.Button;
 
 import com.bekkostudio.meditasidanretret.R;
 import com.bekkostudio.meditasidanretret.Timer.Meditasi.MeditationSetting;
-import com.bekkostudio.meditasidanretret.Timer.Namaskara.NamaskaraHomeActivity;
+import com.bekkostudio.meditasidanretret.Timer.Namaskara.NamaskaraEmptinessActivity;
+import com.bekkostudio.meditasidanretret.Timer.Namaskara.NamaskaraMenuActivity;
 import com.bekkostudio.meditasidanretret.Timer.NianFo.NianFoHomeActivity;
 
 public class TimerFragment extends Fragment{
@@ -38,7 +39,7 @@ public class TimerFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 //NAMASKARA GANTI INTENT DI BAWAH DENGAN CLASS NAMASKARA
-                Intent intent = new Intent(getActivity(), NamaskaraHomeActivity.class);
+                Intent intent = new Intent(getActivity(), NamaskaraMenuActivity.class);
                 getActivity().startActivity(intent);
             }
         });
