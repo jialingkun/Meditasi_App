@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bekkostudio.meditasidanretret.Chart.Duration;
 import com.bekkostudio.meditasidanretret.Chart.Note;
 import com.bekkostudio.meditasidanretret.Global;
+import com.bekkostudio.meditasidanretret.MainActivity;
 import com.bekkostudio.meditasidanretret.R;
 
 public class MeditationResult extends AppCompatActivity {
@@ -61,6 +62,7 @@ public class MeditationResult extends AppCompatActivity {
 
     public void endMeditation(){
         saveNote();
+        Global.showMoodSurvey(this,true);
         finish();
     }
 

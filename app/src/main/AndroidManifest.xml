@@ -23,7 +23,12 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Timer.Meditasi.MeditationCountdown"
             android:screenOrientation="portrait" />
@@ -75,15 +80,6 @@
         <activity
             android:name=".Chart.MoodActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".FirstLauncher"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".Timer.Namaskara.NamaskaraMenuActivity"
             android:screenOrientation="portrait"/>

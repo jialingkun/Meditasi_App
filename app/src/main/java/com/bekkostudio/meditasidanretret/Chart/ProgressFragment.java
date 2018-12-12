@@ -260,11 +260,11 @@ public class ProgressFragment extends Fragment {
         int dataIndex = moodDate.size()-1;
         dateAxisValue.add(new AxisValue(dataIndex).setLabel(moodDate.get(dataIndex)));
         //add value
-        moodValue.add(Global.moods.get(i).moodValue);
-        yMoodAxisValue.add(new PointValue(dataIndex, Global.moods.get(i).moodValue));
+        moodValue.add(Global.moods.get(i).moodBeforeValue);
+        yMoodAxisValue.add(new PointValue(dataIndex, Global.moods.get(i).moodBeforeValue));
         //add medicine value
-        medicineValue.add(Global.moods.get(i).medicineValue);
-        yMedicineAxisValue.add(new PointValue(dataIndex, Global.moods.get(i).medicineValue));
+        medicineValue.add(Global.moods.get(i).moodAfterValue);
+        yMedicineAxisValue.add(new PointValue(dataIndex, Global.moods.get(i).moodAfterValue));
     }
 
     private void LineChartMeditasi () {

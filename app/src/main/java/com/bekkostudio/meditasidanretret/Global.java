@@ -8,10 +8,8 @@ import android.webkit.WebView;
 
 import com.bekkostudio.meditasidanretret.Chart.Duration;
 import com.bekkostudio.meditasidanretret.Chart.Mood;
+import com.bekkostudio.meditasidanretret.Chart.MoodActivity;
 import com.bekkostudio.meditasidanretret.Chart.Note;
-//import com.bekkostudio.meditasidanretret.Course.Retret.BillingParameter;
-//import com.bekkostudio.meditasidanretret.Course.Retret.RetretDays;
-//import com.bekkostudio.meditasidanretret.Course.Retret.RetretDetail;
 import com.bekkostudio.meditasidanretret.Timer.Meditasi.MeditationCountdown;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -21,16 +19,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.math.BigInteger;
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Global {
@@ -217,7 +209,7 @@ public class Global {
     //temp variable to check timer completed status
     public static boolean tempIsCompleted;
     //To mark if the last timer represent morning or night
-    public static boolean isMorningTimer;
+//    public static boolean isMorningTimer;
 
     //universal pattern for date
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE,dd-MM-yyyy");
@@ -341,9 +333,8 @@ public class Global {
     }
 
 
-    //Mood and medicine database
+    //Mood database
     public static ArrayList<Mood> moods;
-
 
     public static void getMood(Context context){
         try {
@@ -370,6 +361,44 @@ public class Global {
             output.close();
         }catch (Exception e){
             Log.d("setMood", "Exception: " + e);
+        }
+    }
+
+    public static void updateLastMood (Context context, Mood mood){
+        moods.set(moods.size()-1,mood);
+        try {
+            FileOutputStream outputStream = context.openFileOutput("mood.txt", Context.MODE_PRIVATE);
+            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+            output.writeObject(moods);
+            output.close();
+        }catch (Exception e){
+            Log.d("setMood", "Exception: " + e);
+        }
+    }
+
+    public static void showMoodSurvey(Activity activity, boolean afterMeditation){
+        Intent intent;
+        //check file mood
+        if (moods.size() > 0){
+            String lastDate = moods.get(moods.size()-1).date;
+            String todayDates = getTodayDate();
+
+            //check lastDate
+            if (lastDate.equals(todayDates)) {
+                if (afterMeditation){
+                    intent = new Intent(activity, MoodActivity.class);
+                    intent.putExtra("afterMeditation", afterMeditation);
+                    activity.startActivity(intent);
+                }
+            } else {
+                intent = new Intent(activity, MoodActivity.class);
+                intent.putExtra("afterMeditation", afterMeditation);
+                activity.startActivity(intent);
+            }
+        } else {
+            intent = new Intent(activity, MoodActivity.class);
+            intent.putExtra("afterMeditation", afterMeditation);
+            activity.startActivity(intent);
         }
     }
 
@@ -473,40 +502,40 @@ public class Global {
 
 
 
-    public static String formatMinutesToHoursMinutes(int rawMinutes){
-        int minutes =rawMinutes % 60;
-        int hours =(rawMinutes / 60) % 24;
-        String result ="";
-        if (hours>0){
-            result = hours + " jam ";
-        }
-
-        if (minutes>0){
-            result = result+minutes + " menit";
-        }
-
-        return result;
-    }
-
-
-    public static String md5(String s)
-    {
-        MessageDigest digest;
-        try
-        {
-            digest = MessageDigest.getInstance("MD5");
-            digest.update(s.getBytes(Charset.forName("US-ASCII")),0,s.length());
-            byte[] magnitude = digest.digest();
-            BigInteger bi = new BigInteger(1, magnitude);
-            String hash = String.format("%0" + (magnitude.length << 1) + "x", bi);
-            return hash;
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            e.printStackTrace();
-        }
-        return "";
-    }
+//    public static String formatMinutesToHoursMinutes(int rawMinutes){
+//        int minutes =rawMinutes % 60;
+//        int hours =(rawMinutes / 60) % 24;
+//        String result ="";
+//        if (hours>0){
+//            result = hours + " jam ";
+//        }
+//
+//        if (minutes>0){
+//            result = result+minutes + " menit";
+//        }
+//
+//        return result;
+//    }
+//
+//
+//    public static String md5(String s)
+//    {
+//        MessageDigest digest;
+//        try
+//        {
+//            digest = MessageDigest.getInstance("MD5");
+//            digest.update(s.getBytes(Charset.forName("US-ASCII")),0,s.length());
+//            byte[] magnitude = digest.digest();
+//            BigInteger bi = new BigInteger(1, magnitude);
+//            String hash = String.format("%0" + (magnitude.length << 1) + "x", bi);
+//            return hash;
+//        }
+//        catch (NoSuchAlgorithmException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        return "";
+//    }
 
     // formatting millisecond to hour, minute, second
     public static String getDateFormat(long durasi) {
@@ -528,5 +557,28 @@ public class Global {
             secondFinal = "0" + secondFinal;
 
         return hourFinal + ":" + minuteFinal + ":" + secondFinal;
+    }
+
+    public static void generateDummyContent(Context context){
+        Date todayDate = new Date();
+
+        moods = new ArrayList<>();
+        moods.add(0,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,2)),3,7));
+        moods.add(0,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,3)),4,5));
+        moods.add(0,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,4)),2,4));
+        setMood(context,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,1)),7,6));
+
+        durations = new ArrayList<>();
+        durations.add(0,new Duration(simpleDateFormat.format(substractDateByDays(todayDate,2)),3000));
+        durations.add(0,new Duration(simpleDateFormat.format(substractDateByDays(todayDate,3)),1300));
+        durations.add(0,new Duration(simpleDateFormat.format(substractDateByDays(todayDate,4)),1800));
+        setDuration(context,new Duration(simpleDateFormat.format(substractDateByDays(todayDate,1)),1000));
+
+        notes = new ArrayList<>();
+        notes.add(0, new Note(simpleDateFormat.format(substractDateByDays(todayDate,2)),"Dari stress langsung tenang dan segar setelah meditasi",true));
+        notes.add(0, new Note(simpleDateFormat.format(substractDateByDays(todayDate,3)),"Merasa baikan setelah meditasi",false));
+        notes.add(0, new Note(simpleDateFormat.format(substractDateByDays(todayDate,4)),"Terasa agak tenang",false));
+        setNote(context, new Note(simpleDateFormat.format(substractDateByDays(todayDate,1)),"Sangat sulit untuk fokus karena terlalu banyak beban pikiran",true));
+
     }
 }

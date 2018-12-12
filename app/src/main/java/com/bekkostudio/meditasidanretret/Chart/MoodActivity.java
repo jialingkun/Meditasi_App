@@ -4,109 +4,77 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.bekkostudio.meditasidanretret.Chart.Mood;
 import com.bekkostudio.meditasidanretret.Global;
-import com.bekkostudio.meditasidanretret.MainActivity;
 import com.bekkostudio.meditasidanretret.R;
+import com.wefika.horizontalpicker.HorizontalPicker;
 
-public class MoodActivity extends AppCompatActivity implements View.OnClickListener{
+public class MoodActivity extends AppCompatActivity implements HorizontalPicker.OnItemSelected {
 
-    Spinner spMoodToday, spMedician;
-    ArrayAdapter adapterMood, adapterMObat;
+    boolean afterMeditation;
     Button btnSubmit;
+    TextView title;
     Mood mood;
+
+    //Mood horizontal picker
+    HorizontalPicker moodValuePickerWidget;
+    String[] moodItem;
+    int moodValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood);
-        btnSubmit = (Button) findViewById(R.id.btn_sumbit);
-        spMoodToday = (Spinner) findViewById(R.id.spinMoodToday);
-        spMedician = (Spinner) findViewById(R.id.spinMinumObat);
 
-        adapterMood = ArrayAdapter.createFromResource(this, R.array.metode_mood, android.R.layout.simple_spinner_item);
-        adapterMObat = ArrayAdapter.createFromResource(this, R.array.minum_obat, android.R.layout.simple_spinner_item);
-        adapterMood.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapterMObat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Intent intent = getIntent();
+        afterMeditation = intent.getBooleanExtra("afterMeditation",false);
 
-        spMoodToday.setAdapter(adapterMood);
-        spMedician.setAdapter(adapterMObat);
-        btnSubmit.setOnClickListener(this);
-        spMoodToday.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        btnSubmit = findViewById(R.id.btn_sumbit);
+        //Horizontal picker library
+        moodValuePickerWidget = findViewById(R.id.valueMood);
+        moodValue = 1; //default 1
+        moodItem = getResources().getStringArray(R.array.mood_value);
+        moodValuePickerWidget.setOnItemSelectedListener(this);
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                submitMood();
             }
         });
 
-        spMedician.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (afterMeditation){
+            title = findViewById(R.id.moodToday);
+            title.setText("Bagaimana Mood Anda setelah Meditasi?");
+        }
 
-            }
+    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+    private void submitMood(){
+        if (afterMeditation){
+            mood = new Mood(Global.moods.get(Global.moods.size()-1).date, Global.moods.get(Global.moods.size()-1).moodBeforeValue, moodValue);
+            Global.updateLastMood(getApplicationContext(), mood);
+        }else{
+            mood = new Mood(Global.getTodayDate(), moodValue, moodValue);
+            Global.setMood(getApplicationContext(), mood);
+        }
+        finish();
     }
 
     @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        int statusMood = 0;
-        int statusMedician = 0;
+    public void onItemSelected(int index){
+        moodValue = Integer.parseInt(moodItem[index]);
+    }
 
-        switch (id) {
-            case R.id.btn_sumbit :
-                if (spMoodToday.getSelectedItem().toString().equals("Sangat Tidak Tenang")) {
-                    statusMood = Mood.SANGAT_TIDAK_TENANG;
-                } else if (spMoodToday.getSelectedItem().toString().equals("Tidak Tenang")) {
-                    statusMood = Mood.TIDAK_TENANG;
-                } else if (spMoodToday.getSelectedItem().toString().equals("Tenang")) {
-                    statusMood = Mood.TENANG;
-                } else if (spMoodToday.getSelectedItem().toString().equals("Sangat Tenang")) {
-                    statusMood = Mood.SANGAT_TENANG;
-                } else {
-                    statusMood = Mood.TIDAK_MENGISI;
-                }
-
-                if (spMedician.getSelectedItem().toString().equals("Tidak Minum Obat")) {
-                    statusMedician = Mood.TIDAK_MINUM_OBAT;
-                } else if (spMedician.getSelectedItem().toString().equals("Kurang Dosis")) {
-                    statusMedician = Mood.KURANGI_DOSIS;
-                } else if (spMedician.getSelectedItem().toString().equals("Minum Obat")) {
-                    statusMedician = Mood.MINUM_OBAT;
-                } else {
-                    statusMedician = Mood.TIDAK_MENGISI;
-                }
-
-                String dateToday = Global.getTodayDate();
-                //entry data mood & medician
-                mood = new Mood(dateToday, statusMood, statusMedician);
-
-                //setMood
-                Global.setMood(getApplicationContext(), mood);
-
-                Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-
-                //move to MainActivity
-                Intent moveMainActivity = new Intent(this, MainActivity.class);
-                startActivity(moveMainActivity);
-                finish();
-                break;
+    @Override
+    public void onBackPressed() {
+        if (afterMeditation){
+            super.onBackPressed();
+        }else{
+            finishAffinity();
         }
+
     }
 }

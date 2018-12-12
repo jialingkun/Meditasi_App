@@ -52,8 +52,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //for testing only
+//        Global.generateDummyContent(getApplicationContext());
+
         //get meditation duration database
         Global.getDuration(getApplicationContext());
+
+        //get Mood Database
+        Global.getMood(getApplicationContext());
 
         //get note database
         Global.getNote(getApplicationContext());
@@ -63,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //Run mood survey if not filling the survey yet
+        Global.showMoodSurvey(this,false);
 
         //get active retret database
 //        Global.getActiveRetret(getApplicationContext());
