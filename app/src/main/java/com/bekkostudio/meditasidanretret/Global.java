@@ -214,6 +214,7 @@ public class Global {
     //universal pattern for date
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE,dd-MM-yyyy");
     public static SimpleDateFormat simpleDateFormatNew = new SimpleDateFormat("dd MMM");
+    public static SimpleDateFormat simpleDateFormatMonth = new SimpleDateFormat("MMMM yyyy");
 
 
 //    public static void getActiveRetret(Context context){
@@ -483,6 +484,20 @@ public class Global {
         }
     }
 
+    public static String newFormatMonth(String date){
+        try {
+            Date newDate = simpleDateFormat.parse(date);
+            return simpleDateFormatMonth.format(newDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "Error: "+e;
+        }
+    }
+
+    public static String formatMonth(Date date){
+        return simpleDateFormatMonth.format(date);
+    }
+
     public static Date parseDate(String date){
         try {
             return simpleDateFormat.parse(date);
@@ -566,6 +581,11 @@ public class Global {
         moods.add(0,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,2)),3,7));
         moods.add(0,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,3)),4,5));
         moods.add(0,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,4)),2,4));
+        //Data dummy bulan lalu
+        moods.add(0,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,28)),3,7));
+        moods.add(0,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,29)),4,5));
+        moods.add(0,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,30)),2,4));
+
         setMood(context,new Mood(simpleDateFormat.format(substractDateByDays(todayDate,1)),7,6));
 
         durations = new ArrayList<>();

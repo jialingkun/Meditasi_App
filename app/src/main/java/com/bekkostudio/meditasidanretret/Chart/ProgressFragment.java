@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class ProgressFragment extends Fragment {
     TextView tvTitleMood, tvMood, tvMedicine, tvTextMood, tvTextMeditasi, tvTitleMeditasi;
+    TextView tvAvMoodBulanIni,tvAvMoodBulanLalu;
     EditText edtTglAwal, edtTglAkhir;
     Button btnFilter;
     DatePickerDialog datePickerDialog;
@@ -76,6 +79,10 @@ public class ProgressFragment extends Fragment {
         tvMedicine = (TextView) view.findViewById(R.id.tvMedicine);
         tvTextMeditasi = (TextView) view.findViewById(R.id.tvTextMeditasi);
         tvTitleMeditasi = (TextView) view.findViewById(R.id.tvTitleMeditasi);
+
+        //mood rata-rata
+        tvAvMoodBulanIni = (TextView) view.findViewById(R.id.rataMoodBulanIni);
+        tvAvMoodBulanLalu = (TextView) view.findViewById(R.id.rataMoodBulanLalu);
 
         edtTglAwal = (EditText) view.findViewById(R.id.edtTglAwal);
         edtTglAkhir = (EditText) view.findViewById(R.id.edtTglAkhir);
@@ -185,26 +192,69 @@ public class ProgressFragment extends Fragment {
             Date ptAwal = dateFormatFilter.parse(edtTglAwal.getText().toString());
             Date ptAkhir = dateFormatFilter.parse(edtTglAkhir.getText().toString());
             boolean keTglAkhir = false;
+            boolean filterTanggal = true;
             int dayDiff;
+
+            //Date bulan lalu
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(ptAkhir);
+            cal.add(Calendar.MONTH, -1);
+            Date dateBulanLalu = cal.getTime();
+            //Format String Bulan
+            String bulanIni = Global.formatMonth(ptAkhir);
+            String bulanLalu = Global.formatMonth(dateBulanLalu);
+            //Parameter untuk hitung rata-rata
+            int totalMoodBulanIni = 0;
+            int jumlahMoodBulanIni = 0;
+            int totalMoodBulanLalu = 0;
+            int jumlahMoodBulanLalu = 0;
+            String bulanFormat;
+
             for (int i = 0; i < Global.moods.size(); i++){
-                if (!keTglAkhir){
-                    dayDiff = (int) Global.getDateDiff(ptAwal, Global.parseDate(Global.moods.get(i).date), TimeUnit.DAYS);
-                    if (dayDiff>=0){
-                        addMoodData(i);
-                        //to data by date akhir
-                        keTglAkhir = true;
-                    }
-                }else{
-                    dayDiff = (int) Global.getDateDiff(Global.parseDate(Global.moods.get(i).date), ptAkhir, TimeUnit.DAYS);
-                    if (dayDiff>=0){
-                        addMoodData(i);
-                        //to data by date akhir
-                        keTglAkhir = true;
+                //hitung rata-rata
+                bulanFormat = Global.newFormatMonth(Global.moods.get(i).date);
+                if (bulanFormat.equals(bulanLalu)){
+                    totalMoodBulanLalu = totalMoodBulanLalu + Global.moods.get(i).moodAfterValue;
+                    jumlahMoodBulanLalu++;
+                }else if (bulanFormat.equals(bulanIni)){
+                    totalMoodBulanIni = totalMoodBulanIni + + Global.moods.get(i).moodAfterValue;
+                    jumlahMoodBulanIni++;
+                }
+
+                //filter data grafik dr tanggal awal dan tgl akhir
+                if (filterTanggal){
+                    if (!keTglAkhir){
+                        dayDiff = (int) Global.getDateDiff(ptAwal, Global.parseDate(Global.moods.get(i).date), TimeUnit.DAYS);
+                        if (dayDiff>=0){
+                            addMoodData(i);
+                            //to data by date akhir
+                            keTglAkhir = true;
+                        }
                     }else{
-                        break;
+                        dayDiff = (int) Global.getDateDiff(Global.parseDate(Global.moods.get(i).date), ptAkhir, TimeUnit.DAYS);
+                        if (dayDiff>=0){
+                            addMoodData(i);
+                            //to data by date akhir
+                            keTglAkhir = true;
+                        }else{
+                            filterTanggal = false; //stop filter tanggal
+                        }
                     }
                 }
             }
+
+            //hitung dan tampilkan rata-rata
+            if (jumlahMoodBulanIni==0){
+                jumlahMoodBulanIni = 1;
+            }
+            if (jumlahMoodBulanLalu==0){
+                jumlahMoodBulanLalu = 1;
+            }
+            DecimalFormat df = new DecimalFormat("#.##");
+            float rataRataMood = (float) totalMoodBulanIni/jumlahMoodBulanIni;
+            tvAvMoodBulanIni.setText(bulanIni+": "+df.format(rataRataMood));
+            rataRataMood = (float) totalMoodBulanLalu/jumlahMoodBulanLalu;
+            tvAvMoodBulanLalu.setText(bulanLalu+": "+df.format(rataRataMood));
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -212,6 +262,7 @@ public class ProgressFragment extends Fragment {
 
         int size = moodDate.size();
         if (size > 1) {
+            tvTextMood.setVisibility(View.GONE);
             //hold the line of the graph chart
             List<Line> lines = new ArrayList<>();
             lines.add(line);
@@ -244,11 +295,9 @@ public class ProgressFragment extends Fragment {
             v.bottom = 0;  //example min value
             progressChartMood.setMaximumViewport(v);
             progressChartMood.setCurrentViewport(v);
-            //Optional step: disable viewport recalculations, thanks to this animations will not change viewport automatically.
-            progressChartMood.setViewportCalculationEnabled(false);
 
         } else {
-            tvTextMood.setText("Data kurang");
+            tvTextMood.setVisibility(View.VISIBLE);
             progressChartMood.setLineChartData(null);
         }
     }
@@ -311,6 +360,7 @@ public class ProgressFragment extends Fragment {
 
         int size = meditasiDate.size();
         if (size > 1) {
+            tvTextMeditasi.setVisibility(View.GONE);
             //hold the line of the graph chart
             List<Line> lines = new ArrayList<>();
             lines.add(line);
@@ -336,7 +386,7 @@ public class ProgressFragment extends Fragment {
             progressChartMeditasi.setLineChartData(data);
 
         } else {
-            tvTextMeditasi.setText("Data kurang");
+            tvTextMeditasi.setVisibility(View.VISIBLE);
             progressChartMeditasi.setLineChartData(null);
         }
     }

@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_below="@+id/tvTitleMood"
-            android:text=""/>
+            android:text="Data Kurang"/>
 
         <lecho.lib.hellocharts.view.LineChartView
             android:id="@+id/progress_chartMood"
@@ -121,19 +121,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1 : Sangat Tidak Tenang"/>
+                android:text="Rata-rata Mood Setelah Meditasi"/>
             <TextView
+                android:id="@+id/rataMoodBulanIni"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="4 : Tidak Tenang"/>
+                android:text="Dalam satu bulan:"/>
             <TextView
+                android:id="@+id/rataMoodBulanLalu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="7 : Tenang"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="10 : Sangat Tenang"/>
+                android:text="Dalam Bulan lalu:"/>
 
         </LinearLayout>
 
@@ -154,7 +152,7 @@
             android:layout_marginTop="20dp"
             android:textSize="20sp"
             android:layout_below="@+id/tvTitleMeditasi"
-            android:text=""/>
+            android:text="Data Kurang"/>
         <lecho.lib.hellocharts.view.LineChartView
             android:id="@+id/progress_chartMeditasi"
             android:layout_width="363dp"
