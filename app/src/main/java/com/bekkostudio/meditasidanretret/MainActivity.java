@@ -70,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        //Run mood survey if not filling the survey yet
-        Global.showMoodSurvey(this,false);
-
         //get active retret database
 //        Global.getActiveRetret(getApplicationContext());
 

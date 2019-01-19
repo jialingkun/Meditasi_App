@@ -20,113 +20,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:text="MEDITASI"
+                android:text="TIMER MEDITASI"
                 android:textSize="19dp"/>
-
-            <TextView
-                android:id="@+id/audioGuideLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:text="Audio Panduan" />
-
-            <LinearLayout
-                android:id="@+id/checkboxLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/audioGuideLabel">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <CheckBox
-                        android:id="@+id/checkDIS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="DIS"/>
-                    <CheckBox
-                        android:id="@+id/checkStandingBAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Standing BAB"/>
-                    <CheckBox
-                        android:id="@+id/checkPMR"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PMR"/>
-                    <CheckBox
-                        android:id="@+id/checkPME"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PME"/>
-                    <CheckBox
-                        android:id="@+id/checkAdjustingPosture"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Adjusting Posture"/>
-                    <CheckBox
-                        android:id="@+id/check315and426"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="315 &amp; 426"/>
-                    <CheckBox
-                        android:id="@+id/checkSittingBAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sitting BAB"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-
-                    <CheckBox
-                        android:id="@+id/checkBodyScanning"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Body Scanning"/>
-                    <CheckBox
-                        android:id="@+id/checkJustSitting"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Just Sitting"/>
-                    <CheckBox
-                        android:id="@+id/checkAbdominalBreathing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Abdominal Breathing"/>
-                    <CheckBox
-                        android:id="@+id/checkExperiencingTheBreath"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Experiencing The Breath"/>
-                    <CheckBox
-                        android:id="@+id/checkCountingTheBreath"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Counting The Breath"/>
-                    <CheckBox
-                        android:id="@+id/checkFollowingTheBreath"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Following The Breath"/>
-
-                </LinearLayout>
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/ambientMusicLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/checkboxLayout"
+                android:layout_below="@+id/title"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:text="Musik Latar" />

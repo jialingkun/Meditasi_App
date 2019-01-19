@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.bekkostudio.meditasidanretret.R;
 import com.bekkostudio.meditasidanretret.Timer.Meditasi.MeditationSetting;
+import com.bekkostudio.meditasidanretret.Timer.Meditasi.MeditationSettingAudio;
 import com.bekkostudio.meditasidanretret.Timer.Namaskara.NamaskaraEmptinessActivity;
 import com.bekkostudio.meditasidanretret.Timer.Namaskara.NamaskaraMenuActivity;
 import com.bekkostudio.meditasidanretret.Timer.NianFo.NianFoHomeActivity;
@@ -30,7 +31,7 @@ public class TimerFragment extends Fragment{
         meditasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MeditationSetting.class);
+                Intent intent = new Intent(getActivity(), MeditationSettingAudio.class);
                 getActivity().startActivity(intent);
             }
         });

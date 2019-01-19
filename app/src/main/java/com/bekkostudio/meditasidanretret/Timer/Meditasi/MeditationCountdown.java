@@ -92,7 +92,7 @@ public class MeditationCountdown extends AppCompatActivity {
         //start wakelock to keep countdown awake
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                "MyWakelockTag");
+                "myapp:MyWakelockTag");
         wakeLock.acquire();
 
 
@@ -220,6 +220,9 @@ public class MeditationCountdown extends AppCompatActivity {
             finishSound.release();
             finishSound = null;
         }
+        if (meditationTimer!=null){meditationTimer.cancel();}
+        if (warmupTimer!=null){warmupTimer.cancel();}
+        if (audioGuideSound!=null){audioGuideSound.stop();}
         super.onDestroy();
     }
 
@@ -251,8 +254,8 @@ public class MeditationCountdown extends AppCompatActivity {
     }
 
     private void endMeditation(){
-        if (warmupTimer!=null){warmupTimer.cancel();}
         if (meditationTimer!=null){meditationTimer.cancel();}
+        if (warmupTimer!=null){warmupTimer.cancel();}
         if (audioGuideSound!=null){audioGuideSound.stop();}
         //Store meditation duration to database
         Global.setDuration(getApplicationContext(),new Duration(Global.getTodayDate(),resultTime/1000));

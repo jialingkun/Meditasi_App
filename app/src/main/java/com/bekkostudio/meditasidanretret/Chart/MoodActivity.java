@@ -73,7 +73,9 @@ public class MoodActivity extends AppCompatActivity implements HorizontalPicker.
         if (afterMeditation){
             super.onBackPressed();
         }else{
-            finishAffinity();
+//            finishAffinity();
+            setResult(RESULT_OK, null);
+            finish();
         }
 
     }

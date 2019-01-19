@@ -1,5 +1,6 @@
 package com.bekkostudio.meditasidanretret.Timer.Meditasi;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,10 +26,6 @@ public class MeditationSetting extends AppCompatActivity implements HorizontalPi
     NumberPicker hoursDurationWidget;
     NumberPicker minutesDurationWidget;
     NumberPicker secondsDurationWidget;
-
-    //audio guide
-    String [] checkboxItem;
-    boolean[] audioCheckStatus;
 
     //warmup horizontal picker
     HorizontalPicker warmupDurationPickerWidget;
@@ -64,10 +61,6 @@ public class MeditationSetting extends AppCompatActivity implements HorizontalPi
         secondsDurationWidget = findViewById(R.id.secondsDuration);
         secondsDurationWidget.setMinValue(0);
         secondsDurationWidget.setMaxValue(59);
-
-        //audio guide
-        checkboxItem = getResources().getStringArray(R.array.checkbox_value);
-        audioCheckStatus = new boolean[checkboxItem.length];
 
         //Horizontal picker library
         warmupDurationPickerWidget = findViewById(R.id.warmupduration);
@@ -144,25 +137,8 @@ public class MeditationSetting extends AppCompatActivity implements HorizontalPi
 
                 ambientMusic = Global.ambientMusicItem[ambientMusicScrollWidget.getActiveItem()];
 
-                //get checkbox status
-                audioCheckStatus[0] = ((CheckBox) findViewById(R.id.checkDIS)).isChecked();
-                audioCheckStatus[1] = ((CheckBox) findViewById(R.id.checkStandingBAB)).isChecked();
-                audioCheckStatus[2] = ((CheckBox) findViewById(R.id.checkPMR)).isChecked();
-                audioCheckStatus[3] = ((CheckBox) findViewById(R.id.checkPME)).isChecked();
-                audioCheckStatus[4] = ((CheckBox) findViewById(R.id.checkAdjustingPosture)).isChecked();
-                audioCheckStatus[5] = ((CheckBox) findViewById(R.id.check315and426)).isChecked();
-                audioCheckStatus[6] = ((CheckBox) findViewById(R.id.checkSittingBAB)).isChecked();
-                audioCheckStatus[7] = ((CheckBox) findViewById(R.id.checkBodyScanning)).isChecked();
-                audioCheckStatus[8] = ((CheckBox) findViewById(R.id.checkJustSitting)).isChecked();
-                audioCheckStatus[9] = ((CheckBox) findViewById(R.id.checkAbdominalBreathing)).isChecked();
-                audioCheckStatus[10] = ((CheckBox) findViewById(R.id.checkExperiencingTheBreath)).isChecked();
-                audioCheckStatus[11] = ((CheckBox) findViewById(R.id.checkCountingTheBreath)).isChecked();
-                audioCheckStatus[12] = ((CheckBox) findViewById(R.id.checkFollowingTheBreath)).isChecked();
-
-
-
                 //start timer
-                Global.startTimer(MeditationSetting.this,meditationDuration,warmupDuration,ambientMusic,audioCheckStatus);
+                Global.startTimer(MeditationSetting.this,meditationDuration,warmupDuration,ambientMusic,Global.audioCheckStatus);
             }
         });
 
@@ -215,6 +191,12 @@ public class MeditationSetting extends AppCompatActivity implements HorizontalPi
             default:
                 warmupDuration = timeValue;
         }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        finish();
     }
 
 }

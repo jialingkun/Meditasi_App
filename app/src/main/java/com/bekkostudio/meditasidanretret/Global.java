@@ -31,6 +31,9 @@ public class Global {
     public static final int[] ambientMusicItem = {0,R.raw.mt_airy,R.raw.weaving,R.raw.butterfly_space};
     public static final int[] nianFoMusicItem = {0,R.raw.nian_fo_1,R.raw.nian_fo_2,R.raw.nian_fo_3};
 
+    //Audio Guide
+    public static boolean[] audioCheckStatus;
+
     //Article
     public static WebView currentWebview;
 
@@ -389,17 +392,17 @@ public class Global {
                 if (afterMeditation){
                     intent = new Intent(activity, MoodActivity.class);
                     intent.putExtra("afterMeditation", afterMeditation);
-                    activity.startActivity(intent);
+                    activity.startActivityForResult(intent, 0);
                 }
             } else {
                 intent = new Intent(activity, MoodActivity.class);
                 intent.putExtra("afterMeditation", afterMeditation);
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent, 0);
             }
         } else {
             intent = new Intent(activity, MoodActivity.class);
             intent.putExtra("afterMeditation", afterMeditation);
-            activity.startActivity(intent);
+            activity.startActivityForResult(intent, 0);
         }
     }
 

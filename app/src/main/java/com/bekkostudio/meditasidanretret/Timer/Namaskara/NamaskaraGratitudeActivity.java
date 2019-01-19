@@ -20,6 +20,10 @@ public class NamaskaraGratitudeActivity extends AppCompatActivity {
 
     TextView remainingTimeWidget;
     Button finishWidget;
+    Button pauseWidget;
+
+    boolean isButtonPause;
+    long milliLeft;
 
     MediaPlayer guideSound;
 
@@ -37,11 +41,12 @@ public class NamaskaraGratitudeActivity extends AppCompatActivity {
         //get widget
         remainingTimeWidget = findViewById(R.id.remainingTime);
         finishWidget = findViewById(R.id.finish);
+        pauseWidget = findViewById(R.id.pause);
 
         //start wakelock to keep countdown awake
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                "MyWakelockTag");
+                "myapp:MyWakelockTag");
         wakeLock.acquire();
 
         guideSound = MediaPlayer.create(this,R.raw.namaskara_gratitude);
@@ -54,6 +59,37 @@ public class NamaskaraGratitudeActivity extends AppCompatActivity {
 
         remainingTimeWidget.setText(formatMilliSecondsToTime(guideSound.getDuration()));
 
+        isButtonPause = true;
+        //pause on click
+        pauseWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isButtonPause){
+                    countDownTimer.cancel();
+                    guideSound.pause();
+                    isButtonPause = false;
+                    pauseWidget.setText("Start");
+                }else{
+                    countDownTimer = new CountDownTimer(milliLeft,1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            milliLeft = millisUntilFinished;
+                            remainingTimeWidget.setText(formatMilliSecondsToTime(millisUntilFinished));
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            remainingTimeWidget.setText("DONE");
+                        }
+                    }.start();
+
+                    guideSound.start();
+                    isButtonPause = true;
+                    pauseWidget.setText("Pause");
+                }
+            }
+        });
+
         //finish early on click
         finishWidget.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +101,7 @@ public class NamaskaraGratitudeActivity extends AppCompatActivity {
         countDownTimer = new CountDownTimer(guideSound.getDuration(),1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                milliLeft = millisUntilFinished;
                 remainingTimeWidget.setText(formatMilliSecondsToTime(millisUntilFinished));
             }
 

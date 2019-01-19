@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Bagaimana mood Anda hari ini ?"
+        android:text="Bagaimana mood anda saat ini ?"
         android:textSize="20sp"
         android:textStyle="bold" />
     <TextView
