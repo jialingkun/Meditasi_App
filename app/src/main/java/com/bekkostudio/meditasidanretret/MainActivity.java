@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bekkostudio.meditasidanretret.Article.ArticleFragment;
 import com.bekkostudio.meditasidanretret.Chart.ProgressFragment;
 import com.bekkostudio.meditasidanretret.Course.CourseFragment;
+import com.bekkostudio.meditasidanretret.Course.CourseFragmentList;
 import com.bekkostudio.meditasidanretret.Timer.TimerFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new CommunityFragment();
                     break;
                 case R.id.navigation_course:
-                    fragment = new CourseFragment();
+                    fragment = new CourseFragmentList();
                     break;
                 case R.id.navigation_chart:
                     fragment = new ProgressFragment();

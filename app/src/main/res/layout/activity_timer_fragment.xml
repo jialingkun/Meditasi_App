@@ -8,41 +8,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="1dp">
 
         <Button
             android:id="@+id/meditasi"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Meditasi"
-            android:layout_weight="1"
-            android:background="@drawable/fullborder_course"/>
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/homebutton_meditasi"/>
 
-        <LinearLayout
+        <Button
+            android:id="@+id/namaskara"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="@drawable/homebutton_namaskara"/>
 
-            <Button
-                android:id="@+id/namaskara"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Namaskara"
-                android:layout_weight="1"
-                android:background="@drawable/fullborder_course"/>
-
-            <Button
-                android:id="@+id/nianfo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Nian Fo"
-                android:layout_weight="1"
-                android:background="@drawable/fullborder_course"/>
-
-
-
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/nianfo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="@drawable/homebutton_nianfo"/>
 
     </LinearLayout>
 </RelativeLayout>

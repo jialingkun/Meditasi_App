@@ -15,7 +15,7 @@ import com.bekkostudio.meditasidanretret.Global;
 import com.bekkostudio.meditasidanretret.R;
 
 public class NamaskaraCountdownActivity extends AppCompatActivity implements View.OnClickListener{
-    TextView countSiklusLabel, posisiLabel;
+    TextView countSiklusLabel,countJumlahSiklusLabel, posisiLabel;
     Button pauseButton, finishEarlyButton;
     MediaPlayer bellTegap, bellSujud;
     PowerManager.WakeLock wakeLock;
@@ -25,7 +25,7 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
     long durasiSujudInSecond, durasiTegapInSecond;
     private int counter = 1;
 
-    CountDownTimer timerSujud, timerTegap;
+    CountDownTimer timerSujud, timerTegap, timerDelay;
     // total millisecond until Count Down Timer onFinish
     long milliLeft;
     // total duration
@@ -60,6 +60,7 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
         wakeLock.acquire();
 
         countSiklusLabel = findViewById(R.id.countSiklusLabel);
+        countJumlahSiklusLabel = findViewById(R.id.countJumlahSiklusLabel);
         posisiLabel = findViewById(R.id.posisiLabel);
         pauseButton = findViewById(R.id.pauseButton);
         finishEarlyButton = findViewById(R.id.finishEarlyButton);
@@ -96,9 +97,24 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
 
             audioGuideSound.start();
         }else{
-            // start a bell recursive loop
-            bellTegap.start();
-            startTimerTegap(durasiTegapInSecond);
+            posisiLabel.setText("Persiapan");
+            countJumlahSiklusLabel.setText("");
+            pauseButton.setVisibility(View.GONE);
+            timerDelay = new CountDownTimer(7000, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    countSiklusLabel.setText(String.valueOf(millisUntilFinished/1000));
+                }
+
+                @Override
+                public void onFinish() {
+                    countJumlahSiklusLabel.setText("Jumlah Siklus");
+                    pauseButton.setVisibility(View.VISIBLE);
+                    // start a bell recursive loop
+                    bellTegap.start();
+                    startTimerTegap(durasiTegapInSecond);
+                }
+            }.start();
         }
     }
 
@@ -237,6 +253,9 @@ public class NamaskaraCountdownActivity extends AppCompatActivity implements Vie
         }
         if (timerTegap != null) {
             timerTegap.cancel();
+        }
+        if (timerDelay != null) {
+            timerDelay.cancel();
         }
 
         // save to database
