@@ -5,28 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Timer.Namaskara.NamaskaraMenuActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="1dp">
+
         <ImageView
             android:id="@+id/emptiness"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:src="@drawable/namaskara_emptiness"/>
+            android:layout_weight="0.5"
+            android:scaleType="fitXY"
+            android:src="@drawable/button_emptines" />
+
         <ImageView
             android:id="@+id/gratitude"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:src="@drawable/namaskara_gratitude"/>
+            android:layout_weight="0.25"
+            android:scaleType="fitXY"
+            android:src="@drawable/button_gratitude"/>
+
         <ImageView
             android:id="@+id/repentance"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:src="@drawable/namaskara_repentance"/>
+            android:layout_weight="0.25"
+            android:scaleType="fitXY"
+            android:src="@drawable/button_repentance"/>
+
     </LinearLayout>
 
 </RelativeLayout>

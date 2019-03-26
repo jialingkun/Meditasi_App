@@ -1,39 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Timer.Meditasi.MeditationSettingAudio">
+    tools:context=".Timer.Meditasi.MeditationSettingAudio"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="0.08">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/header_title"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
             android:text="MEDITASI"
-            android:textSize="19dp"/>
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:layout_marginStart="5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.92">
 
         <TextView
             android:id="@+id/audioGuideLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"
             android:layout_marginTop="15dp"
-            android:text="Audio Panduan" />
+            android:text="AUDIO PANDUAN" />
+
+        <View
+            android:id="@+id/separator"
+            android:background="@color/separator"
+            android:layout_width = "match_parent"
+            android:layout_height="1dip"
+            android:layout_centerVertical ="true"
+            android:layout_below="@id/audioGuideLabel"
+            android:layout_margin="10dp"/>
 
         <LinearLayout
             android:id="@+id/checkboxLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@+id/audioGuideLabel">
+            android:layout_below="@+id/separator">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -44,37 +74,51 @@
                     android:id="@+id/checkDIS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
                     android:text="DIS"/>
                 <CheckBox
                     android:id="@+id/checkStandingBAB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Standing DAB"/>
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
+                    android:text="STANDING DAB"/>
                 <CheckBox
                     android:id="@+id/checkPMR"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
                     android:text="PMR"/>
                 <CheckBox
                     android:id="@+id/checkPME"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
                     android:text="PME"/>
                 <CheckBox
                     android:id="@+id/checkAdjustingPosture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adjusting Posture"/>
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
+                    android:text="ADJUSTING POSTURE"/>
                 <CheckBox
                     android:id="@+id/check315and426"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
                     android:text="315 &amp; 426"/>
                 <CheckBox
                     android:id="@+id/checkSittingBAB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sitting DAB"/>
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
+                    android:text="SITTING DAB"/>
 
             </LinearLayout>
             <LinearLayout
@@ -83,50 +127,65 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-
                 <CheckBox
                     android:id="@+id/checkBodyScanning"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Body Scanning"/>
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
+                    android:text="BODY SCANNING"/>
                 <CheckBox
                     android:id="@+id/checkJustSitting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Just Sitting"/>
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
+                    android:text="JUST SITTING"/>
                 <CheckBox
                     android:id="@+id/checkAbdominalBreathing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Abdominal Breathing"/>
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
+                    android:text="ABDOMINAL BREATHING"/>
                 <CheckBox
                     android:id="@+id/checkExperiencingTheBreath"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Experiencing The Breath"/>
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
+                    android:text="EXPERIENCING THE BREATH"/>
                 <CheckBox
                     android:id="@+id/checkCountingTheBreath"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Counting The Breath"/>
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
+                    android:text="COUNTING THE BREATH"/>
                 <CheckBox
                     android:id="@+id/checkFollowingTheBreath"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Following The Breath"/>
+                    android:textColor="@color/text"
+                    android:buttonTint="@color/color1"
+                    android:text="FOLLOWING THE BREATH"/>
 
             </LinearLayout>
         </LinearLayout>
 
         <Button
             android:id="@+id/startTimer"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/checkboxLayout"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:background="@color/color1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
             android:text="NEXT" />
 
 
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>
