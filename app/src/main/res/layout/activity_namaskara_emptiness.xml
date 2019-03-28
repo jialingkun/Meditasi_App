@@ -1,124 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".Timer.TimerFragment">
+    tools:context=".Timer.TimerFragment"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/namaskaraLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Namaskara" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08">
 
-    <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
-        android:id="@+id/panduanScrollView"
-        android:layout_below="@id/namaskaraLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true">
-
-        <LinearLayout
-            android:id="@+id/panduanLinear"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-        </LinearLayout>
+            android:src="@drawable/header_title"
+            android:scaleType="centerCrop"/>
 
-    </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_centerInParent="true">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Durasi Tegap"
-                    android:layout_marginBottom="30dp"/>
-                <NumberPicker
-                    android:id="@+id/durasiTegap"
-                    android:layout_width="35dp"
-                    android:layout_height="150dp"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
-                    android:descendantFocusability="blocksDescendants">
-
-                </NumberPicker>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginTop="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Durasi Sujud"
-                    android:layout_marginBottom="30dp"/>
-                <NumberPicker
-                    android:id="@+id/durasiSujud"
-                    android:layout_width="35dp"
-                    android:layout_height="150dp"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
-                    android:descendantFocusability="blocksDescendants">
-
-                </NumberPicker>
-            </LinearLayout>
-        </LinearLayout>
         <TextView
+            android:id="@+id/namaskaraLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jumlah Siklus"
-            android:layout_marginTop="40dp" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
-            <EditText
-                android:id="@+id/siklusEdit"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kali"
-                android:layout_marginLeft="10dp"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:text="NAMASKARA"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:layout_marginStart="5dp"/>
 
-    <Button
-        android:id="@+id/startTimerNamaskara"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:text="START!" />
-</RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.92">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/startTimerNamaskara">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/audioGuideLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_marginTop="15dp"
+                    android:text="AUDIO PANDUAN" />
+
+                <View
+                    android:id="@+id/audioGuideLabelSeparator"
+                    android:background="@color/separator"
+                    android:layout_width = "match_parent"
+                    android:layout_height="1dip"
+                    android:layout_centerVertical ="true"
+                    android:layout_margin="10dp"
+                    android:layout_below="@id/audioGuideLabel"/>
+
+                <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
+                    android:id="@+id/panduanScrollView"
+                    android:layout_below="@id/audioGuideLabelSeparator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true">
+
+                    <LinearLayout
+                        android:id="@+id/panduanLinear"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+
+                </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/durationLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/panduanScrollView"
+                    android:layout_marginStart="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_marginTop="15dp"
+                    android:text="DURASI NAMASKARA" />
+
+                <View
+                    android:id="@+id/durationLabelSeparator"
+                    android:background="@color/separator"
+                    android:layout_width = "match_parent"
+                    android:layout_height="1dip"
+                    android:layout_centerVertical ="true"
+                    android:layout_margin="10dp"
+                    android:layout_below="@id/durationLabel"/>
+
+                <LinearLayout
+                    android:id="@+id/durasiPicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/durationLabelSeparator">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/tegapText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textColor="@color/text"
+                            android:text="Durasi Tegap" />
+
+                        <NumberPicker
+                            android:id="@+id/durasiTegap"
+                            android:layout_width="35dp"
+                            android:layout_height="150dp"
+                            android:scaleX="1.3"
+                            android:scaleY="1.3"
+                            android:layout_below="@id/tegapText"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp">
+
+                        </NumberPicker>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/sujudText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textColor="@color/text"
+                            android:text="Durasi Sujud" />
+
+                        <NumberPicker
+                            android:id="@+id/durasiSujud"
+                            android:layout_width="35dp"
+                            android:layout_height="150dp"
+                            android:scaleX="1.3"
+                            android:scaleY="1.3"
+                            android:layout_below="@id/sujudText"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp">
+
+                        </NumberPicker>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/siklusLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/durasiPicker"
+                    android:layout_marginStart="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_marginTop="15dp"
+                    android:text="JUMLAH SIKLUS" />
+
+                <View
+                    android:id="@+id/siklusLabelSeparator"
+                    android:background="@color/separator"
+                    android:layout_width = "match_parent"
+                    android:layout_height="1dip"
+                    android:layout_centerVertical ="true"
+                    android:layout_margin="10dp"
+                    android:layout_below="@id/siklusLabel"/>
+
+                <LinearLayout
+                    android:layout_below="@+id/siklusLabelSeparator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp">
+                    <EditText
+                        android:id="@+id/siklusEdit"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:backgroundTint="@color/color1"
+                        android:textSize="18sp"
+                        android:inputType="numberDecimal" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text"
+                        android:textSize="18sp"
+                        android:text="Kali"
+                        android:layout_marginLeft="10dp"/>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/startTimerNamaskara"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/color1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:text="START!" />
+
+    </RelativeLayout>
+</LinearLayout>
