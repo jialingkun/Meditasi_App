@@ -34,18 +34,18 @@
 
     <string-array name="checkbox_value">
         <item>DIS</item>
-        <item>Standing BAB</item>
+        <item>STANDING DAB</item>
         <item>PMR</item>
         <item>PME</item>
-        <item>Adjusting Posture</item>
-        <item>315 and 426</item>
-        <item>Sitting BAB</item>
-        <item>Body Scanning</item>
-        <item>Just Sitting</item>
-        <item>Abdominal Breathing</item>
-        <item>Experiencing The Breath</item>
-        <item>Counting The Breath</item>
-        <item>Following The Breath</item>
+        <item>ADJUSTING POSTURE</item>
+        <item>315 AND 426</item>
+        <item>SITTING DAB</item>
+        <item>BODY SCANNING</item>
+        <item>JUST SITTING</item>
+        <item>ABDOMINAL BREATHING</item>
+        <item>EXPERIENCING THE BREATH</item>
+        <item>COUNTING THE BREATH</item>
+        <item>FOLLOWING THE BREATH</item>
     </string-array>
 
     <array name="metode_mood">

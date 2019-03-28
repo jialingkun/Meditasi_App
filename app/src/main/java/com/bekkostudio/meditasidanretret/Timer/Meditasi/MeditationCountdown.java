@@ -157,7 +157,7 @@ public class MeditationCountdown extends AppCompatActivity {
     private void startTimer(){
         //start Warmup Timer
         bellSound.start();
-        messageWidget.setText("Pemanasan");
+        messageWidget.setText("PEMANASAN");
         remainingTimeWidget.setText(formatMilliSecondsToTime(warmupDuration*1000));
         resultTime = 0;
         warmupTimer = new CountDownTimer(warmupDuration*1000, 1000) {
@@ -168,7 +168,7 @@ public class MeditationCountdown extends AppCompatActivity {
 
             public void onFinish() {
                 bellSound.start();
-                messageWidget.setText("Meditasi");
+                messageWidget.setText("MEDITASI");
 
                 if (ambientMusic != 0){
                     backgroundSound.start();
