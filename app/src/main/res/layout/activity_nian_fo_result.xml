@@ -1,81 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Timer.NianFo.NianFoResultActivity"
-    android:padding="16dp">
-    <TableLayout
-        android:id="@+id/table_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_centerInParent="true"
-        android:gravity="center">
-        <TableRow>
-            <TextView
-                android:text="Jumlah Siklus"
-                android:padding="3dp"
-                android:textStyle="bold" />
-            <TextView
-                android:text=":"
-                android:padding="3dp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/siklusResultLabel"
-                android:padding="3dp"
-                android:layout_marginLeft="5dp"
-                tools:text="1000"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Durasi"
-                android:padding="3dp"
-                android:textStyle="bold" />
-            <TextView
-                android:text=":"
-                android:padding="3dp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/durasiResultLabel"
-                android:padding="3dp"
-                android:layout_marginLeft="5dp"
-                tools:text="01:00:00"/>
-        </TableRow>
-    </TableLayout>
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08">
 
-    <TextView
-        android:id="@+id/noteText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/table_layout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Tambah Catatan" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/header_title"
+            android:scaleType="centerCrop"/>
 
-    <EditText
-        android:id="@+id/note"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/noteText"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:text="NIAN FO"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:layout_marginStart="5dp"/>
 
-    <CheckBox
-        android:id="@+id/important"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/note"
-        android:layout_centerHorizontal="true"
-        android:text="Tandai Sebagai catatan Penting" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.92">
 
-    <Button
-        android:id="@+id/done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Done"/>
-</RelativeLayout>
+        <TextView
+            android:id="@+id/meditasiText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"
+            android:layout_marginTop="15dp"
+            android:text="NIAN FO" />
+
+        <View
+            android:id="@+id/meditasiSeparator"
+            android:background="@color/separator"
+            android:layout_width = "match_parent"
+            android:layout_height="1dip"
+            android:layout_centerVertical ="true"
+            android:layout_margin="10dp"
+            android:layout_below="@id/meditasiText"/>
+
+        <TextView
+            android:id="@+id/siklusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/meditasiSeparator"
+            android:layout_marginLeft="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/text"
+            android:text="Jumlah Siklus : " />
+
+        <TextView
+            android:id="@+id/siklusResultLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/siklusText"
+            android:layout_below="@id/meditasiSeparator"
+            android:textSize="18sp"
+            android:textColor="@color/text"
+            android:text="10" />
+
+        <TextView
+            android:id="@+id/durasiText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/siklusText"
+            android:layout_marginLeft="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/text"
+            android:text="Durasi : " />
+
+        <TextView
+            android:id="@+id/durasiResultLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/durasiText"
+            android:layout_below="@id/siklusText"
+            android:textSize="18sp"
+            android:textColor="@color/text"
+            android:text="00:00:00" />
+
+        <TextView
+            android:id="@+id/noteText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/durasiText"
+            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"
+            android:layout_marginTop="15dp"
+            android:text="TAMBAH CATATAN" />
+
+        <View
+            android:id="@+id/noteSeparator"
+            android:background="@color/separator"
+            android:layout_width = "match_parent"
+            android:layout_height="1dip"
+            android:layout_centerVertical ="true"
+            android:layout_margin="10dp"
+            android:layout_below="@id/noteText"/>
+
+        <EditText
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/noteSeparator"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/color1"
+            android:textSize="18sp"
+            android:inputType="textMultiLine" />
+
+        <CheckBox
+            android:id="@+id/important"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/note"
+            android:layout_marginStart="7dp"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            android:buttonTint="@color/color1"
+            android:text="Tandai Sebagai catatan Penting" />
+
+
+        <Button
+            android:id="@+id/done"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/color1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:text="SELESAI" />
+
+    </RelativeLayout>
+</LinearLayout>

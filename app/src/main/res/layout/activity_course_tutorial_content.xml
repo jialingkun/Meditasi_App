@@ -1,67 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Article.TutorialContentActivity">
-    <ScrollView
+    tools:context=".Article.TutorialContentActivity"
+    android:orientation="vertical">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
+        android:layout_height="0dp"
+        android:layout_weight="0.08">
+
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:src="@drawable/header_title"
+            android:scaleType="centerCrop"/>
 
-            <TextView
-                android:id="@+id/videoTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:text="VIDEO TUTORIAL"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:layout_marginStart="5dp"/>
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.92">
 
-
-            <com.google.android.exoplayer2.ui.PlayerView
-                android:id="@+id/exoplayer"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_below="@+id/videoTitle"
-                android:layout_centerHorizontal="true"/>
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/fullscreenPlayer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Full Screen"
-                android:layout_below="@+id/exoplayer"
-                android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:id="@+id/videoTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_marginTop="15dp"
+                    android:text="How to meditate for dummies" />
 
-            <TextView
-                android:id="@+id/videoDescriptionTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/fullscreenPlayer"
-                android:text="Deskripsi"/>
-            <TextView
-                android:id="@+id/videoDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/videoDescriptionTitle"/>
-            <TextView
-                android:id="@+id/videoEbookTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/videoDescription"
-                android:text="Download Ebook"/>
-            <Button
-                android:id="@+id/videoEbook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/videoEbookTitle"
-                android:text="Download"/>
+                <View
+                    android:id="@+id/videoTitleSeparator"
+                    android:background="@color/separator"
+                    android:layout_width = "match_parent"
+                    android:layout_height="1dip"
+                    android:layout_centerVertical ="true"
+                    android:layout_margin="10dp"
+                    android:layout_below="@id/videoTitle"/>
 
-        </RelativeLayout>
 
-    </ScrollView>
 
-</RelativeLayout>
+                <com.google.android.exoplayer2.ui.PlayerView
+                    android:id="@+id/exoplayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/videoTitleSeparator"
+                    android:layout_centerHorizontal="true"/>
+
+                <Button
+                    android:id="@+id/fullscreenPlayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Full Screen"
+                    android:background="@drawable/rounded_rectangle_short"
+                    android:layout_margin="8dp"
+                    android:textColor="#FFFF"
+                    android:layout_below="@+id/exoplayer"/>
+
+                <TextView
+                    android:id="@+id/videoDescriptionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/fullscreenPlayer"
+                    android:layout_marginStart="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_marginTop="15dp"
+                    android:text="DESCRIPTION" />
+
+                <View
+                    android:id="@+id/videoDescriptionTitleSeparator"
+                    android:background="@color/separator"
+                    android:layout_width = "match_parent"
+                    android:layout_height="1dip"
+                    android:layout_centerVertical ="true"
+                    android:layout_margin="10dp"
+                    android:layout_below="@id/videoDescriptionTitle"/>
+
+                <TextView
+                    android:id="@+id/videoDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/text"
+                    android:layout_margin="10dp"
+                    android:layout_below="@+id/videoDescriptionTitleSeparator"/>
+                <Button
+                    android:id="@+id/videoEbook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:background="@drawable/rounded_rectangle_short"
+                    android:layout_margin="8dp"
+                    android:textColor="#FFFF"
+                    android:layout_below="@+id/videoDescription"
+                    android:text="DOWNLOAD E-BOOK"/>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

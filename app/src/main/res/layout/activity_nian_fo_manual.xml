@@ -4,48 +4,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical"
-    tools:context=".Timer.NianFo.NianFoManualActivity">
-    <Button
-        android:id="@+id/finishEarlyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Finish Early"/>
-    <FrameLayout
+    tools:context=".Timer.NianFo.NianFoManualActivity"
+    android:orientation="vertical">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-        <Button
-            android:id="@+id/nianFoNextButton"
+        android:layout_weight="0.08">
+
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="60sp" />
-        <LinearLayout
+            android:src="@drawable/header_title"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:elevation="100dp"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/siklusLabel"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:text="NIAN FO"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:layout_marginStart="5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.92">
+
+        <Button
+            android:id="@+id/finishEarlyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:layout_marginTop="20dp"
+            android:text="Finish Early"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/finishEarlyButton"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp">
+            <Button
+                android:id="@+id/nianFoNextButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_rectangle"/>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Jumlah Siklus"/>
-            <TextView
-                android:id="@+id/countSiklusLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_below="@id/siklusLabel"
-                android:textSize="60sp"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:text="0" />
-        </LinearLayout>
-    </FrameLayout>
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:elevation="100dp">
+                <TextView
+                    android:id="@+id/siklusLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="#FFFF"
+                    android:layout_marginBottom="10dp"
+                    android:text="Jumlah Siklus"/>
+                <TextView
+                    android:id="@+id/countSiklusLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="60sp"
+                    android:textColor="#FFFF"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:text="0" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
 </LinearLayout>

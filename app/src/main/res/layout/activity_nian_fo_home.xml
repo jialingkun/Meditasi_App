@@ -1,89 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".Timer.NianFo.NianFoHomeActivity">
-    <TextView
-        android:id="@+id/nianFoLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:text="Nian Fo" />
-    <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
-        android:id="@+id/metodeScrollView"
-        android:layout_below="@id/nianFoLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true">
+    tools:context=".Timer.NianFo.NianFoHomeActivity"
+    android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/metodeLinear"
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08">
+
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-        </LinearLayout>
+            android:src="@drawable/header_title"
+            android:scaleType="centerCrop"/>
 
-    </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_centerInParent="true">
-        <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
-            android:id="@+id/centerHorizontalScrollView"
-            android:layout_below="@+id/mantraMusicLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-
-            <LinearLayout
-                android:id="@+id/mantraMusic"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-            </LinearLayout>
-
-        </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
         <TextView
+            android:id="@+id/nianFoLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jumlah Siklus"
-            android:layout_marginTop="20dp" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
-            <EditText
-                android:id="@+id/siklusEdit"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kali"
-                android:layout_marginLeft="10dp"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:text="NIAN FO"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:layout_marginStart="5dp"/>
 
-    <Button
-        android:id="@+id/startTimerNianFo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:text="START!" />
-</RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.92">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/startTimerNianFo">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/modeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_marginTop="15dp"
+                    android:text="MODE" />
+
+                <View
+                    android:id="@+id/modeLabelSeparator"
+                    android:background="@color/separator"
+                    android:layout_width = "match_parent"
+                    android:layout_height="1dip"
+                    android:layout_centerVertical ="true"
+                    android:layout_margin="10dp"
+                    android:layout_below="@id/modeLabel"/>
+
+                <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
+                    android:id="@+id/metodeScrollView"
+                    android:layout_below="@id/modeLabelSeparator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true">
+
+                    <LinearLayout
+                        android:id="@+id/metodeLinear"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+
+                </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/mantraMusicLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/metodeScrollView"
+                    android:layout_marginStart="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_marginTop="15dp"
+                    android:text="MUSIK LATAR" />
+
+                <View
+                    android:id="@+id/mantraMusicLabelSeparator"
+                    android:background="@color/separator"
+                    android:layout_width = "match_parent"
+                    android:layout_height="1dip"
+                    android:layout_centerVertical ="true"
+                    android:layout_margin="10dp"
+                    android:layout_below="@id/mantraMusicLabel"/>
+
+                <com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView
+                    android:id="@+id/centerHorizontalScrollView"
+                    android:layout_below="@+id/mantraMusicLabelSeparator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <LinearLayout
+                        android:id="@+id/mantraMusic"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+
+                </com.bekkostudio.meditasidanretret.CenteringHorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/siklusLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/centerHorizontalScrollView"
+                    android:layout_marginStart="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_marginTop="15dp"
+                    android:text="JUMLAH SIKLUS" />
+
+                <View
+                    android:id="@+id/siklusLabelSeparator"
+                    android:background="@color/separator"
+                    android:layout_width = "match_parent"
+                    android:layout_height="1dip"
+                    android:layout_centerVertical ="true"
+                    android:layout_margin="10dp"
+                    android:layout_below="@id/siklusLabel"/>
+
+                <LinearLayout
+                    android:layout_below="@+id/siklusLabelSeparator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp">
+                    <EditText
+                        android:id="@+id/siklusEdit"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:backgroundTint="@color/color1"
+                        android:textSize="18sp"
+                        android:inputType="numberDecimal" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text"
+                        android:textSize="18sp"
+                        android:text="Kali"
+                        android:layout_marginStart="10dp"/>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/startTimerNianFo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/color1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:text="START!" />
+
+    </RelativeLayout>
+</LinearLayout>

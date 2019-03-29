@@ -1,47 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".Timer.NianFo.NianFoManualActivity">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:orientation="vertical">
+    tools:context=".Timer.NianFo.NianFoManualActivity"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/header_title"
+            android:scaleType="centerCrop"/>
+
         <TextView
-            android:id="@+id/siklusLabel"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:text="NIAN FO"
             android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:text="Jumlah Siklus"/>
-        <TextView
-            android:id="@+id/countSiklusLabel"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:layout_marginStart="5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.92">
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="60sp"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:text="0" />
-    </LinearLayout>
-    <Button
-        android:id="@+id/pauseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:text="Pause"/>
-    <Button
-        android:id="@+id/finishEarlyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/pauseButton"
-        android:text="Finish Early"/>
-</RelativeLayout>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/siklusLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/text"
+                android:layout_marginBottom="10dp"
+                android:text="Jumlah Siklus"/>
+            <TextView
+                android:id="@+id/countSiklusLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="60sp"
+                android:textColor="@color/text"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/controlButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/pauseButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/color2"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFF"
+                android:text="PAUSE" />
+
+            <Button
+                android:id="@+id/finishEarlyButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/color1"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFF"
+                android:text="FINISH EARLY" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>
