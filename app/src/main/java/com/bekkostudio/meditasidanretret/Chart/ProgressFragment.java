@@ -185,8 +185,8 @@ public class ProgressFragment extends Fragment {
         medicineValue = new ArrayList<>();
 
         //line will hold data value mood, medicine
-        Line line = new Line(yMoodAxisValue).setColor(Color.parseColor("#27ae60"));
-        Line line1 = new Line(yMedicineAxisValue).setColor(Color.parseColor("#c0392b"));
+        Line line = new Line(yMoodAxisValue).setColor(Color.parseColor("#00e5ad"));
+        Line line1 = new Line(yMedicineAxisValue).setColor(Color.parseColor("#ffb23b"));
 
         try {
             Date ptAwal = dateFormatFilter.parse(edtTglAwal.getText().toString());
@@ -276,12 +276,12 @@ public class ProgressFragment extends Fragment {
             Axis axis = new Axis();
             axis.setValues(dateAxisValue);
             axis.setTextSize(14);
-            axis.setTextColor(Color.parseColor("#03A9F4"));
+            axis.setTextColor(Color.parseColor("#9e0000"));
             data.setAxisXBottom(axis);
 
             Axis yAxis = new Axis();
             yAxis.setName("Mood");
-            yAxis.setTextColor(Color.parseColor("#03A9F4"));
+            yAxis.setTextColor(Color.parseColor("#9e0000"));
             yAxis.setTextSize(16);
             data.setAxisYLeft(yAxis);
 
@@ -325,7 +325,7 @@ public class ProgressFragment extends Fragment {
         durationValue = new ArrayList<>();
 
         //line will hold data value
-        Line line = new Line(yDurationAxisValue).setColor(Color.parseColor("#27ae60"));
+        Line line = new Line(yDurationAxisValue).setColor(Color.parseColor("#00b8e5"));
 
 
         lastMeditasiDate = null; //help adding duration on same date
@@ -373,12 +373,12 @@ public class ProgressFragment extends Fragment {
             Axis axis = new Axis();
             axis.setValues(dateMeditasiAxisValue);
             axis.setTextSize(14);
-            axis.setTextColor(Color.parseColor("#03A9F4"));
+            axis.setTextColor(Color.parseColor("#9e0000"));
             data.setAxisXBottom(axis);
 
             Axis yAxis = new Axis();
             yAxis.setName("Durasi (Menit)");
-            yAxis.setTextColor(Color.parseColor("#03A9F4"));
+            yAxis.setTextColor(Color.parseColor("#9e0000"));
             yAxis.setTextSize(16);
             data.setAxisYLeft(yAxis);
 
