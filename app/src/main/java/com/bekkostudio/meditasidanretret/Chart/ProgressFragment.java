@@ -490,7 +490,7 @@ public class ProgressFragment extends Fragment {
         hm.put("date", dateFormatFilter.format(Global.parseDate(Global.notes.get(i).date)));
         //important
         if (Global.notes.get(i).important){
-            hm.put("important", "PENTING!");
+            hm.put("important", "!");
         }else{
             hm.put("important", "");
         }
